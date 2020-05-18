@@ -83,9 +83,6 @@ dependencies {
     // Permission
     implementation "com.github.Hydratant:SPermission:$permission_version"
 
-    // Firebase
-    implementation "com.google.firebase:firebase-analytics:$firebase_analytics_version"
-
     // 테스트
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
