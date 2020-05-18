@@ -2,7 +2,7 @@
 
 package com.bita.lost.repo
 
-enum class 습득물품코드(code: String) {
+enum class AcquirePlaceCode(val code: String) {
     버스("b1"),
     마을버스("b2"),
     법인택시("t1"),
