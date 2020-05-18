@@ -3,6 +3,7 @@ package com.bita.lost
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.text.DecimalFormat
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -13,5 +14,14 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+    }
+
+    @Test
+    fun doubleToString() {
+        val doubleList = arrayOf(6.1708348E7, 6.170824E7, 6.1707868E7, 6.1707857E7, 6.1707856E7, 6.1707734E7, 6.1707696E7, 6.1707647E7, 6.1707574E7, 6.170753E7)
+        doubleList.forEach {
+            println("$it : ${(DecimalFormat("#").format(it))}")
+        }
+
     }
 }
