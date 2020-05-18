@@ -10,8 +10,8 @@ interface MainDataSource {
     fun 분실물조회(
         @Path("START_INDEX") startIndex: Int,
         @Path("END_INDEX") endIndex: Int,
-        @Path("CATE") cate: String,
+        @Path("CATE", encoded = true) cate: String,
         @Path("WB_CODE") wbCode: String,
-        @Path("GET_NAME") getName: String
+        @Path("GET_NAME", encoded = true) getName: String
     ) : Call<String>
 }
