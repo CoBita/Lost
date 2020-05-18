@@ -1,0 +1,56 @@
+ext {
+
+    // Sdk and tools
+    minSdkVersion = 21
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    buildToolVersion = '29.0.2'
+
+    //version
+    versionCode = 1
+    versionName = "1.0.0"
+
+    // 기본
+    kotlin_version = '1.3.71'
+    gradle_version = '3.6.2'
+    appcompat_version = '1.1.0'
+    constraintlayout_version = '1.1.3'
+    ktx_version = '1.2.0'
+
+    //Navigation
+    navigation_verison = '2.2.2'
+
+    //LiveData & MutableData
+    lifecycle_version = '2.2.0'
+
+    // Coroutine
+    coroutine_version = '1.3.3'
+
+    // Base Core
+    base_version = '0.0.6'
+
+    // Material 디자인
+    material_version = '1.1.0'
+
+    // 통신
+    retrofit_version = '2.7.2'
+    okhttp_version = '4.4.0'
+
+    // 코인
+    koin_version = '2.1.5'
+
+    // GoogleService
+    google_service_version = '4.3.3'
+
+    // glide
+    glide_version = '4.11.0'
+
+    // GoogleService
+    google_service_version = '4.3.3'
+
+    // Firebase
+    firebase_analytics_version = '17.4.1'
+
+    //permission
+    permission_version = '1.0.6'
+}
