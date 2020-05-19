@@ -15,6 +15,14 @@ class MainActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        vm.getAcquirePlaceCode()
+        replace()
     }
+
+
+    private fun replace() {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, AcquirePlaceFr(), "test")
+                .commit()
+    }
+
 }
