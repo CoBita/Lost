@@ -19,7 +19,10 @@ class AcquirePlaceFr : LFragment() {
 
     lateinit var bb: AcquirePlaceFrBinding
 
-    private val acquirePlaceAdapter by lazy { AcquirePlaceAdapter() }
+    private val acquirePlaceAdapter by lazy {
+        //TODO : Animation 부분
+        AcquirePlaceAdapter().apply { onItemClick = { mainVm.setAcquirePlaceData(it) } }
+    }
     private val decoration = AcquirePlaceItemDecoration()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,5 +36,13 @@ class AcquirePlaceFr : LFragment() {
         bb.recycler.adapter = acquirePlaceAdapter
         bb.recycler.addItemDecoration(decoration)
         vm.getAcquirePlaceCode()
+    }
+
+
+    companion object {
+        fun newInstance(): AcquirePlaceFr {
+            val acquirePlaceFr = AcquirePlaceFr()
+            return acquirePlaceFr
+        }
     }
 }
