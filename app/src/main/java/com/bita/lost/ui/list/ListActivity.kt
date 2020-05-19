@@ -1,10 +1,13 @@
 package com.bita.lost.ui.list
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.Window
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import com.and.base.log.Log
+import com.airbnb.lottie.LottieAnimationView
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.ListActBinding
@@ -22,11 +25,27 @@ class ListActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-//        vm.result.observe(this, Observer { Log.w(it.service.items.joinToString("\n")) })
+    }
+
+    override fun createProgress(): Dialog {
+        val dialog = Dialog(mContext)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.window?.apply {
+            setContentView(R.layout.list_loading)
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+        return dialog
+    }
+
+    override fun onParseExtra() {
+        super.onParseExtra()
+        // todo 메인에서 넘어온 값으로 변경 필요
+        vm.init("핸드폰", AcquirePlaceCode.버스.code, "")
     }
 
     override fun onLoad() {
         super.onLoad()
-        vm.분실물조회(1, 10, "핸드폰", AcquirePlaceCode.버스.code, "")
+        vm.getLostList()
     }
 }

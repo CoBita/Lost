@@ -23,6 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+<!--        list:onBottom="@{()->vm.분실물조회()}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
@@ -32,6 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transport"
             list:items="@{vm.list}"
+            list:onBottom="@{vm::getLostList}"
             tools:listitem="@layout/list_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

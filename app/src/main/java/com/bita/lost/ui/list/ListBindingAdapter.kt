@@ -10,13 +10,27 @@ object ListBindingAdapter {
     @JvmStatic
     @BindingAdapter("list:items")
     fun setAdapter(v: RecyclerView, data: ArrayList<LostItem>) {
-        Log.w("setAdapter called=============\n" + data.joinToString("\n"))
         v.adapter?.let {
-            (it as ListAdapter).set(data)
+//            (it as ListAdapter).set(data)
+            (it as ListAdapter).addAll(data)
         } ?: run {
             val adapter = ListAdapter()
             adapter.set(data)
             v.adapter = adapter
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("list:onBottom")
+    fun onBottom(v: RecyclerView, function: () -> Unit) {
+        Log.w("add scroll listener")
+        v.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!v.canScrollVertically(1)) {
+                    function()
+                }
+            }
+        })
     }
 }

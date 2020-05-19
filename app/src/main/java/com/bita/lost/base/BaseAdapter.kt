@@ -16,8 +16,9 @@ abstract class BaseAdapter<T>() : RecyclerView.Adapter<BaseHolder<T>>() {
     }
 
     fun addAll(items: ArrayList<T>) {
+        val before = this.items.size
         this.items.addAll(items)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(before, items.size)
     }
 
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T>
