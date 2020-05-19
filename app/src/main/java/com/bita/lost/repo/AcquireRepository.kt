@@ -14,7 +14,7 @@ class AcquireRepositoryImpl : AcquireRepository {
     override suspend fun getAcquirePlaceCode(): ArrayList<AcquirePlaceData> = withContext(Dispatchers.Default) {
         val acquirePlaceCodeList = arrayListOf<AcquirePlaceData>()
         AcquirePlaceCode.values().forEach {
-            acquirePlaceCodeList.add(AcquirePlaceData(it.name, it.code))
+            acquirePlaceCodeList.add(AcquirePlaceData(it.description, it.code, it.icon))
         }
         return@withContext acquirePlaceCodeList
     }
