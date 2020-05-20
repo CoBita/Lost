@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:background="@drawable/rounded_rect"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:transitionGroup="true">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"

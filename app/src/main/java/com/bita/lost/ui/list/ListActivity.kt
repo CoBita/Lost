@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
     override val vm: ListViewModel by viewModel()
-    private val listFr = ListFragment()
+    private val listFr = ListFragment().apply { exitTransition = Explode() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,7 @@ class ListActivity : LActivity() {
             bundle.putString(DetailFragment.ID, id)
             arguments = bundle
             enterTransition = Slide()
-            exitTransition = Explode()
+            reenterTransition = null
         } else listFr
 
         val transaction = supportFragmentManager.beginTransaction().replace(R.id.container, target)

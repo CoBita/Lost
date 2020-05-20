@@ -42,7 +42,6 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             val end = start + viewsPerPage - 1
             Log.w("$start ~ $end 조회")
             val result: LostListFrame = repository.분실물조회(start, end, cate, wbCode.code, name)
-            delay(2000)
             index = end
             list.clear()
             list.addAll(result.service.items)
