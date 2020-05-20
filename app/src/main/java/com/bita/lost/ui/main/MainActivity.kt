@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.ActivityMainBinding
+import com.bita.lost.repo.AcquirePlaceCode
 import com.bita.lost.ui.list.ListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,7 +38,7 @@ class MainActivity : LActivity() {
 
     private fun replace() {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, AcquirePlaceFr.newInstance(), ACQUIRE_PLACE_TAG)
+                .replace(R.id.container, AcquisitionFr.newInstance(), ACQUIRE_PLACE_TAG)
                 .commit()
     }
 

@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.bita.lost.repo.data.AcquireData" />
+            type="com.bita.lost.repo.AcquisitionCode" />
 
     </data>
 
@@ -27,8 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:drawableTop="@drawable/ic_bus"
-            tools:text="버스" />
+            tools:drawableTop="@drawable/ic_phone"
+            tools:text="핸드폰" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -20,6 +20,10 @@ class AcquisitionFr : LFragment() {
 
     lateinit var bb: AcquisitionFrBinding
 
+    private val acquisitionAdapter by lazy { AcquisitionAdapter() }
+
+    private val itemDecoration by lazy { GridItemDecoration(16) }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bb = DataBindingUtil.inflate(inflater, R.layout.acquisition_fr, container, false)
         return bb.root
@@ -27,6 +31,10 @@ class AcquisitionFr : LFragment() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        bb.vm = vm
+        bb.recycler.adapter = acquisitionAdapter
+        bb.recycler.addItemDecoration(itemDecoration)
+        vm.getAcquisitionCode()
     }
 
 

@@ -3,13 +3,14 @@
 package com.bita.lost.repo
 
 import com.bita.lost.repo.data.AcquireData
+import com.bita.lost.repo.data.AcquisitionData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 interface AcquireRepository {
     suspend fun getAcquirePlaceCode(): ArrayList<AcquireData>
 
-    suspend fun getAcquisitionCode(): ArrayList<AcquireData>
+    suspend fun getAcquisitionCode(): List<AcquisitionCode>
 }
 
 class AcquireRepositoryImpl : AcquireRepository {
@@ -21,7 +22,7 @@ class AcquireRepositoryImpl : AcquireRepository {
         return@withContext acquirePlaceCodeList
     }
 
-    override suspend fun getAcquisitionCode(): ArrayList<AcquireData> {
-        TODO("Not yet implemented")
+    override suspend fun getAcquisitionCode(): List<AcquisitionCode> = withContext(Dispatchers.Default) {
+        return@withContext AcquisitionCode.values().asList()
     }
 }
