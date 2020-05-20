@@ -61,7 +61,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/seoyoon630"
+            android:id="@+id/dummy"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
