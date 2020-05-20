@@ -5,13 +5,13 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bita.lost.repo.data.AcquirePlaceData
+import com.bita.lost.repo.data.AcquireData
 
-object AcquirePlaceBindingAdapter {
+object MainBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:acquirePlaceList")
-    fun addAcquirePlaceList(recyclerView: RecyclerView, list: MutableList<AcquirePlaceData>) {
+    fun addAcquirePlaceList(recyclerView: RecyclerView, list: MutableList<AcquireData>) {
         val adapter = recyclerView.adapter
         adapter?.let {
             if (adapter is AcquirePlaceAdapter) {
