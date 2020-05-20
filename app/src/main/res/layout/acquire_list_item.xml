@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
             android:gravity="center"
-            android:text="@{item.name}"
+            android:text="@{item.description}"
             android:textColor="@color/black"
             app:drawableTop="@{item.icon}"
             app:layout_constraintBottom_toBottomOf="parent"
