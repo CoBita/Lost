@@ -41,7 +41,6 @@ class ListActivity : LActivity() {
     override fun onParseExtra() {
         super.onParseExtra()
         // todo 메인에서 넘어온 값으로 변경 필요
-
         vm.init("핸드폰", AcquirePlaceCode.지하철1호선에서4호선, "")
     }
 
