@@ -5,8 +5,8 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bita.lost.repo.AcquirePlaceCode
-import com.bita.lost.repo.AcquisitionCode
+import com.bita.lost.repo.data.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquisitionCode
 
 object MainBindingAdapter {
 

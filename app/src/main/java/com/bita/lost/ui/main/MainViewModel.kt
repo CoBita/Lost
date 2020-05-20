@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.and.base.log.Log
 import com.bita.lost.base.LViewModel
-import com.bita.lost.repo.AcquirePlaceCode
-import com.bita.lost.repo.AcquisitionCode
+import com.bita.lost.repo.data.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquisitionCode
 
 class MainViewModel : LViewModel() {
 

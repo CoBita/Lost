@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.R
 import com.bita.lost.base.SingleAdapter
 import com.bita.lost.databinding.AcquireListItemBinding
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 
 class AcquirePlaceAdapter : SingleAdapter<AcquirePlaceHolder, AcquirePlaceCode>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AcquirePlaceHolder {

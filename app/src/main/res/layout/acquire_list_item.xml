@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.bita.lost.repo.AcquirePlaceCode" />
+            type="com.bita.lost.repo.data.AcquirePlaceCode" />
 
     </data>
 

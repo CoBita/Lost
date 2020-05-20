@@ -4,8 +4,7 @@ import android.content.Intent
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.and.base.log.Log
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.LostItem
 import com.bita.lost.ui.detail.DetailActivity
 

@@ -5,13 +5,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
-import com.airbnb.lottie.LottieAnimationView
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.ListActBinding
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {

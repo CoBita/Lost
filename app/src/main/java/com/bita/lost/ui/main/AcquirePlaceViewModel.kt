@@ -2,7 +2,7 @@ package com.bita.lost.ui.main
 
 import androidx.databinding.ObservableArrayList
 import com.bita.lost.base.LViewModel
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.AcquireRepository
 import kotlinx.coroutines.launch
 

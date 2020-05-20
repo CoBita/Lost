@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.R
 import com.bita.lost.base.SingleAdapter
 import com.bita.lost.databinding.AcquisitionListItemBinding
-import com.bita.lost.repo.AcquisitionCode
+import com.bita.lost.repo.data.AcquisitionCode
 
 class AcquisitionAdapter : SingleAdapter<AcquisitionHolder, AcquisitionCode>() {
 

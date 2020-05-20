@@ -2,6 +2,8 @@
 
 package com.bita.lost.repo
 
+import com.bita.lost.repo.data.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquisitionCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

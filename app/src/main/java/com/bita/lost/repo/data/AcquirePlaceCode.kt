@@ -1,6 +1,6 @@
 @file:Suppress("ClassName", "unused", "NonAsciiCharacters", "EnumEntryName")
 
-package com.bita.lost.repo
+package com.bita.lost.repo.data
 
 import com.bita.lost.R
 
