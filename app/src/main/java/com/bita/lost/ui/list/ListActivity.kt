@@ -5,26 +5,23 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import android.widget.ProgressBar
-import androidx.databinding.DataBindingUtil
-import com.airbnb.lottie.LottieAnimationView
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
-import com.bita.lost.databinding.ListActBinding
 import com.bita.lost.repo.AcquirePlaceCode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
     override val vm: ListViewModel by viewModel()
-    private val binding by lazy { DataBindingUtil.setContentView<ListActBinding>(this, R.layout.list_act) }
+    val listFr = ListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = vm
+        setContentView(R.layout.list_act)
     }
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        replace(false)
     }
 
     override fun createProgress(): Dialog {
@@ -47,5 +44,17 @@ class ListActivity : LActivity() {
     override fun onLoad() {
         super.onLoad()
         vm.getLostList()
+    }
+
+    fun replace(isDetail: Boolean, id: String? = null) {
+        val target = if (isDetail) DetailFragment().apply {
+            val bundle = Bundle()
+            bundle.putString(DetailFragment.ID, id)
+            arguments = bundle
+        } else listFr
+
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, target)
+                .commit()
     }
 }
