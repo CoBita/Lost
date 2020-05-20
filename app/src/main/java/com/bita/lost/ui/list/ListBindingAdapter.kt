@@ -1,11 +1,13 @@
 package com.bita.lost.ui.list
 
+import android.content.Intent
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.and.base.log.Log
 import com.bita.lost.repo.AcquirePlaceCode
 import com.bita.lost.repo.data.LostItem
+import com.bita.lost.ui.detail.DetailActivity
 
 object ListBindingAdapter {
 
@@ -15,7 +17,7 @@ object ListBindingAdapter {
         v.adapter?.takeIf { it is ListAdapter }?.let {
             (it as ListAdapter).addAll(data)
         } ?: run {
-            val adapter = ListAdapter()
+            val adapter = ListAdapter { v.context.startActivity(Intent(v.context, DetailActivity::class.java)) }
             adapter.set(data)
             v.adapter = adapter
         }
@@ -38,7 +40,7 @@ object ListBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("list:setTransport")
-    fun setTransport(v: TextView, enum : AcquirePlaceCode){
+    fun setTransport(v: TextView, enum: AcquirePlaceCode) {
         v.apply {
             text = enum.description
             setCompoundDrawablesRelativeWithIntrinsicBounds(null, v.context.getDrawable(enum.icon), null, null)
