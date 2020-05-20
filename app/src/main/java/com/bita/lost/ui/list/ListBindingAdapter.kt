@@ -11,13 +11,21 @@ import com.bita.lost.ui.detail.DetailActivity
 
 object ListBindingAdapter {
 
+    //    /*"app:has_next",*/
+    @Suppress("UNCHECKED_CAST")
     @JvmStatic
-    @BindingAdapter("list:items")
-    fun setAdapter(v: RecyclerView, data: ArrayList<LostItem>) {
+    @BindingAdapter("app:items", "app:has_next", "app:get_next_data")
+    fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit) {
+        // todo hasNext 추가
+        val data = arrayListOf<LostItem?>().apply {
+            addAll(rawData)
+            if (hasNext && isNotEmpty()) add(null)
+        }
+
         v.adapter?.takeIf { it is ListAdapter }?.let {
             (it as ListAdapter).addAll(data)
         } ?: run {
-            val adapter = ListAdapter { v.context.startActivity(Intent(v.context, DetailActivity::class.java)) }
+            val adapter = ListAdapter({ v.context.startActivity(Intent(v.context, DetailActivity::class.java)) }, function)
             adapter.set(data)
             v.adapter = adapter
         }
@@ -25,21 +33,7 @@ object ListBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("list:onBottom")
-    fun onBottom(v: RecyclerView, function: () -> Unit) {
-        Log.w("add scroll listener")
-        v.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (!v.canScrollVertically(1)) {
-                    function()
-                }
-            }
-        })
-    }
-
-    @JvmStatic
-    @BindingAdapter("list:setTransport")
+    @BindingAdapter("app:setTransport")
     fun setTransport(v: TextView, enum: AcquirePlaceCode) {
         v.apply {
             text = enum.description
