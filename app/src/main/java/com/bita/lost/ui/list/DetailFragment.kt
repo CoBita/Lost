@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
@@ -23,7 +24,6 @@ class DetailFragment : LFragment() {
         super.onParseExtra()
         arguments?.getString(ID)?.let { id ->
             binding.result.text = id
-            showDialog(id)
         }
     }
 

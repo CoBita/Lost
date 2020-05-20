@@ -23,16 +23,12 @@ class ListFragment : LFragment() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         binding.vm = vm
+        vm.getLostList()
     }
 
     override fun onParseExtra() {
         super.onParseExtra()
         // todo 메인에서 넘어온 값으로 변경 필요
         vm.init("핸드폰", AcquirePlaceCode.지하철1호선에서4호선, "")
-    }
-
-    override fun onLoad() {
-        super.onLoad()
-        vm.getLostList()
     }
 }

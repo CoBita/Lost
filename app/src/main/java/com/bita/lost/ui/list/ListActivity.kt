@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.transition.Explode
+import android.transition.Slide
 import android.view.Window
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
@@ -12,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
     override val vm: ListViewModel by viewModel()
-    val listFr = ListFragment()
+    private val listFr = ListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +53,12 @@ class ListActivity : LActivity() {
             val bundle = Bundle()
             bundle.putString(DetailFragment.ID, id)
             arguments = bundle
+            enterTransition = Slide()
+            exitTransition = Explode()
         } else listFr
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.container, target)
-                .commit()
+        val transaction = supportFragmentManager.beginTransaction().replace(R.id.container, target)
+        if (isDetail) transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
