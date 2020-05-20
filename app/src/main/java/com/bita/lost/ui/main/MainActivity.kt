@@ -29,8 +29,8 @@ class MainActivity : LActivity() {
             }
         })
 
-        bb.seoyoon630.setOnClickListener {
-            startActivity(Intent(this, ListActivity::class.java).apply { putExtra("정서윤", " 바보") })
+        bb.dummy.setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
         }
     }
 
