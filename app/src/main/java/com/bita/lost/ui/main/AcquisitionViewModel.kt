@@ -6,7 +6,7 @@ import com.bita.lost.repo.AcquireRepository
 import com.bita.lost.repo.data.AcquireData
 import kotlinx.coroutines.launch
 
-class AcquirePlaceViewModel(private val acquireRepository: AcquireRepository) : LViewModel() {
+class AcquisitionViewModel(private val acquireRepository: AcquireRepository) : LViewModel() {
 
 
     val codeList = ObservableArrayList<AcquireData>()

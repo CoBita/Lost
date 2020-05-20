@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.R
 import com.bita.lost.base.SingleAdapter
 import com.bita.lost.databinding.AcquireListItemBinding
-import com.bita.lost.repo.data.AcquirePlaceData
+import com.bita.lost.repo.data.AcquireData
 
-class AcquirePlaceAdapter : SingleAdapter<AcquirePlaceHolder, AcquirePlaceData>() {
+class AcquirePlaceAdapter : SingleAdapter<AcquirePlaceHolder, AcquireData>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AcquirePlaceHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
@@ -19,13 +19,13 @@ class AcquirePlaceAdapter : SingleAdapter<AcquirePlaceHolder, AcquirePlaceData>(
         return AcquirePlaceHolder(binding)
     }
 
-    override fun onBind(holder: AcquirePlaceHolder, item: AcquirePlaceData) = holder.bind(item)
+    override fun onBind(holder: AcquirePlaceHolder, item: AcquireData) = holder.bind(item)
 
 }
 
 
 class AcquirePlaceHolder(private val binding: AcquireListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: AcquirePlaceData) {
+    fun bind(item: AcquireData) {
         with(binding) {
             binding.item = item
             executePendingBindings()

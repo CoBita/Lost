@@ -2,7 +2,7 @@
 
 package com.bita.lost.repo
 
-enum class 습득물분류 {
+enum class AcquisitionCode {
     지갑,
     쇼핑백,
     서류봉투,
