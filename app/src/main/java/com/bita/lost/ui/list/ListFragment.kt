@@ -10,6 +10,7 @@ import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.ListFrBinding
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ListFragment : LFragment() {
@@ -29,13 +30,14 @@ class ListFragment : LFragment() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        // todo 메인에서 넘어온 값으로 변경 필요
         val wbCode = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUIRE_PLACE)
         val cate = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUISITION)
         val name = activity?.intent?.getStringExtra(ListActivity.EXTRA_SEARCH)
 
         if (wbCode is AcquirePlaceCode && cate is AcquisitionCode) {
             vm.init(cate, wbCode, name)
+        } else {
+            showDialog("", "다시 한 번 시도해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> activity?.finish() })
         }
     }
 }
