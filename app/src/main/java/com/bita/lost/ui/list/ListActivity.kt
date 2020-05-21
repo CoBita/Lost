@@ -57,6 +57,7 @@ class ListActivity : LActivity() {
             reenterTransition = null
         } else listFr
 
+
         val transaction = supportFragmentManager.beginTransaction().replace(R.id.container, target)
         if (isDetail) transaction.addToBackStack(null)
         transaction.commit()

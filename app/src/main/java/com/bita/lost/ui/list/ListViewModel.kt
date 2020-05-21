@@ -35,6 +35,10 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         this.name = name
     }
 
+    fun getFirstLostList(){
+        if(list.isEmpty()) getLostList()
+    }
+
     fun getLostList() {
         scope.launch(handler) {
             // todo 성공 실패 여부 try catch 로 처리하는게 맞나..?

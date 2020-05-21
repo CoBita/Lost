@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.ListFrBinding
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ListFragment : LFragment() {
@@ -23,7 +23,7 @@ class ListFragment : LFragment() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         binding.vm = vm
-        vm.getLostList()
+        vm.getFirstLostList()
     }
 
     override fun onParseExtra() {
