@@ -25,19 +25,24 @@ class MainActivity : LActivity() {
         super.onLoadOnce()
         bb.vm = vm
         // First
-        replace(AcquirePlaceFr.newInstance(), ACQUIRE_PLACE_TAG)
-        vm.selectAcquirePlaceData.observe(this, Observer { it?.let { replace(AcquisitionFr.newInstance(), ACQUISITION_TAG) } })
-        vm.selectAcquisitionData.observe(this, Observer { it?.let { replace(SearchFr.newInstance(), SEARCH_TAG) } })
+        vm.replaceFragment.observe(this, Observer { it?.let { replace(it) } })
         vm.finish.observe(this, Observer { it?.let { mainResultData -> mainFinish(mainResultData) } })
     }
 
-
-    private fun replace(fragment: Fragment, tag: String) {
+    private fun replace(tag: String) {
+        val fragment: Fragment =
+                when (tag) {
+                    MainViewModel.ACQUIRE_PLACE_TAG -> AcquirePlaceFr.newInstance()
+                    MainViewModel.ACQUISITION_TAG -> AcquisitionFr.newInstance()
+                    MainViewModel.SEARCH_TAG -> SearchFr.newInstance()
+                    else -> throw IllegalStateException("들어오면 안됨")
+                }
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, fragment, tag)
             commit()
         }
     }
+
 
     private fun mainFinish(mainResultData: MainResultData) {
         val acquirePlaceData = mainResultData.acquirePlaceCode
@@ -50,12 +55,6 @@ class MainActivity : LActivity() {
             putExtra(ListActivity.EXTRA_SEARCH, searchText)
         }
         startActivity(intent)
-    }
-
-    companion object {
-        const val ACQUIRE_PLACE_TAG = "AcquirePlace"
-        const val ACQUISITION_TAG = "Acquisition"
-        const val SEARCH_TAG = "Search"
     }
 
 }

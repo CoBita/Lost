@@ -1,5 +1,7 @@
 package com.bita.lost.ui.main
 
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.and.base.log.Log
@@ -10,54 +12,80 @@ import com.bita.lost.repo.data.MainResultData
 
 class MainViewModel : LViewModel() {
 
+    val infoText = ObservableField(acquireInfoText)
 
-    private val _selectAcquirePlaceData = MutableLiveData<AcquirePlaceCode>()
-    val selectAcquirePlaceData: LiveData<AcquirePlaceCode> get() = _selectAcquirePlaceData
+    val selectAcquirePlaceIcon = ObservableInt()
+    val selectAcquisitionIcon = ObservableInt()
 
-    private val _selectAcquisitionData = MutableLiveData<AcquisitionCode>()
-    val selectAcquisitionData: LiveData<AcquisitionCode> get() = _selectAcquisitionData
-
-    private val _selectSearch = MutableLiveData<String>()
-    val selectSearch: LiveData<String> get() = _selectSearch
+    private val _replaceFragment = MutableLiveData<String>()
+    val replaceFragment: LiveData<String> get() = _replaceFragment
 
     private val _finish = MutableLiveData<MainResultData>()
     val finish: LiveData<MainResultData> get() = _finish
 
+    private var selectAcquirePlaceData: AcquirePlaceCode? = null
+    private var selectAcquisitionData: AcquisitionCode? = null
+    private var selectSearchText: String? = null
+
+
+    init {
+        _replaceFragment.postValue(ACQUIRE_PLACE_TAG)
+    }
 
     fun setAcquirePlaceData(acquireData: AcquirePlaceCode) {
-        _selectAcquirePlaceData.postValue(acquireData)
+        selectAcquirePlaceData = acquireData
+        infoText.set(acquisitionInfoText)
+        selectAcquirePlaceIcon.set(acquireData.icon)
+        _replaceFragment.postValue(ACQUISITION_TAG)
     }
 
     fun setAcquisitionData(acquisitionCode: AcquisitionCode) {
-        _selectAcquisitionData.postValue(acquisitionCode)
+        selectAcquisitionData = acquisitionCode
+        infoText.set(searchInfoText)
+        selectAcquisitionIcon.set(acquisitionCode.icon)
+        _replaceFragment.postValue(SEARCH_TAG)
     }
 
     fun setSearchText(searchText: String?) {
-        _selectSearch.postValue(searchText)
+        selectSearchText = searchText
         result()
     }
 
 
     fun result() {
-        val acquirePlaceData = _selectAcquirePlaceData.value
-        val acquisitionData = _selectAcquisitionData.value
 
-        if (acquirePlaceData == null) {
+        if (selectAcquirePlaceData == null) {
             _alertMessage.postValue("잃어버린 장소를 선택 해 주세요.")
             return
         }
 
-        if (acquisitionData == null) {
+        if (selectAcquisitionData == null) {
             _alertMessage.postValue("잃어버린 물건을 선택 해 주세요.")
             return
         }
 
 
-        Log.i("acquirePlaceData : $acquirePlaceData")
-        Log.i("acquisitionData : $acquisitionData")
+        Log.i("acquirePlaceData : $selectAcquirePlaceData")
+        Log.i("acquisitionData : $selectAcquisitionData")
+        Log.i("searchText : $selectSearchText")
 
-        val searchText = _selectSearch.value
-        val mainResultData = MainResultData(acquirePlaceData, acquisitionData, searchText)
-        _finish.postValue(mainResultData)
+
+        selectAcquirePlaceData?.let { placeData ->
+            selectAcquisitionData?.let { acquisitionData ->
+                val mainResultData = MainResultData(placeData, acquisitionData, selectSearchText)
+                _finish.postValue(mainResultData)
+            }
+        }
     }
+
+    companion object {
+        private const val acquireInfoText = "어디에서\n잃어버렸나요?"
+        private const val acquisitionInfoText = "무엇을\n잃어버렸나요?"
+        private const val searchInfoText = "검색어를\n입력하시겠어요?"
+
+        const val ACQUIRE_PLACE_TAG = "AcquirePlace"
+        const val ACQUISITION_TAG = "Acquisition"
+        const val SEARCH_TAG = "Search"
+    }
+
 }
