@@ -17,38 +17,50 @@
         tools:context=".ui.main.MainActivity">
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/acquirePlace"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintEnd_toStartOf="@id/temp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:drawableTop="@drawable/ic_bus"
-            tools:text="버스" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintEnd_toStartOf="@id/temp2"
-            app:layout_constraintStart_toEndOf="@id/acquirePlace"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:drawableTop="@drawable/ic_bus"
-            tools:text="버스" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/header_top_bg"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/temp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:drawableTop="@drawable/ic_bus"
-            tools:text="버스" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/acquirePlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:scaleType="center"
+                app:layout_constraintEnd_toStartOf="@id/acquisition"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_bus" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/acquisition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                app:layout_constraintEnd_toStartOf="@id/temp2"
+                app:layout_constraintStart_toEndOf="@id/acquirePlace"
+                app:layout_constraintTop_toTopOf="@id/acquirePlace"
+                app:srcCompat="@drawable/ic_book" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/temp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/acquisition"
+                app:layout_constraintTop_toTopOf="@id/acquirePlace"
+                tools:srcCompat="@drawable/ic_bus" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <FrameLayout
@@ -56,18 +68,21 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/search"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/acquirePlace" />
+            app:layout_constraintTop_toBottomOf="@id/header" />
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dummy"
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:onClick="@{()-> vm.result()}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

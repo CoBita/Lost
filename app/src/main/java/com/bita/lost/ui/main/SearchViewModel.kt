@@ -12,10 +12,8 @@ class SearchViewModel : LViewModel() {
     private val _searchFinish = MutableLiveData<String>()
     val searchFinish: LiveData<String> get() = _searchFinish
 
-
     fun result() {
         val inputSearch = searchText.get()
         _searchFinish.postValue(inputSearch)
     }
-
 }

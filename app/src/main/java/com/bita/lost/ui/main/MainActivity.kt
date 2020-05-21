@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.ActivityMainBinding
+import com.bita.lost.repo.data.MainResultData
 import com.bita.lost.ui.list.ListActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,14 +28,28 @@ class MainActivity : LActivity() {
         replace(AcquirePlaceFr.newInstance(), ACQUIRE_PLACE_TAG)
         vm.selectAcquirePlaceData.observe(this, Observer { it?.let { replace(AcquisitionFr.newInstance(), ACQUISITION_TAG) } })
         vm.selectAcquisitionData.observe(this, Observer { it?.let { replace(SearchFr.newInstance(), SEARCH_TAG) } })
-        vm.finish.observe(this, Observer { it?.let { if (it) startActivity(Intent(this, ListActivity::class.java)) } })
+        vm.finish.observe(this, Observer { it?.let { mainResultData -> mainFinish(mainResultData) } })
     }
 
 
     private fun replace(fragment: Fragment, tag: String) {
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.container, fragment, tag)
-                .commit()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, fragment, tag)
+            commit()
+        }
+    }
+
+    private fun mainFinish(mainResultData: MainResultData) {
+        val acquirePlaceData = mainResultData.acquirePlaceCode
+        val acquisitionData = mainResultData.acquisitionCode
+        val searchText = mainResultData.search
+
+        val intent = Intent(this, ListActivity::class.java).apply {
+            putExtra(ListActivity.EXTRA_ACQUIRE_PLACE, acquirePlaceData)
+            putExtra(ListActivity.EXTRA_ACQUISITION, acquisitionData)
+            putExtra(ListActivity.EXTRA_SEARCH, searchText)
+        }
+        startActivity(intent)
     }
 
     companion object {

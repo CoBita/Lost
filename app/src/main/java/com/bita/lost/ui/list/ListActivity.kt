@@ -46,4 +46,10 @@ class ListActivity : LActivity() {
         super.onLoad()
         vm.getLostList()
     }
+
+    companion object {
+        const val EXTRA_ACQUIRE_PLACE = "ACQUIRE_PLACE"
+        const val EXTRA_ACQUISITION = "ACQUISITION"
+        const val EXTRA_SEARCH = "EXTRA_SEARCH"
+    }
 }

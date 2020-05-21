@@ -6,6 +6,7 @@ import com.and.base.log.Log
 import com.bita.lost.base.LViewModel
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
+import com.bita.lost.repo.data.MainResultData
 
 class MainViewModel : LViewModel() {
 
@@ -19,8 +20,8 @@ class MainViewModel : LViewModel() {
     private val _selectSearch = MutableLiveData<String>()
     val selectSearch: LiveData<String> get() = _selectSearch
 
-    private val _finish = MutableLiveData<Boolean>()
-    val finish: LiveData<Boolean> get() = _finish
+    private val _finish = MutableLiveData<MainResultData>()
+    val finish: LiveData<MainResultData> get() = _finish
 
 
     fun setAcquirePlaceData(acquireData: AcquirePlaceCode) {
@@ -55,7 +56,8 @@ class MainViewModel : LViewModel() {
         Log.i("acquirePlaceData : $acquirePlaceData")
         Log.i("acquisitionData : $acquisitionData")
 
-        // TODO : Data 넘기는 부분 추가해야함
-        _finish.postValue(true)
+        val searchText = _selectSearch.value
+        val mainResultData = MainResultData(acquirePlaceData, acquisitionData, searchText)
+        _finish.postValue(mainResultData)
     }
 }
