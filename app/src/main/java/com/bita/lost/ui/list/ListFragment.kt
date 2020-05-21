@@ -35,7 +35,7 @@ class ListFragment : LFragment() {
         val name = activity?.intent?.getStringExtra(ListActivity.EXTRA_SEARCH)
 
         if (wbCode is AcquirePlaceCode && cate is AcquisitionCode) {
-            vm.init(cate.name, wbCode, name)
+            vm.init(cate, wbCode, name)
         }
     }
 }

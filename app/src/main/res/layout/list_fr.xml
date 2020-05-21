@@ -23,11 +23,26 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
+            app:layout_constraintEnd_toStartOf="@id/cate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:setTransport="@{vm.wbCode}"
             tools:drawableTop="@drawable/ic_bus"
             tools:text="버스" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/transport"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setAcquisition="@{vm.cate}"
+            tools:drawableTop="@drawable/ic_bus"
+            tools:text="버스" /> 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
@@ -35,9 +50,10 @@
             android:layout_height="0dp"
             android:clipChildren="false"
             android:orientation="vertical"
+            android:overScrollMode="never"
             android:transitionGroup="false"
             app:get_next_data="@{vm::getLostList}"
-            app:has_next="@{true}"
+            app:has_next="@{vm.hasNext}"
             app:items="@{vm.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
