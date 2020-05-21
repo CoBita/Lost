@@ -1,12 +1,10 @@
 package com.bita.lost.ui.list
 
-import android.content.Intent
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.LostItem
-import com.bita.lost.ui.detail.DetailActivity
 
 object ListBindingAdapter {
 
@@ -24,7 +22,11 @@ object ListBindingAdapter {
         v.adapter?.takeIf { it is ListAdapter }?.let {
             (it as ListAdapter).addAll(data)
         } ?: run {
-            val adapter = ListAdapter({ v.context.startActivity(Intent(v.context, DetailActivity::class.java)) }, function)
+            val adapter = ListAdapter({ id ->
+                v.context.takeIf { it is ListActivity }?.let {
+                    (it as ListActivity).replace(true, id)
+                }
+            }, function)
             adapter.set(data)
             v.adapter = adapter
         }

@@ -4,25 +4,27 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.transition.Explode
+import android.transition.Slide
 import android.view.Window
-import androidx.databinding.DataBindingUtil
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
-import com.bita.lost.databinding.ListActBinding
 import com.bita.lost.repo.data.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquisitionCode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
     override val vm: ListViewModel by viewModel()
-    private val binding by lazy { DataBindingUtil.setContentView<ListActBinding>(this, R.layout.list_act) }
+    private val listFr = ListFragment().apply { exitTransition = Explode() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = vm
+        setContentView(R.layout.list_act)
     }
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        replace(false)
     }
 
     override fun createProgress(): Dialog {
@@ -36,15 +38,19 @@ class ListActivity : LActivity() {
         return dialog
     }
 
-    override fun onParseExtra() {
-        super.onParseExtra()
-        // todo 메인에서 넘어온 값으로 변경 필요
-        vm.init("핸드폰", AcquirePlaceCode.지하철1호선에서4호선, "")
-    }
+    fun replace(isDetail: Boolean, id: String? = null) {
+        val target = if (isDetail) DetailFragment().apply {
+            val bundle = Bundle()
+            bundle.putString(DetailFragment.ID, id)
+            arguments = bundle
+            enterTransition = Slide()
+            reenterTransition = null
+        } else listFr
 
-    override fun onLoad() {
-        super.onLoad()
-        vm.getLostList()
+
+        val transaction = supportFragmentManager.beginTransaction().replace(R.id.container, target)
+        if (isDetail) transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     companion object {
