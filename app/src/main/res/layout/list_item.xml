@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/shadow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -18,8 +19,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_rect"
-        android:elevation="16dp"
-        android:outlineSpotShadowColor="#EEF0F6"
         android:padding="16dp"
         android:transitionGroup="true">
 

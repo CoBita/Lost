@@ -12,37 +12,28 @@
             type="com.bita.lost.ui.list.ListViewModel" />
     </data>
 
-    <!--    android:background="#efefef"-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/transport"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
+            style="@style/headerIcon"
+            app:layout_constraintBottom_toTopOf="@id/list"
             app:layout_constraintEnd_toStartOf="@id/cate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setTransport="@{vm.wbCode}"
-            tools:drawableTop="@drawable/ic_bus"
-            tools:text="버스" />
+            app:src="@{vm.wbCode.icon}"
+            tools:src="@drawable/ic_bus" />
 
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
+            style="@style/headerIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/transport"
             app:layout_constraintTop_toTopOf="parent"
-            app:setAcquisition="@{vm.cate}"
-            tools:drawableTop="@drawable/ic_bus"
-            tools:text="버스" /> 
+            app:src="@{vm.cate.icon}"
+            tools:src="@drawable/ic_backpack" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"

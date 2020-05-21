@@ -16,7 +16,7 @@ class ListFragment : LFragment() {
     override val vm: ListViewModel by sharedViewModel()
     private lateinit var binding: ListFrBinding
 
-    override fun onCreateView(        inflater: LayoutInflater,        container: ViewGroup?,        savedInstanceState: Bundle?    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fr, container, false)
         return binding.root
     }

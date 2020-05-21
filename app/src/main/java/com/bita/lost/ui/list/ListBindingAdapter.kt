@@ -1,10 +1,8 @@
 package com.bita.lost.ui.list
 
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bita.lost.repo.data.AcquirePlaceCode
-import com.bita.lost.repo.data.AcquisitionCode
 import com.bita.lost.repo.data.LostItem
 
 object ListBindingAdapter {
@@ -35,20 +33,8 @@ object ListBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:setTransport")
-    fun setTransport(v: TextView, enum: AcquirePlaceCode) {
-        v.apply {
-            text = enum.description
-            setCompoundDrawablesRelativeWithIntrinsicBounds(null, v.context.getDrawable(enum.icon), null, null)
-        }
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:setAcquisition")
-    fun setAcquisition(v: TextView, enum: AcquisitionCode) {
-        v.apply {
-            text = enum.name
-            setCompoundDrawablesRelativeWithIntrinsicBounds(null, v.context.getDrawable(enum.icon), null, null)
-        }
+    @BindingAdapter("app:src")
+    fun setSrc(v: ImageView, drawableId: Int) {
+        v.setImageResource(drawableId)
     }
 }
