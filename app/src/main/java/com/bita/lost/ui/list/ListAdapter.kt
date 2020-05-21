@@ -1,6 +1,7 @@
 package com.bita.lost.ui.list
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.bita.lost.R
@@ -20,19 +21,21 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
             0 -> ListHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             else -> MoreHolder(ListMoreItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
-
     }
 
     override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 } ?: 1
 
+    private fun animate(v: View, index: Int) {
+        if (lastAnimatedIndex < index) {
+            v.animation = AnimationUtils.loadAnimation(v.context, R.anim.up_anim)
+            lastAnimatedIndex = index
+        }
+    }
+
     inner class ListHolder(private val binding: ListItemBinding) :
             BaseHolder<LostItem?>(binding.root) {
         override fun bind(data: LostItem?) {
-            val index = items.indexOf(data)
-            if (lastAnimatedIndex < index) {
-                binding.root.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.up_anim)
-                lastAnimatedIndex = index
-            }
+            animate(binding.root, items.indexOf(data))
             binding.data = data
             binding.root.setOnClickListener { data?.id?.let { id -> startActivity(id) } }
         }
@@ -40,8 +43,10 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
 
     inner class MoreHolder(private val binding: ListMoreItemBinding) : BaseHolder<LostItem?>(binding.root) {
         override fun bind(data: LostItem?) {
+            animate(binding.root, items.indexOf(data))
             binding.root.setOnClickListener {
-                val lastIndex =items.lastIndex
+                lastAnimatedIndex--
+                val lastIndex = items.lastIndex
                 items.removeAt(lastIndex)
                 notifyItemRemoved(lastIndex)
                 getNextData()

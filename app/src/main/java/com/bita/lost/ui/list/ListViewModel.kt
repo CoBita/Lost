@@ -9,6 +9,7 @@ import com.bita.lost.base.LViewModel
 import com.bita.lost.common.progress
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.ListRepository
+import com.bita.lost.repo.data.AcquisitionCode
 import com.bita.lost.repo.data.LostItem
 import com.bita.lost.repo.data.LostListFrame
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 class ListViewModel(private val repository: ListRepository) : LViewModel() {
     private var index = 0
     private val viewsPerPage = 20
-    private lateinit var cate: String
+    lateinit var cate: AcquisitionCode
     lateinit var wbCode: AcquirePlaceCode
     private lateinit var name: String
 
@@ -29,10 +30,14 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         e.printStackTrace()
     }
 
-    fun init(cate: String, wbCode: AcquirePlaceCode, name: String) {
+    fun init(cate: AcquisitionCode, wbCode: AcquirePlaceCode, name: String?) {
         this.cate = cate
         this.wbCode = wbCode
-        this.name = name
+        this.name = name ?: ""
+    }
+
+    fun getFirstLostList() {
+        if (list.isEmpty()) getLostList()
     }
 
     fun getLostList() {
@@ -41,11 +46,11 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             val start = index + 1
             val end = start + viewsPerPage - 1
             Log.w("$start ~ $end 조회")
-            val result: LostListFrame = repository.분실물조회(start, end, cate, wbCode.code, name)
-            delay(2000)
+            val result: LostListFrame = repository.분실물조회(start, end, cate.name, wbCode.code, name)
             index = end
             list.clear()
             list.addAll(result.service.items)
+            if (result.service.listTotalCount <= end) hasNext.set(false)
         }.progress(_isProgress)
     }
 }

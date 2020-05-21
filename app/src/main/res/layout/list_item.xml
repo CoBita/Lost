@@ -10,15 +10,17 @@
             type="com.bita.lost.repo.data.LostItem" />
     </data>
 
-    <!-- material design -->
-    <!-- android:foreground="?android:attr/selectableItemBackground" -->
-    <!-- android:background="@drawable/test_soft_ui"-->
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/shadow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_rect"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:transitionGroup="true">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
@@ -31,6 +33,18 @@
             tools:text="삼성애니콜폴더핸드폰(검정+회색)" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/place"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{data.company +' '+data.place}"
+            app:layout_constraintEnd_toStartOf="@id/date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="경찰서" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,18 +53,8 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/place"
-            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintTop_toTopOf="@id/place"
             tools:text="2018-08-21" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/place"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="@{data.company +' '+data.place}"
-            app:layout_constraintEnd_toStartOf="@id/date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/date"
-            tools:text="경찰서" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

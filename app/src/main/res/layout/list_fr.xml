@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:list="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.list.ListActivity">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.bita.lost.ui.list.ListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/transport"
+            style="@style/headerIcon"
+            app:layout_constraintBottom_toTopOf="@id/list"
+            app:layout_constraintEnd_toStartOf="@id/cate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:src="@{vm.wbCode.icon}"
+            tools:src="@drawable/ic_bus" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cate"
+            style="@style/headerIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/transport"
+            app:layout_constraintTop_toTopOf="parent"
+            app:src="@{vm.cate.icon}"
+            tools:src="@drawable/ic_backpack" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:transitionGroup="false"
+            app:get_next_data="@{vm::getLostList}"
+            app:has_next="@{vm.hasNext}"
+            app:items="@{vm.list}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transport"
+            tools:listitem="@layout/list_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
