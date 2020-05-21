@@ -7,7 +7,7 @@ import androidx.databinding.ObservableBoolean
 import com.and.base.log.Log
 import com.bita.lost.base.LViewModel
 import com.bita.lost.common.progress
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.ListRepository
 import com.bita.lost.repo.data.LostItem
 import com.bita.lost.repo.data.LostListFrame

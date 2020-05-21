@@ -41,7 +41,7 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
     inner class MoreHolder(private val binding: ListMoreItemBinding) : BaseHolder<LostItem?>(binding.root) {
         override fun bind(data: LostItem?) {
             binding.root.setOnClickListener {
-                val lastIndex =items.lastIndex
+                val lastIndex = items.lastIndex
                 items.removeAt(lastIndex)
                 notifyItemRemoved(lastIndex)
                 getNextData()

@@ -3,7 +3,7 @@ package com.bita.lost.ui.list
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.LostItem
 
 object ListBindingAdapter {

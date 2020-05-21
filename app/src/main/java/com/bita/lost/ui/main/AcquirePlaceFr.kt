@@ -23,7 +23,7 @@ class AcquirePlaceFr : LFragment() {
         //TODO : Animation 부분
         AcquirePlaceAdapter().apply { onItemClick = { mainVm.setAcquirePlaceData(it) } }
     }
-    private val decoration = AcquirePlaceItemDecoration()
+    private val decoration by lazy { GridItemDecoration(16) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bb = DataBindingUtil.inflate(inflater, R.layout.acquire_place_fr, container, false)

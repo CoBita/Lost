@@ -9,7 +9,7 @@ import android.transition.Slide
 import android.view.Window
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
-import com.bita.lost.repo.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquirePlaceCode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
