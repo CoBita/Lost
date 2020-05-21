@@ -84,7 +84,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/acquisition"
                 app:layout_constraintTop_toTopOf="@id/acquirePlace"
-                tools:text="휴대폰" />
+                tools:text="휴대폰"
+                tools:ignore="SpUsage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
