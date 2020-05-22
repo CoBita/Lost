@@ -1,3 +1,3 @@
 package com.bita.lost.di
 
-val appModules = listOf(netModule, mainModule, listModule)
+val appModules = listOf(netModule, mainModule, listModule, detailModule)
