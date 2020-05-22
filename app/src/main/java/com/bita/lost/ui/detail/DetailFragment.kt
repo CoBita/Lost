@@ -23,9 +23,7 @@ class DetailFragment : LFragment() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        arguments?.getString(ID)?.let { id ->
-            Snackbar.make(binding.root, "id = $id", Snackbar.LENGTH_SHORT).show()
-        }
+        arguments?.getString(ID)?.let { id -> vm.분실물상세조회(id) }
     }
 
     companion object {
@@ -39,7 +37,6 @@ class DetailFragment : LFragment() {
                 reenterTransition = null
             }
         }
-
 
         const val ID = "ID"
     }
