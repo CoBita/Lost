@@ -25,7 +25,7 @@ class MainViewModel : LViewModel() {
 
     private var selectAcquirePlaceData: AcquirePlaceCode? = null
     private var selectAcquisitionData: AcquisitionCode? = null
-    val selectSearchText = ObservableField<String>()
+    private var selectSearchText: String? = null
 
 
     init {
@@ -47,7 +47,7 @@ class MainViewModel : LViewModel() {
     }
 
     fun setSearchText(searchText: String?) {
-        selectSearchText.set(searchText)
+        selectSearchText = searchText
         result()
     }
 
@@ -64,14 +64,13 @@ class MainViewModel : LViewModel() {
             return
         }
 
-        val searchText = selectSearchText.get()
         Log.i("acquirePlaceData : $selectAcquirePlaceData")
         Log.i("acquisitionData : $selectAcquisitionData")
-        Log.i("searchText : $searchText")
+        Log.i("searchText : $selectSearchText")
 
         selectAcquirePlaceData?.let { placeData ->
             selectAcquisitionData?.let { acquisitionData ->
-                val mainResultData = MainResultData(placeData, acquisitionData, searchText)
+                val mainResultData = MainResultData(placeData, acquisitionData, selectSearchText)
                 _finish.postValue(mainResultData)
             }
         }
@@ -85,9 +84,6 @@ class MainViewModel : LViewModel() {
         _replaceFragment.postValue(ACQUISITION_TAG)
     }
 
-    fun clickSearch() {
-        _replaceFragment.postValue(SEARCH_TAG)
-    }
 
     fun clickValidation(): Boolean {
         if (selectAcquirePlaceData != null && selectAcquisitionData != null) {

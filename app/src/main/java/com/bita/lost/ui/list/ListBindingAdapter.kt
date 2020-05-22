@@ -23,7 +23,7 @@ object ListBindingAdapter {
         } ?: run {
             val adapter = ListAdapter({ id ->
                 v.context.takeIf { it is ListActivity }?.let {
-                    (it as ListActivity).replace(true, id)
+                    (it as ListActivity).detailReplace(id)
                 }
             }, function)
             adapter.set(data)

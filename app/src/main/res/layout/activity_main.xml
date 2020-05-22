@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bg"
         tools:context=".ui.main.MainActivity">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -33,18 +34,14 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-            android:background="@drawable/header_top_bg"
-            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/acquirePlace"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:background="@drawable/header_select_bg"
-                android:elevation="2dp"
+                style="@style/headerIcon"
+                android:layout_margin="8dp"
                 android:onClick="@{()-> vm.clickAcquirePlaceIcon()}"
                 android:scaleType="centerInside"
                 app:intSrc="@{vm.selectAcquirePlaceIcon}"
@@ -56,36 +53,16 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/acquisition"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:background="@drawable/header_select_bg"
-                android:elevation="2dp"
+                style="@style/headerIcon"
+                android:layout_margin="8dp"
                 android:onClick="@{()-> vm.clickAcquisitionIcon()}"
                 android:scaleType="centerInside"
                 app:intSrc="@{vm.selectAcquisitionIcon}"
-                app:layout_constraintEnd_toStartOf="@id/search"
+                app:layout_constraintBottom_toBottomOf="@id/acquirePlace"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/acquirePlace"
                 app:layout_constraintTop_toTopOf="@id/acquirePlace"
                 app:srcCompat="@drawable/ic_book" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/search"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:background="@drawable/header_select_bg"
-                android:elevation="2dp"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:onClick="@{()-> vm.clickSearch()}"
-                android:text="@{vm.selectSearchText}"
-                android:textColor="@color/black"
-                android:textSize="11dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/acquisition"
-                app:layout_constraintTop_toTopOf="@id/acquirePlace"
-                tools:text="휴대폰"
-                tools:ignore="SpUsage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

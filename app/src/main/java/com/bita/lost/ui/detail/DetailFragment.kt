@@ -1,19 +1,19 @@
-package com.bita.lost.ui.list
+package com.bita.lost.ui.detail
 
 import android.os.Bundle
+import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.DetailFrBinding
 import com.google.android.material.snackbar.Snackbar
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : LFragment() {
-    override val vm: ListViewModel by sharedViewModel()
+    override val vm: DetailViewModel by viewModel()
     private lateinit var binding: DetailFrBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,6 +29,19 @@ class DetailFragment : LFragment() {
     }
 
     companion object {
+        fun newInstance(id: String): DetailFragment {
+            val bundle = Bundle().apply {
+                putString(ID, id)
+            }
+            return DetailFragment().apply {
+                arguments = bundle
+                enterTransition = Slide()
+                reenterTransition = null
+            }
+        }
+
+
         const val ID = "ID"
     }
+
 }

@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.transition.Explode
 import android.transition.Slide
 import android.view.Window
+import androidx.fragment.app.Fragment
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
+import com.bita.lost.ui.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
@@ -22,7 +24,7 @@ class ListActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        replace(false)
+        replace()
     }
 
     override fun createProgress(): Dialog {
@@ -36,19 +38,19 @@ class ListActivity : LActivity() {
         return dialog
     }
 
-    fun replace(isDetail: Boolean, id: String? = null) {
-        val target = if (isDetail) DetailFragment().apply {
-            val bundle = Bundle()
-            bundle.putString(DetailFragment.ID, id)
-            arguments = bundle
-            enterTransition = Slide()
-            reenterTransition = null
-        } else listFr
+    fun replace() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, listFr)
+            commit()
+        }
+    }
 
-
-        val transaction = supportFragmentManager.beginTransaction().replace(R.id.container, target)
-        if (isDetail) transaction.addToBackStack(null)
-        transaction.commit()
+    fun detailReplace(id: String) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, DetailFragment.newInstance(id))
+            addToBackStack(null)
+            commit()
+        }
     }
 
     companion object {
