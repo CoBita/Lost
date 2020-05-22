@@ -50,7 +50,6 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             Log.w("$start ~ $end 조회")
             val result: LostListFrame = repository.분실물조회(start, end, cate!!.name, wbCode!!.code, name)
             index = end
-            list.clear()
             list.addAll(result.service.items)
             if (result.service.listTotalCount <= end) hasNext.set(false)
         }.progress(_isProgress)
