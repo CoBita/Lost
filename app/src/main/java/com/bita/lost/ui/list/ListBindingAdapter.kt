@@ -12,14 +12,13 @@ object ListBindingAdapter {
     @JvmStatic
     @BindingAdapter("app:items", "app:has_next", "app:get_next_data")
     fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit) {
-        // todo hasNext 추가
         val data = arrayListOf<LostItem?>().apply {
             addAll(rawData)
             if (hasNext && isNotEmpty()) add(null)
         }
 
         v.adapter?.takeIf { it is ListAdapter }?.let {
-            (it as ListAdapter).addAll(data)
+            (it as ListAdapter).set(data)
         } ?: run {
             val adapter = ListAdapter({ id ->
                 v.context.takeIf { it is ListActivity }?.let {
