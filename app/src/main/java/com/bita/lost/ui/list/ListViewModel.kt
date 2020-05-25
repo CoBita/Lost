@@ -7,22 +7,18 @@ import androidx.databinding.ObservableBoolean
 import com.and.base.log.Log
 import com.bita.lost.base.LViewModel
 import com.bita.lost.common.progress
-import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.ListRepository
+import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
 import com.bita.lost.repo.data.LostItem
 import com.bita.lost.repo.data.LostListFrame
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ListViewModel(private val repository: ListRepository) : LViewModel() {
-    private var index = 0
-    private val viewsPerPage = 20
-    var cate: AcquisitionCode? = null
-    var wbCode: AcquirePlaceCode? = null
-    private lateinit var name: String
+    private var page = 0
+    lateinit var lstPlace: AcquisitionCode
+    lateinit var lstPrdtNm: AcquirePlaceCode
 
     val list = ObservableArrayList<LostItem>()
     val hasNext = ObservableBoolean(true)
@@ -31,10 +27,9 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         e.printStackTrace()
     }
 
-    fun init(cate: AcquisitionCode, wbCode: AcquirePlaceCode, name: String?) {
-        this.cate = cate
-        this.wbCode = wbCode
-        this.name = name ?: ""
+    fun init(lstPlace: AcquisitionCode, lstPrdtNm: AcquirePlaceCode) {
+        this.lstPlace = lstPlace
+        this.lstPrdtNm = lstPrdtNm
     }
 
     fun getFirstLostList() {
@@ -42,16 +37,12 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     }
 
     fun getLostList() {
-        if(cate == null || wbCode == null) return
         scope.launch(handler) {
-            // todo 성공 실패 여부 try catch 로 처리하는게 맞나..?
-            val start = index + 1
-            val end = start + viewsPerPage - 1
-            Log.w("$start ~ $end 조회")
-            val result: LostListFrame = repository.분실물조회(start, end, cate!!.name, wbCode!!.code, name)
-            index = end
-            list.addAll(result.service.items)
-            if (result.service.listTotalCount <= end) hasNext.set(false)
+            page++
+            val result: LostListFrame = repository.분실물조회(lstPlace.name, lstPrdtNm.name, page)
+//            val result: LostListFrame = repository.분실물조회("", "", page)
+            list.addAll(result.response.body.list.items)
+            if (result.response.body.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)
     }
 }

@@ -37,7 +37,7 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
         override fun bind(data: LostItem?) {
             animate(binding.root, items.indexOf(data))
             binding.data = data
-            binding.root.setOnClickListener { data?.id?.let { id -> startActivity(id) } }
+            binding.root.setOnClickListener { data?.atcId?.let { id -> startActivity(id) } }
         }
     }
 

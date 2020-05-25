@@ -32,10 +32,9 @@ class ListFragment : LFragment() {
         super.onParseExtra()
         val wbCode = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUIRE_PLACE)
         val cate = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUISITION)
-        val name = activity?.intent?.getStringExtra(ListActivity.EXTRA_SEARCH)
 
         if (wbCode is AcquirePlaceCode && cate is AcquisitionCode) {
-            vm.init(cate, wbCode, name)
+            vm.init(cate, wbCode)
         } else {
             showDialog("", "다시 한 번 시도해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> activity?.finish() })
         }

@@ -22,7 +22,8 @@ class DetailFragment : LFragment() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        arguments?.getString(ID)?.let { id -> vm.분실물상세조회(id) }
+        // TODO 경찰청 API로 교체 후 해당 내용 주석 해제 필요
+//        arguments?.getString(ID)?.let { id -> vm.분실물상세조회(id) }
     }
 
     companion object {
