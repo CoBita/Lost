@@ -6,13 +6,12 @@ import com.bita.lost.R
 
 enum class AcquisitionCode(val icon: Int) {
     지갑(R.drawable.ic_wallet),
-    쇼핑백(R.drawable.ic_shopping_bag),
-    서류봉투(R.drawable.ic_paper_bag),
     가방(R.drawable.ic_bag),
-    베낭(R.drawable.ic_backpack),
     핸드폰(R.drawable.ic_phone),
     옷(R.drawable.ic_cloth),
     책(R.drawable.ic_book),
-    파일(R.drawable.ic_file),
-    기타(R.drawable.ic_etc)
+
+    직접입력(R.drawable.ic_etc)
+
+    // TODO : 카드추가, 직접입력 BottomSheet
 }

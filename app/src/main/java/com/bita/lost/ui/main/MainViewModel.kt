@@ -41,13 +41,7 @@ class MainViewModel : LViewModel() {
 
     fun setAcquisitionData(acquisitionCode: AcquisitionCode) {
         selectAcquisitionData = acquisitionCode
-        infoText.set(searchInfoText)
         selectAcquisitionIcon.set(acquisitionCode.icon)
-        _replaceFragment.postValue(SEARCH_TAG)
-    }
-
-    fun setSearchText(searchText: String?) {
-        selectSearchText = searchText
         result()
     }
 
@@ -66,11 +60,10 @@ class MainViewModel : LViewModel() {
 
         Log.i("acquirePlaceData : $selectAcquirePlaceData")
         Log.i("acquisitionData : $selectAcquisitionData")
-        Log.i("searchText : $selectSearchText")
 
         selectAcquirePlaceData?.let { placeData ->
             selectAcquisitionData?.let { acquisitionData ->
-                val mainResultData = MainResultData(placeData, acquisitionData, selectSearchText)
+                val mainResultData = MainResultData(placeData, acquisitionData)
                 _finish.postValue(mainResultData)
             }
         }
@@ -95,11 +88,9 @@ class MainViewModel : LViewModel() {
     companion object {
         private const val acquireInfoText = "어디에서\n잃어버렸나요?"
         private const val acquisitionInfoText = "무엇을\n잃어버렸나요?"
-        private const val searchInfoText = "검색어를\n입력하시겠어요?"
 
         const val ACQUIRE_PLACE_TAG = "AcquirePlace"
         const val ACQUISITION_TAG = "Acquisition"
-        const val SEARCH_TAG = "Search"
     }
 
 }

@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.DetailFrBinding
-import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : LFragment() {
@@ -28,9 +27,7 @@ class DetailFragment : LFragment() {
 
     companion object {
         fun newInstance(id: String): DetailFragment {
-            val bundle = Bundle().apply {
-                putString(ID, id)
-            }
+            val bundle = Bundle().apply { putString(ID, id) }
             return DetailFragment().apply {
                 arguments = bundle
                 enterTransition = Slide()

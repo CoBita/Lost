@@ -34,7 +34,6 @@ class MainActivity : LActivity() {
                 when (tag) {
                     MainViewModel.ACQUIRE_PLACE_TAG -> AcquirePlaceFr.newInstance()
                     MainViewModel.ACQUISITION_TAG -> AcquisitionFr.newInstance()
-                    MainViewModel.SEARCH_TAG -> SearchFr.newInstance()
                     else -> throw IllegalStateException("들어오면 안됨")
                 }
         supportFragmentManager.beginTransaction().apply {
@@ -47,12 +46,10 @@ class MainActivity : LActivity() {
     private fun mainFinish(mainResultData: MainResultData) {
         val acquirePlaceData = mainResultData.acquirePlaceCode
         val acquisitionData = mainResultData.acquisitionCode
-        val searchText = mainResultData.search
 
         val intent = Intent(this, ListActivity::class.java).apply {
             putExtra(ListActivity.EXTRA_ACQUIRE_PLACE, acquirePlaceData)
             putExtra(ListActivity.EXTRA_ACQUISITION, acquisitionData)
-            putExtra(ListActivity.EXTRA_SEARCH, searchText)
         }
         startActivity(intent)
     }
