@@ -8,10 +8,7 @@ import com.and.base.log.Log
 import com.bita.lost.base.LViewModel
 import com.bita.lost.common.progress
 import com.bita.lost.repo.ListRepository
-import com.bita.lost.repo.data.AcquirePlaceCode
-import com.bita.lost.repo.data.AcquisitionCode
-import com.bita.lost.repo.data.LostItem
-import com.bita.lost.repo.data.LostListFrame
+import com.bita.lost.repo.data.*
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
@@ -39,9 +36,9 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     fun getLostList() {
         scope.launch(handler) {
             page++
-            val result: LostListFrame = repository.분실물조회(lstPlace.description, lstPrdtNm.name, page)
-            list.addAll(result.response.body.list.items)
-            if (result.response.body.totalCount <= page * 20) hasNext.set(false)
+            val result: Body<LostList> = repository.분실물조회(lstPlace.description, lstPrdtNm.name, page)
+            result.items.items?.let { list.addAll(it) }
+            if (result.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)
     }
 }
