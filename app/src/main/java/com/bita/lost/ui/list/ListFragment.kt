@@ -30,11 +30,11 @@ class ListFragment : LFragment() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        val wbCode = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUIRE_PLACE)
-        val cate = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUISITION)
+        val place = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUIRE_PLACE)
+        val name = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUISITION)
 
-        if (wbCode is AcquirePlaceCode && cate is AcquisitionCode) {
-            vm.init(cate, wbCode)
+        if (place is AcquirePlaceCode && name is AcquisitionCode) {
+            vm.init(place, name)
         } else {
             showDialog("", "다시 한 번 시도해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> activity?.finish() })
         }

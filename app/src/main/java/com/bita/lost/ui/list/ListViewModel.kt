@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 
 class ListViewModel(private val repository: ListRepository) : LViewModel() {
     private var page = 0
-    lateinit var lstPlace: AcquisitionCode
-    lateinit var lstPrdtNm: AcquirePlaceCode
+    lateinit var lstPrdtNm: AcquisitionCode
+    lateinit var lstPlace: AcquirePlaceCode
 
     val list = ObservableArrayList<LostItem>()
     val hasNext = ObservableBoolean(true)
@@ -27,7 +27,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         e.printStackTrace()
     }
 
-    fun init(lstPlace: AcquisitionCode, lstPrdtNm: AcquirePlaceCode) {
+    fun init(lstPlace: AcquirePlaceCode, lstPrdtNm: AcquisitionCode) {
         this.lstPlace = lstPlace
         this.lstPrdtNm = lstPrdtNm
     }
@@ -39,8 +39,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     fun getLostList() {
         scope.launch(handler) {
             page++
-            val result: LostListFrame = repository.분실물조회(lstPlace.name, lstPrdtNm.name, page)
-//            val result: LostListFrame = repository.분실물조회("", "", page)
+            val result: LostListFrame = repository.분실물조회(lstPlace.description, lstPrdtNm.name, page)
             list.addAll(result.response.body.list.items)
             if (result.response.body.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)
