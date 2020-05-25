@@ -10,7 +10,6 @@ enum class AcquisitionCode(val icon: Int) {
     핸드폰(R.drawable.ic_phone),
     옷(R.drawable.ic_cloth),
     책(R.drawable.ic_book),
-
     직접입력(R.drawable.ic_etc)
 
     // TODO : 카드추가, 직접입력 BottomSheet

@@ -27,6 +27,9 @@ class MainActivity : LActivity() {
         // First
         vm.replaceFragment.observe(this, Observer { it?.let { replace(it) } })
         vm.finish.observe(this, Observer { it?.let { mainResultData -> mainFinish(mainResultData) } })
+
+        val inputBottomSheetFr = InputBottomSheetFr.newInstance { }
+        inputBottomSheetFr.show(supportFragmentManager, "")
     }
 
     private fun replace(tag: String) {

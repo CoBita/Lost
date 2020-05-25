@@ -20,7 +20,6 @@ class AcquirePlaceFr : LFragment() {
     lateinit var bb: AcquirePlaceFrBinding
 
     private val acquirePlaceAdapter by lazy {
-        //TODO : Animation 부분
         AcquirePlaceAdapter().apply { onItemClick = { mainVm.setAcquirePlaceData(it) } }
     }
     private val decoration by lazy { GridItemDecoration(16) }
