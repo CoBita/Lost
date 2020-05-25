@@ -36,7 +36,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     fun getLostList() {
         scope.launch(handler) {
             page++
-            val result: Body<LostList> = repository.분실물조회(lstPlace.description, lstPrdtNm.name, page)
+            val result: Body<LostList> = repository.분실물조회(lstPlace.description, lstPrdtNm.description, page)
             result.items.items?.let { list.addAll(it) }
             if (result.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)
