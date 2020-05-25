@@ -5,9 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.transition.Explode
-import android.transition.Slide
 import android.view.Window
-import androidx.fragment.app.Fragment
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.ui.detail.DetailFragment
@@ -56,6 +54,5 @@ class ListActivity : LActivity() {
     companion object {
         const val EXTRA_ACQUIRE_PLACE = "ACQUIRE_PLACE"
         const val EXTRA_ACQUISITION = "ACQUISITION"
-        const val EXTRA_SEARCH = "EXTRA_SEARCH"
     }
 }
