@@ -25,7 +25,6 @@ class MainViewModel : LViewModel() {
 
     private var selectAcquirePlaceData: AcquirePlaceCode? = null
     private var selectAcquisitionData: AcquisitionCode? = null
-    private var selectSearchText: String? = null
 
 
     init {
@@ -47,7 +46,6 @@ class MainViewModel : LViewModel() {
 
 
     fun result() {
-
         if (selectAcquirePlaceData == null) {
             _alertMessage.postValue("잃어버린 장소를 선택 해 주세요.")
             return
@@ -75,14 +73,6 @@ class MainViewModel : LViewModel() {
 
     fun clickAcquisitionIcon() {
         _replaceFragment.postValue(ACQUISITION_TAG)
-    }
-
-
-    fun clickValidation(): Boolean {
-        if (selectAcquirePlaceData != null && selectAcquisitionData != null) {
-            return true
-        }
-        return false
     }
 
     companion object {

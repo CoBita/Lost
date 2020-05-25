@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bita.lost.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.input_bottom_fr.*
 
 class InputBottomSheetFr : BottomSheetDialogFragment() {
 
@@ -17,21 +18,22 @@ class InputBottomSheetFr : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        close.setOnClickListener { dismiss() }
+        search.setOnClickListener { finish() }
     }
 
 
     private fun finish() {
-
+        val inputText = input.editableText.toString()
+        onInput?.invoke(inputText)
         dismiss()
     }
-
 
 
     companion object {
         fun newInstance(input: ((input: String) -> Unit)): InputBottomSheetFr {
             val bottomSheetFr = InputBottomSheetFr().apply {
                 onInput = input
-//                isCancelable = false
             }
             return bottomSheetFr
         }

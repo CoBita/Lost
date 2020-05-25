@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
@@ -29,7 +30,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="3"
             tools:listitem="@layout/acquire_list_item" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

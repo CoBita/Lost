@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.AcquirePlaceFrBinding
+import com.bita.lost.repo.data.AcquirePlaceCode
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +21,19 @@ class AcquirePlaceFr : LFragment() {
     lateinit var bb: AcquirePlaceFrBinding
 
     private val acquirePlaceAdapter by lazy {
-        AcquirePlaceAdapter().apply { onItemClick = { mainVm.setAcquirePlaceData(it) } }
+        AcquirePlaceAdapter().apply {
+            onItemClick = {
+                if (it == AcquirePlaceCode.직접입력) {
+                    val inputBottomSheetFr = InputBottomSheetFr.newInstance { input ->
+                        it.description = input
+                        mainVm.setAcquirePlaceData(it)
+                    }
+                    inputBottomSheetFr.show(childFragmentManager, "")
+                } else {
+                    mainVm.setAcquirePlaceData(it)
+                }
+            }
+        }
     }
     private val decoration by lazy { GridItemDecoration(16) }
 
