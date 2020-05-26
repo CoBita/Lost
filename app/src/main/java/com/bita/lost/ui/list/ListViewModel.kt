@@ -19,6 +19,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
 
     val list = ObservableArrayList<LostItem>()
     val hasNext = ObservableBoolean(true)
+    val isLoadFinish = ObservableBoolean(false)
     private val handler = CoroutineExceptionHandler { _, e ->
         Log.w("exception occured")
         e.printStackTrace()
@@ -37,6 +38,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         scope.launch(handler) {
             page++
             val result: Body<LostList> = repository.분실물조회(lstPlace.description, lstPrdtNm.description, page)
+            isLoadFinish.set(true)
             result.items.items?.let { list.addAll(it) }
             if (result.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)

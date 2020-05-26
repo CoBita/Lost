@@ -7,14 +7,18 @@ import com.bita.lost.repo.data.LostItem
 
 object ListBindingAdapter {
 
-    //    /*"app:has_next",*/
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
-    @BindingAdapter("app:items", "app:has_next", "app:get_next_data")
-    fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit) {
+    @BindingAdapter("app:items", "app:has_next", "app:get_next_data", "app:is_load_finish")
+    fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit, isLoadFinish: Boolean) {
+        if (!isLoadFinish) {
+            return
+        }
+
         val data = arrayListOf<LostItem?>().apply {
             addAll(rawData)
             if (hasNext && isNotEmpty()) add(null)
+            if (this.isEmpty()) add(null)
         }
 
         v.adapter?.takeIf { it is ListAdapter }?.let {

@@ -44,6 +44,7 @@
             android:transitionGroup="false"
             app:get_next_data="@{vm::getLostList}"
             app:has_next="@{vm.hasNext}"
+            app:is_load_finish="@{vm.isLoadFinish}"
             app:items="@{vm.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
