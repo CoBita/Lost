@@ -25,7 +25,7 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
         }
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 } ?: if(position == 0) 1 else 1
+    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 } ?: if(position == 0) 1 else 2
 
     private fun animate(v: View, index: Int) {
         if (lastAnimatedIndex < index) {
