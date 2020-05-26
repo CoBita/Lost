@@ -9,6 +9,7 @@ import com.bita.lost.base.BaseAdapter
 import com.bita.lost.base.BaseHolder
 import com.bita.lost.databinding.ListItemBinding
 import com.bita.lost.databinding.ListMoreItemBinding
+import com.bita.lost.databinding.ListNoItemBinding
 import com.bita.lost.repo.data.LostItem
 
 class ListAdapter(private val startActivity: (id: String) -> Unit,
@@ -19,11 +20,12 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<LostItem?> {
         return when (viewType) {
             0 -> ListHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            1 -> NoHolder(ListNoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             else -> MoreHolder(ListMoreItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 } ?: 1
+    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 } ?: if(position == 0) 1 else 2
 
     private fun animate(v: View, index: Int) {
         if (lastAnimatedIndex < index) {
@@ -38,6 +40,12 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
             animate(binding.root, items.indexOf(data))
             binding.data = data
             binding.root.setOnClickListener { data?.atcId?.let { id -> startActivity(id) } }
+        }
+    }
+
+    inner class NoHolder(private val binding: ListNoItemBinding) : BaseHolder<LostItem?>(binding.root) {
+        override fun bind(data: LostItem?) {
+            animate(binding.notice, items.indexOf(data))
         }
     }
 
