@@ -1,7 +1,6 @@
 package com.bita.lost.ui.main
 
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.and.base.log.Log
@@ -14,8 +13,8 @@ class MainViewModel : LViewModel() {
 
     val infoText = ObservableField(acquireInfoText)
 
-    val selectAcquirePlaceIcon = ObservableInt()
-    val selectAcquisitionIcon = ObservableInt()
+    val selectAcquirePlaceIcon = ObservableField<Any>()
+    val selectAcquisitionIcon = ObservableField<Any>()
 
     private val _replaceFragment = MutableLiveData<String>()
     val replaceFragment: LiveData<String> get() = _replaceFragment
@@ -34,13 +33,22 @@ class MainViewModel : LViewModel() {
     fun setAcquirePlaceData(acquireData: AcquirePlaceCode) {
         selectAcquirePlaceData = acquireData
         infoText.set(acquisitionInfoText)
-        selectAcquirePlaceIcon.set(acquireData.icon)
+
+        if (acquireData == AcquirePlaceCode.직접입력) {
+            selectAcquirePlaceIcon.set(acquireData.description)
+        } else {
+            selectAcquirePlaceIcon.set(acquireData.icon)
+        }
         _replaceFragment.postValue(ACQUISITION_TAG)
     }
 
     fun setAcquisitionData(acquisitionCode: AcquisitionCode) {
         selectAcquisitionData = acquisitionCode
-        selectAcquisitionIcon.set(acquisitionCode.icon)
+        if (acquisitionCode == AcquisitionCode.직접입력) {
+            selectAcquisitionIcon.set(acquisitionCode.description)
+        } else {
+            selectAcquisitionIcon.set(acquisitionCode.icon)
+        }
         result()
     }
 
