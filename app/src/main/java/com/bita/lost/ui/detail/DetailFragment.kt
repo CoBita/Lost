@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.DetailFrBinding
@@ -22,8 +23,12 @@ class DetailFragment : LFragment() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        // TODO 경찰청 API로 교체 후 해당 내용 주석 해제 필요
-//        arguments?.getString(ID)?.let { id -> vm.분실물상세조회(id) }
+        arguments?.getString(ID)?.let { id -> vm.분실물상세조회(id) }
+    }
+
+    override fun onLoadOnce() {
+        super.onLoadOnce()
+        vm.result.observe(this, Observer { binding.result.text = it.toString() })
     }
 
     companion object {

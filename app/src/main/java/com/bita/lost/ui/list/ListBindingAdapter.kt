@@ -7,7 +7,6 @@ import com.bita.lost.repo.data.LostItem
 
 object ListBindingAdapter {
 
-    @Suppress("UNCHECKED_CAST")
     @JvmStatic
     @BindingAdapter("app:items", "app:has_next", "app:get_next_data", "app:is_load_finish")
     fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit, isLoadFinish: Boolean) {
@@ -21,17 +20,12 @@ object ListBindingAdapter {
             if (this.isEmpty()) add(null)
         }
 
-        v.adapter?.takeIf { it is ListAdapter }?.let {
-            (it as ListAdapter).set(data)
-        } ?: run {
-            val adapter = ListAdapter({ id ->
-                v.context.takeIf { it is ListActivity }?.let {
-                    (it as ListActivity).detailReplace(id)
+        v.adapter?.let { it as? ListAdapter }?.set(data)
+                ?: run {
+                    val adapter = ListAdapter({ id -> v.context.let { it as? ListActivity }?.showDetail(id) }, function)
+                    adapter.set(data)
+                    v.adapter = adapter
                 }
-            }, function)
-            adapter.set(data)
-            v.adapter = adapter
-        }
         v.scheduleLayoutAnimation()
     }
 

@@ -1,6 +1,7 @@
 package com.bita.lost.ui.list
 
 import android.os.Bundle
+import android.transition.Explode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,13 @@ import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.ListFrBinding
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
-import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class ListFragment : LFragment() {
+class ListFragment private constructor() : LFragment() {
     override val vm: ListViewModel by sharedViewModel()
     private lateinit var binding: ListFrBinding
+    private lateinit var place: AcquirePlaceCode
+    private lateinit var name: AcquisitionCode
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fr, container, false)
@@ -24,19 +26,20 @@ class ListFragment : LFragment() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        vm.init(place, name)
         binding.vm = vm
         vm.getFirstLostList()
     }
 
-    override fun onParseExtra() {
-        super.onParseExtra()
-        val place = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUIRE_PLACE)
-        val name = activity?.intent?.getSerializableExtra(ListActivity.EXTRA_ACQUISITION)
 
-        if (place is AcquirePlaceCode && name is AcquisitionCode) {
-            vm.init(place, name)
-        } else {
-            showDialog("", "다시 한 번 시도해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> activity?.finish() })
+    companion object {
+        fun newInstance(place: AcquirePlaceCode, name: AcquisitionCode): ListFragment {
+            return ListFragment().apply {
+                this.place = place
+                this.name = name
+                exitTransition = Explode()
+            }
         }
     }
+
 }

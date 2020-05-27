@@ -48,8 +48,8 @@ class MainActivity : LActivity() {
         val acquisitionData = mainResultData.acquisitionCode
 
         val intent = Intent(this, ListActivity::class.java).apply {
-            putExtra(ListActivity.EXTRA_ACQUIRE_PLACE, acquirePlaceData)
-            putExtra(ListActivity.EXTRA_ACQUISITION, acquisitionData)
+            putExtra(ListActivity.ACQUIRE_PLACE, acquirePlaceData)
+            putExtra(ListActivity.ACQUISITION, acquisitionData)
         }
         startActivity(intent)
     }
