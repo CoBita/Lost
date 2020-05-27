@@ -2,24 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="id"
-            type="String" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/test_ui">
+        android:background="@color/bg">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@{id}"
             tools:text="id가 들어갈 곳" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
