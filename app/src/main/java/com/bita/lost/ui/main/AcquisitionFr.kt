@@ -24,7 +24,7 @@ class AcquisitionFr : LFragment() {
         AcquisitionAdapter().apply {
             onItemClick = {
                 if (it == AcquisitionCode.직접입력) {
-                    val inputBottomSheetFr = InputBottomSheetFr.newInstance { input ->
+                    val inputBottomSheetFr = InputBottomSheetFr.newInstance(inputTitle) { input ->
                         it.description = input
                         mainVm.setAcquisitionData(it)
                     }
@@ -53,6 +53,7 @@ class AcquisitionFr : LFragment() {
 
 
     companion object {
+        const val inputTitle = "잃어버린 물건"
         fun newInstance(): AcquisitionFr {
             val acquisitionFr = AcquisitionFr()
             return acquisitionFr

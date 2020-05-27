@@ -24,7 +24,7 @@ class AcquirePlaceFr : LFragment() {
         AcquirePlaceAdapter().apply {
             onItemClick = {
                 if (it == AcquirePlaceCode.직접입력) {
-                    val inputBottomSheetFr = InputBottomSheetFr.newInstance { input ->
+                    val inputBottomSheetFr = InputBottomSheetFr.newInstance(inputTitle) { input ->
                         it.description = input
                         mainVm.setAcquirePlaceData(it)
                     }
@@ -52,6 +52,7 @@ class AcquirePlaceFr : LFragment() {
 
 
     companion object {
+        const val inputTitle = "잃어버린 장소"
         fun newInstance(): AcquirePlaceFr {
             val acquirePlaceFr = AcquirePlaceFr()
             return acquirePlaceFr
