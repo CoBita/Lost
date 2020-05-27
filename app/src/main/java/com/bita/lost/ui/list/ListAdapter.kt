@@ -12,11 +12,10 @@ import com.bita.lost.databinding.ListMoreItemBinding
 import com.bita.lost.databinding.ListNoItemBinding
 import com.bita.lost.repo.data.LostItem
 
-class ListAdapter(private val startActivity: (id: String) -> Unit,
+class ListAdapter(private val showDetail: (id: String) -> Unit,
                   private val getNextData: () -> Unit) : BaseAdapter<LostItem?>() {
     var lastAnimatedIndex = -1
 
-    @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<LostItem?> {
         return when (viewType) {
             0 -> ListHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -25,7 +24,8 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
         }
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 } ?: if(position == 0) 1 else 2
+    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 }
+            ?: if (position == 0) 1 else 2
 
     private fun animate(v: View, index: Int) {
         if (lastAnimatedIndex < index) {
@@ -39,7 +39,9 @@ class ListAdapter(private val startActivity: (id: String) -> Unit,
         override fun bind(data: LostItem?) {
             animate(binding.root, items.indexOf(data))
             binding.data = data
-            binding.root.setOnClickListener { data?.atcId?.let { id -> startActivity(id) } }
+            binding.root.setOnClickListener {
+                data?.atcId?.let { id -> showDetail(id) }
+            }
         }
     }
 

@@ -4,16 +4,18 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.transition.Explode
 import android.view.Window
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
+import com.bita.lost.repo.data.AcquirePlaceCode
+import com.bita.lost.repo.data.AcquisitionCode
 import com.bita.lost.ui.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : LActivity() {
     override val vm: ListViewModel by viewModel()
-    private val listFr = ListFragment().apply { exitTransition = Explode() }
+    private lateinit var listFr: ListFragment
+    private val transaction by lazy { supportFragmentManager.beginTransaction() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,37 +24,45 @@ class ListActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        replace()
+        if (::listFr.isInitialized) {
+            transaction.apply {
+                replace(R.id.container, listFr)
+                commit()
+            }
+        } else
+            showDialog("", "잃어버리신 장소 및 물건의 이름을 다시 한 번 입력해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> finish() })
+
     }
 
-    override fun createProgress(): Dialog {
-        val dialog = Dialog(mContext)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.window?.apply {
-            setContentView(R.layout.list_loading)
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    override fun onParseExtra() {
+        super.onParseExtra()
+        val place = intent.getSerializableExtra(ACQUIRE_PLACE)
+        val name = intent.getSerializableExtra(ACQUISITION)
+
+        if (place is AcquirePlaceCode && name is AcquisitionCode) {
+            listFr = ListFragment.newInstance(place, name)
         }
-        return dialog
     }
 
-    fun replace() {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, listFr)
-            commit()
-        }
-    }
-
-    fun detailReplace(id: String) {
-        supportFragmentManager.beginTransaction().apply {
+    fun showDetail(id: String) {
+        transaction.apply {
             replace(R.id.container, DetailFragment.newInstance(id))
             addToBackStack(null)
             commit()
         }
     }
 
+    override fun createProgress(): Dialog = Dialog(mContext).apply {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        setCancelable(false)
+        window?.apply {
+            setContentView(R.layout.list_loading)
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+    }
+
     companion object {
-        const val EXTRA_ACQUIRE_PLACE = "ACQUIRE_PLACE"
-        const val EXTRA_ACQUISITION = "ACQUISITION"
+        const val ACQUIRE_PLACE = "ACQUIRE_PLACE"
+        const val ACQUISITION = "ACQUISITION"
     }
 }
