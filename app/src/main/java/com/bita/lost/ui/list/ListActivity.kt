@@ -15,7 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ListActivity : LActivity() {
     override val vm: ListViewModel by viewModel()
     private lateinit var listFr: ListFragment
-    private val transaction by lazy { supportFragmentManager.beginTransaction() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,7 @@ class ListActivity : LActivity() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         if (::listFr.isInitialized) {
-            transaction.apply {
+            supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, listFr)
                 commit()
             }
@@ -45,7 +44,7 @@ class ListActivity : LActivity() {
     }
 
     fun showDetail(id: String) {
-        transaction.apply {
+        supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, DetailFragment.newInstance(id))
             addToBackStack(null)
             commit()
