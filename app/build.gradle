@@ -90,4 +90,7 @@ dependencies {
 
     // lottie
     implementation "com.airbnb.android:lottie:$lottie_version"
+    
+    // google admob
+    implementation 'com.google.android.gms:play-services-ads:19.1.0'
 }

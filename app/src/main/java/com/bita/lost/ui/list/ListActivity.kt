@@ -23,6 +23,7 @@ class ListActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+
         if (::listFr.isInitialized) {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, listFr)
