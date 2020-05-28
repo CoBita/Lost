@@ -13,13 +13,7 @@ object ListBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:items", "app:has_next", "app:get_next_data", "app:is_load_finish")
-    fun setAdapter(
-        v: RecyclerView,
-        rawData: ArrayList<LostItem>,
-        hasNext: Boolean,
-        function: () -> Unit,
-        isLoadFinish: Boolean
-    ) {
+    fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit, isLoadFinish: Boolean) {
         if (!isLoadFinish) {
             return
         }
@@ -31,14 +25,14 @@ object ListBindingAdapter {
         }
 
         v.adapter?.let { it as? ListAdapter }?.set(data)
-            ?: run {
-                val adapter = ListAdapter(
-                    { id -> v.context.let { it as? ListActivity }?.showDetail(id) },
-                    function
-                )
-                adapter.set(data)
-                v.adapter = adapter
-            }
+                ?: run {
+                    val adapter = ListAdapter(
+                            { id -> v.context.let { it as? ListActivity }?.showDetail(id) },
+                            function
+                    )
+                    adapter.set(data)
+                    v.adapter = adapter
+                }
         v.scheduleLayoutAnimation()
     }
 

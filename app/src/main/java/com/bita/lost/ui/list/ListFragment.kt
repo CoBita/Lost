@@ -12,8 +12,6 @@ import com.bita.lost.databinding.ListFrBinding
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ListFragment private constructor() : LFragment() {
@@ -65,6 +63,4 @@ class ListFragment private constructor() : LFragment() {
         super.onDestroy()
         binding.adView.destroy()
     }
-
-
 }
