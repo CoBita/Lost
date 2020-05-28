@@ -51,4 +51,20 @@ class ListFragment private constructor() : LFragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.adView.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.adView.resume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.adView.destroy()
+    }
+
+
 }

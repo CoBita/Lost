@@ -31,7 +31,7 @@ class LApplication : BaseApplication() {
     private fun initAds() {
         MobileAds.initialize(this)
         if (!AdRequest.Builder().build().isTestDevice(this)) {
-            val testDeviceIds = listOf(resources.getString(R.string.test_device_id_1))
+            val testDeviceIds = listOf(resources.getString(R.string.test_device_id_1), resources.getString(R.string.test_device_id_2))
             val configuration =
                 RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
             MobileAds.setRequestConfiguration(configuration)
