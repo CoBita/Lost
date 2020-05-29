@@ -2,6 +2,7 @@ package com.bita.lost.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +16,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : LActivity() {
     override val vm: MainViewModel by viewModel()
     lateinit var bb: ActivityMainBinding
+
+    override fun setSoftInputMode() {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -26,6 +26,7 @@ fun String.textAsBitmap(context: Context, textSize: Float, @ColorInt textColor: 
         this.textSize = size.toFloat()
         this.color = textColor
         this.textAlign = Paint.Align.LEFT
+        this.style = Paint.Style.FILL
     }
     val baseline = -paint.ascent()
     var width = (paint.measureText(this) + 0.0f).toInt() // round

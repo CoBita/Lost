@@ -36,7 +36,8 @@
             android:layout_marginBottom="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/info">
+            app:layout_constraintTop_toBottomOf="@id/info"
+            tools:background="#897">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/acquirePlace"
@@ -44,11 +45,11 @@
                 android:layout_margin="8dp"
                 android:onClick="@{()-> vm.clickAcquirePlaceIcon()}"
                 android:scaleType="centerInside"
-                app:intSrc="@{vm.selectAcquirePlaceIcon}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/acquisition"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:mainImage="@{vm.selectAcquirePlaceIcon}"
                 tools:srcCompat="@drawable/ic_bus" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -57,12 +58,12 @@
                 android:layout_margin="8dp"
                 android:onClick="@{()-> vm.clickAcquisitionIcon()}"
                 android:scaleType="centerInside"
-                app:intSrc="@{vm.selectAcquisitionIcon}"
                 app:layout_constraintBottom_toBottomOf="@id/acquirePlace"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/acquirePlace"
                 app:layout_constraintTop_toTopOf="@id/acquirePlace"
-                app:srcCompat="@drawable/ic_book" />
+                app:mainImage="@{vm.selectAcquisitionIcon}"
+                tools:srcCompat="@drawable/ic_book" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
