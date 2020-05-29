@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toStartOf="@id/cate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:src="@{vm.lstPlace.icon}"
+            app:setSrcByAcquirePlaceCode="@{vm.lstPlace}"
             tools:src="@drawable/ic_bus" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -31,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/transport"
             app:layout_constraintTop_toTopOf="parent"
-            app:src="@{vm.lstPrdtNm.icon}"
+            app:setSrcByAcquisitionCode="@{vm.lstPrdtNm}"
             tools:src="@drawable/ic_backpack" />
 
         <androidx.recyclerview.widget.RecyclerView
