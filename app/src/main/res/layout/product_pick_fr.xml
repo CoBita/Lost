@@ -7,14 +7,13 @@
 
         <variable
             name="vm"
-            type="com.bita.lost.ui.main.ColorPickViewModel" />
-
+            type="com.bita.lost.ui.main.ProductViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bottomBg">
+        android:layout_height="match_parent"
+        android:background="@color/bg">
 
         <include
             android:id="@+id/header"
@@ -25,14 +24,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:colorList="@{vm.colorList}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
-            app:spanCount="5"
+            app:productList="@{vm.productList}"
             tools:layout_margin="16dp"
-            tools:listitem="@layout/color_list_item" />
+            tools:listitem="@layout/product_iist_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

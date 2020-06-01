@@ -9,22 +9,20 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.and.base.common.EventObserver
 import com.bita.lost.R
-import com.bita.lost.databinding.ColorPickFrBinding
-import com.bita.lost.repo.data.ColorCode
+import com.bita.lost.databinding.AreaPickFrBinding
+import com.bita.lost.repo.data.AreaCode
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ColorPickFr : BottomSheetDialogFragment() {
+class AreaPickFr : BottomSheetDialogFragment() {
 
-    private val vm: ColorPickViewModel by viewModel()
-    lateinit var bb: ColorPickFrBinding
+    private lateinit var bb: AreaPickFrBinding
+    private val vm: AreaViewModel by viewModel()
 
-    // Item Select
-    lateinit var onItemSelect: ((color: ColorCode) -> Unit)
-    private val decoration by lazy { GridItemDecoration(16) }
+    lateinit var onItemSelect: ((area: AreaCode) -> Unit)
 
-    private val adapter: ColorAdapter by lazy {
-        ColorAdapter().apply {
+    private val adapter by lazy {
+        AreaAdapter().apply {
             onItemClick = {
                 dismiss()
                 onItemSelect.invoke(it)
@@ -33,7 +31,7 @@ class ColorPickFr : BottomSheetDialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        bb = DataBindingUtil.inflate(inflater, R.layout.color_pick_fr, container, false)
+        bb = DataBindingUtil.inflate(inflater, R.layout.area_pick_fr, container, false)
         return bb.root
     }
 
@@ -41,24 +39,16 @@ class ColorPickFr : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         bb.vm = vm
         bb.header.headerVm = vm
-
         bb.recycler.adapter = adapter
-        bb.recycler.addItemDecoration(decoration)
-        vm.getColorList()
 
+        vm.getAreaList()
         vm.dismiss.observe(this, EventObserver { dismiss() })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        bb.recycler.removeItemDecoration(decoration)
-    }
-
-
     companion object {
-        fun newInstance(itemSelect: ((color: ColorCode) -> Unit)): ColorPickFr {
-            val colorPickFr = ColorPickFr().apply { onItemSelect = itemSelect }
-            return colorPickFr
+        fun newInstance(itemSelect: ((area: AreaCode) -> Unit)): AreaPickFr {
+            val areaFr = AreaPickFr().apply { onItemSelect = itemSelect }
+            return areaFr
         }
     }
 }
