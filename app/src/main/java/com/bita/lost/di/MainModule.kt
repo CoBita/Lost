@@ -11,12 +11,14 @@ val mainModule
         single<AcquireRepository> { AcquireRepositoryImpl() }
         single<ColorRepository> { ColorRepositoryImpl() }
         single<AreaRepository> { AreaRepositoryImpl() }
+        single<ProductRepository> { ProductRepositoryImpl() }
 
         viewModel { MainViewModel() }
         viewModel { AcquirePlaceViewModel(get()) }
         viewModel { AcquisitionViewModel(get()) }
         viewModel { ColorPickViewModel(get()) }
         viewModel { AreaViewModel(get()) }
+        viewModel { ProductViewModel(get()) }
 
         viewModel { SearchViewModel() }
 

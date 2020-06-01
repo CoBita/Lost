@@ -9,10 +9,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bita.lost.repo.data.AcquirePlaceCode
-import com.bita.lost.repo.data.AcquisitionCode
-import com.bita.lost.repo.data.AreaCode
-import com.bita.lost.repo.data.ColorCode
+import com.bita.lost.repo.data.*
 
 object MainBindingAdapter {
 
@@ -49,6 +46,17 @@ object MainBindingAdapter {
         }
     }
 
+
+    @JvmStatic
+    @BindingAdapter("app:productList")
+    fun addProductList(recyclerView: RecyclerView, list: MutableList<ProductCode>) {
+        val adapter = recyclerView.adapter
+        adapter?.let {
+            if (adapter is ProductAdapter) {
+                adapter.set(list)
+            }
+        }
+    }
 
     @JvmStatic
     @BindingAdapter("app:drawableTop")

@@ -29,9 +29,17 @@ class SearchActivity : LActivity() {
         }
 
         area.setOnClickListener {
-            AreaFr.newInstance {
+            AreaPickFr.newInstance {
                 Log.i(it)
                 area.setText(it.name)
+            }.show(supportFragmentManager, AREA_PICK_TAG)
+        }
+
+
+        product.setOnClickListener {
+            ProductPickFr.newInstance {
+                Log.i(it)
+                product.setText(it.name)
             }.show(supportFragmentManager, AREA_PICK_TAG)
         }
     }
@@ -39,5 +47,6 @@ class SearchActivity : LActivity() {
     companion object {
         const val AREA_PICK_TAG = "areaPick"
         const val COLOR_PICK_TAG = "colorPick"
+        const val PRODUCT_PICK_TAG = "productPick"
     }
 }
