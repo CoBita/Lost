@@ -3,68 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.bita.lost.ui.main.AreaViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/area"
-            style="@style/mainInfoText"
-            app:layout_constraintBottom_toBottomOf="@id/temp"
+        <include
+            android:id="@+id/header"
+            layout="@layout/bottom_sheet_header" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:areaList="@{vm.areaList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/temp"
-            tools:text="서울특별시" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp"
-            style="@style/mainInfoText"
-            app:layout_constraintStart_toEndOf="@id/area"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="에서" />
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/color"
-            style="@style/mainInfoText"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/area"
-            tools:text="검정" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp2"
-            style="@style/mainInfoText"
-            app:layout_constraintBottom_toBottomOf="@id/color"
-            app:layout_constraintStart_toEndOf="@id/color"
-            app:layout_constraintTop_toTopOf="@id/color"
-            tools:text="색의" />
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/stuff"
-            style="@style/mainInfoText"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/color"
-            app:layout_constraintStart_toEndOf="@id/temp2"
-            app:layout_constraintTop_toTopOf="@id/color"
-            tools:text="지갑" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp3"
-            style="@style/mainInfoText"
-            app:layout_constraintBottom_toBottomOf="@id/color"
-            app:layout_constraintStart_toEndOf="@id/stuff"
-            app:layout_constraintTop_toTopOf="@id/color"
-            tools:text="을(를)" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp4"
-            style="@style/mainInfoText"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/color"
-            tools:text="찾고있습니다." />
-
+            app:layout_constraintTop_toBottomOf="@id/header"
+            tools:layout_margin="16dp"
+            tools:listitem="@layout/area_list_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

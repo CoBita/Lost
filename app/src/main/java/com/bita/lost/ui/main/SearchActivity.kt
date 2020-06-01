@@ -27,6 +27,13 @@ class SearchActivity : LActivity() {
                 color.setText(it.name)
             }.show(supportFragmentManager, COLOR_PICK_TAG)
         }
+
+        area.setOnClickListener {
+            AreaFr.newInstance {
+                Log.i(it)
+                area.setText(it.name)
+            }.show(supportFragmentManager, AREA_PICK_TAG)
+        }
     }
 
     companion object {

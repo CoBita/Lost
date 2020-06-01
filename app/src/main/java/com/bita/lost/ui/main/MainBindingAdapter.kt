@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
+import com.bita.lost.repo.data.AreaCode
 import com.bita.lost.repo.data.ColorCode
 
 object MainBindingAdapter {
@@ -32,6 +33,17 @@ object MainBindingAdapter {
         val adapter = recyclerView.adapter
         adapter?.let {
             if (adapter is ColorAdapter) {
+                adapter.set(list)
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:areaList")
+    fun addAreaList(recyclerView: RecyclerView, list: MutableList<AreaCode>) {
+        val adapter = recyclerView.adapter
+        adapter?.let {
+            if (adapter is AreaAdapter) {
                 adapter.set(list)
             }
         }
