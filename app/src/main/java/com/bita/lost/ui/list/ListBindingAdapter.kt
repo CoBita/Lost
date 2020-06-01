@@ -1,9 +1,13 @@
 package com.bita.lost.ui.list
 
 import android.graphics.Color
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bita.lost.R
+import com.bita.lost.base.LActivity
 import com.bita.lost.common.textAsBitmap
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
@@ -13,16 +17,8 @@ object ListBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:items", "app:has_next", "app:get_next_data", "app:is_load_finish")
-    fun setAdapter(
-        v: RecyclerView,
-        rawData: ArrayList<LostItem>,
-        hasNext: Boolean,
-        function: () -> Unit,
-        isLoadFinish: Boolean
-    ) {
-        if (!isLoadFinish) {
-            return
-        }
+    fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit, isLoadFinish: Boolean) {
+        if (!isLoadFinish) return
 
         val data = arrayListOf<LostItem?>().apply {
             addAll(rawData)
@@ -31,14 +27,11 @@ object ListBindingAdapter {
         }
 
         v.adapter?.let { it as? ListAdapter }?.set(data)
-            ?: run {
-                val adapter = ListAdapter(
-                    { id -> v.context.let { it as? ListActivity }?.showDetail(id) },
-                    function
-                )
-                adapter.set(data)
-                v.adapter = adapter
-            }
+                ?: run {
+                    val adapter = ListAdapter({ id -> v.context.let { it as? ListActivity }?.showDetail(id) }, function)
+                    adapter.set(data)
+                    v.adapter = adapter
+                }
         v.scheduleLayoutAnimation()
     }
 
@@ -62,5 +55,16 @@ object ListBindingAdapter {
         if (enum == AcquisitionCode.직접입력) {
             v.setImageBitmap(enum.description.textAsBitmap(v.context, 10f, Color.BLACK))
         } else setSrc(v, enum.icon)
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:translationY")
+    fun translationY(v: View, flag: Boolean) {
+        if (!flag) {
+            v.alpha = 0f
+        } else {
+            v.alpha = 1f
+            v.animation = AnimationUtils.loadAnimation(v.context, R.anim.appear_anim)
+        }
     }
 }

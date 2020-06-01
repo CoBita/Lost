@@ -15,14 +15,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".ui.main.SearchActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.list.ListActivity" />
+        <activity android:name=".ui.list.ListActivity"/>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ad_application_id"/>
     </application>
 
 </manifest>
