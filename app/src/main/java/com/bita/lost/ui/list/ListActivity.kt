@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
+import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.repo.data.AcquirePlaceCode
@@ -23,6 +24,7 @@ class ListActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        vm.backPressed.observe(this, Observer{onBackPressed()})
         if (::listFr.isInitialized) {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, listFr)
@@ -30,7 +32,6 @@ class ListActivity : LActivity() {
             }
         } else
             showDialog("", "잃어버리신 장소 및 물건의 이름을 다시 한 번 입력해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> finish() })
-
     }
 
     override fun onParseExtra() {

@@ -21,6 +21,8 @@
             android:layout_height="0dp"
             android:clipChildren="false"
             android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:clipToPadding="false"
             android:overScrollMode="never"
             android:transitionGroup="false"
             app:get_next_data="@{vm::getLostList}"
@@ -34,68 +36,94 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:background="@color/white"
             style="@style/shadow"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            android:scaleType="center"
-            app:layout_constraintBottom_toBottomOf="@id/area"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onBack="@{true}"
-            app:srcCompat="@drawable/ic_back" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/product"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{vm.lstPrdtNm.description}"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/back"
+            android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="검정색 가방" />
+            app:translationY="@{vm.isLoadFinish}">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/area"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@{vm.lstPlace.description}"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/period"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/back"
-            app:layout_constraintTop_toBottomOf="@id/product"
-            tools:text="서울특별시" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="@{vm::onBackPressed}"
+                android:scaleType="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/period"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/rounded_rect"
-            android:backgroundTint="#ddd"
-            android:paddingStart="8dp"
-            android:paddingTop="2dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="2dp"
-            android:text="2020.5.30 - 2020.6.1"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/back"
-            app:layout_constraintTop_toBottomOf="@id/area" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{vm.lstPrdtNm.description}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_min="wrap"
+                tools:text="검정색 가방" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/area"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{vm.lstPlace.description}"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/period"
+                app:layout_constraintStart_toEndOf="@id/back"
+                app:layout_constraintTop_toBottomOf="@id/product"
+                app:layout_constraintWidth_min="wrap"
+                tools:text="서울특별시" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/period_bg"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="2dp"
+                android:text="2020.5.30 - 2020.6.1"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back"
+                app:layout_constraintTop_toBottomOf="@id/area" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="product, area, period" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="end"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="2dp"
+                android:text="@{vm.resultCount}"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/barrier"
+                app:layout_constraintTop_toBottomOf="@id/area"
+                tools:text="총 검색결과 7787개" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

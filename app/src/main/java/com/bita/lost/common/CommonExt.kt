@@ -8,6 +8,7 @@ import androidx.annotation.ColorInt
 import androidx.lifecycle.MutableLiveData
 import com.and.base.common.sp2px
 import kotlinx.coroutines.Job
+import java.text.DecimalFormat
 
 
 /**
@@ -39,3 +40,5 @@ fun String.textAsBitmap(context: Context, textSize: Float, @ColorInt textColor: 
     canvas.drawText(this, width / 2 - trueWidth / 2.toFloat(), baseline, paint)
     return image
 }
+
+fun Int.format() : String = DecimalFormat("#,###").format(this)

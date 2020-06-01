@@ -2,11 +2,16 @@
 
 package com.bita.lost.ui.list
 
+import android.view.View
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.and.base.log.Log
 import com.bita.lost.base.LViewModel
 import com.bita.lost.common.progress
+import com.bita.lost.common.format
 import com.bita.lost.repo.ListRepository
 import com.bita.lost.repo.data.*
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,6 +25,11 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     val list = ObservableArrayList<LostItem>()
     val hasNext = ObservableBoolean(true)
     val isLoadFinish = ObservableBoolean(false)
+    val resultCount = ObservableField<String>("")
+
+    private val _backPressed = MutableLiveData<Boolean>()
+    val backPressed: LiveData<Boolean> get() = _backPressed
+
     private val handler = CoroutineExceptionHandler { _, e ->
         Log.w("exception occured")
         e.printStackTrace()
@@ -40,7 +50,13 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             val result: Body<LostList> = repository.분실물조회(lstPlace.description, lstPrdtNm.description, page)
             isLoadFinish.set(true)
             result.items.items?.let { list.addAll(it) }
+//            if (page == 1) resultCount.set("검색결과 총 ${result.totalCount}개")
+            if (page == 1) resultCount.set("검색결과 총 ${result.totalCount.format()}개")
             if (result.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)
+    }
+
+    fun onBackPressed(v : View) {
+        _backPressed.postValue(true)
     }
 }
