@@ -228,6 +228,7 @@ fabric.properties
 
 ./gradle/wrapper/gradle-wrapper.properties
 Const.kt
+strings_ad.xml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 

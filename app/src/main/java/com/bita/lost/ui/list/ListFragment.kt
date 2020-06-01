@@ -11,6 +11,7 @@ import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.ListFrBinding
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
+import com.google.android.gms.ads.AdRequest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ListFragment private constructor() : LFragment() {
@@ -26,11 +27,17 @@ class ListFragment private constructor() : LFragment() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        initializeAds()
+
         vm.init(place, name)
         binding.vm = vm
         vm.getFirstLostList()
     }
 
+    private fun initializeAds(){
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+    }
 
     companion object {
         fun newInstance(place: AcquirePlaceCode, name: AcquisitionCode): ListFragment {
@@ -42,4 +49,18 @@ class ListFragment private constructor() : LFragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.adView.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.adView.resume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.adView.destroy()
+    }
 }
