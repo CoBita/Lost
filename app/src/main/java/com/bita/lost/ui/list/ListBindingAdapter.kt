@@ -1,9 +1,11 @@
 package com.bita.lost.ui.list
 
 import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bita.lost.base.LActivity
 import com.bita.lost.common.textAsBitmap
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
@@ -62,5 +64,11 @@ object ListBindingAdapter {
         if (enum == AcquisitionCode.직접입력) {
             v.setImageBitmap(enum.description.textAsBitmap(v.context, 10f, Color.BLACK))
         } else setSrc(v, enum.icon)
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:onBack")
+    fun onBack(v: View, flag: Boolean) {
+        v.setOnClickListener { (v.context as? LActivity)?.onBackPressed() }
     }
 }
