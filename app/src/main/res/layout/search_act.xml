@@ -11,7 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bottomBg"
+        android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/area"
@@ -26,6 +28,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temp"
             style="@style/mainInfoText"
+            android:layout_marginTop="64dp"
             android:text="에서"
             app:layout_constraintStart_toEndOf="@id/area"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,6 +82,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/color" />
 
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="검색"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
