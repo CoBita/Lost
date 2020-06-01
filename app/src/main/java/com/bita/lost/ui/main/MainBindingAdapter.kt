@@ -1,12 +1,17 @@
 package com.bita.lost.ui.main
 
+import android.graphics.*
+import android.os.Build
+import android.view.View
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
+import com.bita.lost.repo.data.ColorCode
 
 object MainBindingAdapter {
 
@@ -20,6 +25,18 @@ object MainBindingAdapter {
             }
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("app:colorList")
+    fun addColorList(recyclerView: RecyclerView, list: MutableList<ColorCode>) {
+        val adapter = recyclerView.adapter
+        adapter?.let {
+            if (adapter is ColorAdapter) {
+                adapter.set(list)
+            }
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter("app:drawableTop")
@@ -39,6 +56,17 @@ object MainBindingAdapter {
             if (adapter is AcquisitionAdapter) {
                 adapter.set(list)
             }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:colorFilter")
+    fun setColorFilter(view: View, @ColorInt color: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val colorFilter = BlendModeColorFilter(color, BlendMode.MULTIPLY)
+            view.background.colorFilter = colorFilter
+        } else {
+            view.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
         }
     }
 }

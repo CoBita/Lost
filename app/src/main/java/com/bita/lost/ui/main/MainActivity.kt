@@ -6,6 +6,7 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.and.base.log.Log
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.ActivityMainBinding
