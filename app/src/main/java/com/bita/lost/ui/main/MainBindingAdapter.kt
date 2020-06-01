@@ -59,6 +59,7 @@ object MainBindingAdapter {
         }
     }
 
+    @Suppress("DEPRECATION")
     @JvmStatic
     @BindingAdapter("app:colorFilter")
     fun setColorFilter(view: View, @ColorInt color: Int) {

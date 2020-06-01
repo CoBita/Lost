@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.and.base.common.EventObserver
 import com.bita.lost.R
 import com.bita.lost.databinding.ColorPickFrBinding
 import com.bita.lost.repo.data.ColorCode
@@ -18,6 +19,7 @@ class ColorPickFr : BottomSheetDialogFragment() {
 
     // Item Select
     lateinit var onItemSelect: ((color: ColorCode) -> Unit)
+    private val decoration by lazy { GridItemDecoration(16) }
 
     private val adapter: ColorAdapter by lazy {
         ColorAdapter().apply {
@@ -37,7 +39,15 @@ class ColorPickFr : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         bb.vm = vm
         bb.recycler.adapter = adapter
+        bb.recycler.addItemDecoration(decoration)
         vm.getColorList()
+
+        vm.dismiss.observe(this, EventObserver { dismiss() })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        bb.recycler.removeItemDecoration(decoration)
     }
 
 
