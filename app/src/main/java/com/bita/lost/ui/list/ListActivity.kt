@@ -64,5 +64,9 @@ class ListActivity : LActivity() {
     companion object {
         const val ACQUIRE_PLACE = "ACQUIRE_PLACE"
         const val ACQUISITION = "ACQUISITION"
+        const val PRDT_CL_CD_01 = "PRDT_CL_CD_01"
+        const val START_YMD = "START_YMD"
+        const val END_YMD = "END_YMD"
+        const val N_FD_LCT_CD = "N_FD_LCT_CD"
     }
 }
