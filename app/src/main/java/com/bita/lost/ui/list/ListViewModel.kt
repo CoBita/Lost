@@ -23,7 +23,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     private var page = 0
     lateinit var area: AreaCode
     lateinit var product: ProductCode
-    lateinit var displayPeriod : String
+    lateinit var displayPeriod: String
     lateinit var startYmd: String
     lateinit var endYmd: String
 
@@ -48,10 +48,17 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         this.endYmd = parseDate(endYmd)
     }
 
-    private fun parseDate(date : String) : String{
-        val parts= date.split(".")
+    private fun parseDate(date: String): String {
+        if (date.isEmpty()) return date
+        val parts = date.split(".")
         val result = StringBuilder()
-        parts.forEach { part -> result.append(DecimalFormat("00").format(part.toInt())) }
+        parts.forEach { part ->
+            try {
+                result.append(DecimalFormat("00").format(part.toInt()))
+            } catch (e: NumberFormatException) {
+                e.printStackTrace()
+            }
+        }
         return result.toString()
     }
 

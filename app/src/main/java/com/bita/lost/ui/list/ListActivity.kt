@@ -37,10 +37,11 @@ class ListActivity : LActivity() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        val area = intent.getSerializableExtra(AREA)
-        val product = intent.getSerializableExtra(PRODUCT)
+        val area = intent.getSerializableExtra(AREA) ?: AreaCode.전체
+        val product = intent.getSerializableExtra(PRODUCT) ?: ProductCode.전체
         val startDate = intent.getStringExtra(START_DATE) ?: ""
         val endDate = intent.getStringExtra(END_DATE) ?: ""
+
         if (area is AreaCode && product is ProductCode) {
             listFr = ListFragment.newInstance(area, product, startDate, endDate)
         }
