@@ -1,11 +1,13 @@
 package com.bita.lost.ui.list
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.transition.Explode
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
+import com.and.base.common.raw2String
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.ListFrBinding
@@ -33,7 +35,27 @@ class ListFragment private constructor() : LFragment() {
 
         vm.init(nFdLctCd, prdtClCd01, startYmd, endYmd)
         binding.vm = vm
-        vm.getFirstLostList()
+        // todo 전문 속도 너무 느려서 dummy 데이터로 처리 중 이후 변경 필요
+//        vm.최초습득물조회()
+        vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
+        binding.header.setOnClickListener {
+            activity?.let { context ->
+                Dialog(context).apply {
+                    requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    window?.apply {
+                        setContentView(R.layout.header_expand_dialog)
+                        setGravity(Gravity.TOP)
+                        setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        val params = attributes.apply {
+                            width = WindowManager.LayoutParams.MATCH_PARENT
+                            windowAnimations = R.style.AnimationPopupStyle
+                        }
+                        attributes = params
+                    }
+                }.show()
+            }
+
+        }
     }
 
     private fun initializeAds() {

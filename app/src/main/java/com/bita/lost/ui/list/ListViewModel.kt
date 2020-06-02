@@ -14,6 +14,8 @@ import com.bita.lost.common.progress
 import com.bita.lost.common.format
 import com.bita.lost.repo.ListRepository
 import com.bita.lost.repo.data.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.lang.StringBuilder
@@ -23,7 +25,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     private var page = 0
     lateinit var area: AreaCode
     lateinit var product: ProductCode
-    lateinit var displayPeriod : String
+    lateinit var displayPeriod: String
     lateinit var startYmd: String
     lateinit var endYmd: String
 
@@ -48,15 +50,30 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         this.endYmd = parseDate(endYmd)
     }
 
-    private fun parseDate(date : String) : String{
-        val parts= date.split(".")
+    private fun parseDate(date: String): String {
+        if (date.isEmpty()) return date
+        val parts = date.split(".")
         val result = StringBuilder()
-        parts.forEach { part -> result.append(DecimalFormat("00").format(part.toInt())) }
+        parts.forEach { part ->
+            try {
+                result.append(DecimalFormat("00").format(part.toInt()))
+            } catch (e: NumberFormatException) {
+                e.printStackTrace()
+            }
+        }
         return result.toString()
     }
 
     fun getFirstLostList() {
         if (list.isEmpty()) getLostList()
+    }
+
+    fun 습득물조회fromDummy(raw: String?) {
+        raw?.let {
+            val dummy : ArrayList<LostItem> = Gson().fromJson(raw, object : TypeToken<ArrayList<LostItem>>() {}.type)
+            list.addAll(dummy)
+            isLoadFinish.set(true)
+        }
     }
 
     fun getLostList() {

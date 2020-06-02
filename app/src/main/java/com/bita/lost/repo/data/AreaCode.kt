@@ -21,5 +21,6 @@ enum class AreaCode(val code: String) {
     제주특별자치도("LCP000"),
     세종특별자치시("LCW000"),
     해외("LCF000"),
-    기타("LCE000")
+    기타("LCE000"),
+    전체("");
 }

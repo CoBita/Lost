@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
@@ -36,16 +37,17 @@ class ListActivity : LActivity() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        val area = intent.getSerializableExtra(AREA)
-        val product = intent.getSerializableExtra(PRODUCT)
+        val area = intent.getSerializableExtra(AREA) ?: AreaCode.전체
+        val product = intent.getSerializableExtra(PRODUCT) ?: ProductCode.전체
         val startDate = intent.getStringExtra(START_DATE) ?: ""
         val endDate = intent.getStringExtra(END_DATE) ?: ""
-        if(area is AreaCode && product is ProductCode){
+
+        if (area is AreaCode && product is ProductCode) {
             listFr = ListFragment.newInstance(area, product, startDate, endDate)
         }
     }
 
-    fun showDetail(id: String, seq : Int) {
+    fun showDetail(id: String, seq: Int) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, DetailFragment.newInstance(id, seq))
             addToBackStack(null)
