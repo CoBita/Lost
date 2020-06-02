@@ -3,6 +3,7 @@ package com.bita.lost.ui.main
 import android.graphics.*
 import android.os.Build
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -68,5 +69,11 @@ object SearchBindingAdapter {
         } else {
             view.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:hintColor")
+    fun setHintColor(view: EditText, @ColorInt color: Int) {
+        view.setHintTextColor(color)
     }
 }
