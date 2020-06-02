@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.transition.Explode
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import com.and.base.common.raw2String
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
-import com.bita.lost.common.raw2String
 import com.bita.lost.databinding.ListFrBinding
 import com.bita.lost.repo.data.AreaCode
 import com.bita.lost.repo.data.ProductCode
