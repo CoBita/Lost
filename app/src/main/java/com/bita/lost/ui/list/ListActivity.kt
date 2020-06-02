@@ -24,7 +24,7 @@ class ListActivity : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        vm.backPressed.observe(this, Observer{onBackPressed()})
+        vm.backPressed.observe(this, Observer { onBackPressed() })
         if (::listFr.isInitialized) {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, listFr)
@@ -64,9 +64,11 @@ class ListActivity : LActivity() {
     companion object {
         const val ACQUIRE_PLACE = "ACQUIRE_PLACE"
         const val ACQUISITION = "ACQUISITION"
-        const val PRDT_CL_CD_01 = "PRDT_CL_CD_01"
-        const val START_YMD = "START_YMD"
-        const val END_YMD = "END_YMD"
-        const val N_FD_LCT_CD = "N_FD_LCT_CD"
+
+        // Parameter
+        const val AREA = "AREA"
+        const val PRODUCT = "PRODUCT"
+        const val START_DATE = "START_DATE"
+        const val END_DATE = "END_DATE"
     }
 }
