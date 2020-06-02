@@ -53,10 +53,11 @@ class MainActivity : LActivity() {
         val acquirePlaceData = mainResultData.acquirePlaceCode
         val acquisitionData = mainResultData.acquisitionCode
 
-        val intent = Intent(this, ListActivity::class.java).apply {
-            putExtra(ListActivity.ACQUIRE_PLACE, acquirePlaceData)
-            putExtra(ListActivity.ACQUISITION, acquisitionData)
-        }
+        val intent = Intent(this, ListActivity::class.java)
+//        .apply {
+//            putExtra(ListActivity.ACQUIRE_PLACE, acquirePlaceData)
+//            putExtra(ListActivity.ACQUISITION, acquisitionData)
+//        }
         startActivity(intent)
     }
 

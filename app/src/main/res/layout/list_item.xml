@@ -22,13 +22,28 @@
         android:padding="16dp"
         android:transitionGroup="true">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
+            android:scaleType="fitXY"
+            app:src="@{data.fdFilePathImg}"
+            tools:background="#ddd" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{data.fdSbjt}"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:noBreakText="@{data.fdSbjt}"
+            android:textSize="14sp"
+            android:lineSpacingExtra="7sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thumbnail"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="ZEFEF 남성용 가방(그레이(회)색)을 습득하여 보관하고 있습니다." />
 
@@ -39,8 +54,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@{data.depPlace}"
+            android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@id/date"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/name"
             app:layout_constraintTop_toBottomOf="@id/name"
             tools:text="신구로지구대" />
 
@@ -48,9 +64,8 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@{data.fdYmd}"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/place"
             app:layout_constraintTop_toTopOf="@id/place"

@@ -3,10 +3,12 @@ package com.bita.lost.ui.list
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.R
 import com.bita.lost.repo.data.LostItem
+import com.bumptech.glide.Glide
 
 object ListBindingAdapter {
 
@@ -32,8 +34,8 @@ object ListBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:src")
-    fun setSrc(v: ImageView, drawableId: Int) {
-        v.setImageResource(drawableId)
+    fun setSrc(v: ImageView, drawable: Any) {
+        Glide.with(v.context).load(drawable).into(v)
     }
 
     @JvmStatic
@@ -45,5 +47,11 @@ object ListBindingAdapter {
             v.alpha = 1f
             v.animation = AnimationUtils.loadAnimation(v.context, R.anim.appear_anim)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:noBreakText")
+    fun noSpace(v : TextView, string : String){
+        v.text = string.replace(" ", "\u00A0")
     }
 }
