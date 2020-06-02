@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ListDataSource {
     @GET("1320000/LosfundInfoInqireService/getLosfundInfoAccToClAreaPd")
-    suspend fun 분실물조회(
+    suspend fun 습득물조회(
             @Query("PRDT_CL_CD_01") prdtClCd01: String,
             @Query("START_YMD") startYmd: String,
             @Query("END_YMD") endYmd: String,

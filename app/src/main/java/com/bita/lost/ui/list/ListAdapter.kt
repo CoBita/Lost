@@ -12,7 +12,7 @@ import com.bita.lost.databinding.ListMoreItemBinding
 import com.bita.lost.databinding.ListNoItemBinding
 import com.bita.lost.repo.data.LostItem
 
-class ListAdapter(private val showDetail: (id: String) -> Unit,
+class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit,
                   private val getNextData: () -> Unit) : BaseAdapter<LostItem?>() {
     var lastAnimatedIndex = -1
 
@@ -39,9 +39,7 @@ class ListAdapter(private val showDetail: (id: String) -> Unit,
         override fun bind(data: LostItem?) {
             animate(binding.root, items.indexOf(data))
             binding.data = data
-            binding.root.setOnClickListener {
-                data?.atcId?.let { id -> showDetail(id) }
-            }
+            binding.root.setOnClickListener { data?.let { showDetail(it.atcId, it.fdSn) } }
         }
     }
 

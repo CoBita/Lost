@@ -13,9 +13,9 @@ class DetailViewModel(private val detailRepository: DetailRepository) : LViewMod
     private val _result = MutableLiveData<DetailItem>()
     val result: MutableLiveData<DetailItem> get() = _result
 
-    fun 분실물상세조회(id: String) {
+    fun 습득물상세조회(id: String, seq : Int) {
         scope.launch {
-            _result.postValue(detailRepository.분실물상세조회(id).response.body.item)
+            _result.postValue(detailRepository.습득물상세조회(id, seq).response.body.item)
         }.progress(_isProgress)
     }
 }

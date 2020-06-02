@@ -14,38 +14,36 @@ data class DetailHeader(
 
 data class DetailBody(val item: DetailItem)
 
-// todo 데이터 참고 후 주석 삭제 필요
-// "atcId":"L2020052700000011",
-// "clrNm":"블랙(검정)",
-// "lstFilePathImg":"https:\/\/www.lost112.go.kr\/lostnfs\/images\/uploadImg\/20200527\/20200527122712643.jpg",
-// "lstHor":17,
-// "lstLctNm":"경기도",
-// "lstPlace":"강원고속 버스",
-// "lstPlaceSeNm":"버스",
-// "lstPrdtNm":"구찌지갑",
-// "lstSbjt":"구찌지갑",
-// "lstSteNm":"온라인 접수",
-// "lstYmd":"2020-05-26",
-// "orgId":"O0000828",
-// "orgNm":"안산상록경찰서",
-// "prdtClNm":"지갑 > 남성용 지갑",
-// "tel":"031-8040-2150",
-// "uniq":"개인정보보호정책에 의해 정보가 제공되지 않습니다."}}}}
+// todo 참고 후 주석 제거 해주세요.
+// "atcId":"F2018113000002322",
+// "csteSteNm":"종결",
+// "depPlace":"서울강북경찰서",
+// "fdFilePathImg":"https:\/\/www.lost112.go.kr\/lostnfs\/images\/sub\/img04_no_img.gif",
+// "fdHor":24,
+// "fdPlace":"노상",
+// "fdPrdtNm":"영성용가박",
+// "fdSn":1,
+// "fdYmd":"2018-11-30",
+// "fndKeepOrgnSeNm":"관서보관",
+// "orgId":"O0000129",
+// "orgNm":"서울강북경찰서",
+// "prdtClNm":"가방 > 여성용가방",
+// "tel":"02-944-4347",
+// "uniq":"내용\r\n\r\n 번동파출소에서는 [2018.11.30]  [영성용가박(핑크(분홍)색)]을 습득\/보관 하였습니다.\r\n분실하신 분께서는 본인을 증명할 수 있는 서류를 지참하시어 보관중으로 기재되어 있는 기관에\r\n방문하시어 보관물품을 수령하시기 바랍니다.\r\n\r\n특이사항 : 없음" } } }
 data class DetailItem(
-        val atcId: String,                  // 관리ID
-        val clrNm: String,                  // 색상명
-        val lstFilePathImg: String,         // 분실물이미지명
-        val lstHor: Int,                    // 분실시간
-        val lstLctNm: String,               // 분실지역명
-        val lstPlace: String,               // 분실장소
-        val lstPlaceSeNm: String,           // 분실장소구분명
-        val lstPrdtNm: String,              // 물품명
-        val lstSbjt: String,                // 게시제목
-        val lstSteNm: String,               // 분실물 상태명
-        val lstYmd: String,                 // 분실일자
-        val orgId: String,                  // 기관ID
-        val orgNm: String,                  // 기관명
-        val prdtClNm: String,               // 물품분류명
-        val tel: String,                    // 기관전화번호
-        val uniq: String                    // 특이사항
+        val atcId: String,                       // 관리ID
+        val csteSteNm: String,                   // 보관상태명
+        val depPlace: String,                    // 보관장소
+        val fdFilePathImg: String,               // 습득물사진파일경로
+        val fdHor: Int,                          // 습득장소
+        val fdPlace: String,                     // 습득시간
+        val fdPrdtNm: String,                    // 물품명
+        val fdSn: Int,                           // 습득순번
+        val fdYmd: String,                       // 습득일자
+        val fndKeepOrgnSeNm: String,             // 습득물보관기관구분명
+        val orgId: String,                       // 기관아이디
+        val orgNm: String,                       // 기관명
+        val prdtClNm: String,                    // 물품분류명
+        val tel: String,                         // 전화번호
+        val uniq: String                         // 특이사항
 )

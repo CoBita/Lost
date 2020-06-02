@@ -8,8 +8,6 @@ import android.view.Window
 import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
-import com.bita.lost.repo.data.AcquirePlaceCode
-import com.bita.lost.repo.data.AcquisitionCode
 import com.bita.lost.repo.data.AreaCode
 import com.bita.lost.repo.data.ProductCode
 import com.bita.lost.ui.detail.DetailFragment
@@ -47,9 +45,9 @@ class ListActivity : LActivity() {
         }
     }
 
-    fun showDetail(id: String) {
+    fun showDetail(id: String, seq : Int) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, DetailFragment.newInstance(id))
+            replace(R.id.container, DetailFragment.newInstance(id, seq))
             addToBackStack(null)
             commit()
         }
@@ -65,9 +63,6 @@ class ListActivity : LActivity() {
     }
 
     companion object {
-        const val ACQUIRE_PLACE = "ACQUIRE_PLACE"
-        const val ACQUISITION = "ACQUISITION"
-
         // Parameter
         const val AREA = "AREA"
         const val PRODUCT = "PRODUCT"

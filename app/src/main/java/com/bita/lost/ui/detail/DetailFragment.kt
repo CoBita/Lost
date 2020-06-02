@@ -23,7 +23,11 @@ class DetailFragment : LFragment() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        arguments?.getString(ID)?.let { id -> vm.분실물상세조회(id) }
+        val id = arguments?.getString(ID)
+        val seq = arguments?.getInt(SEQ)
+        if (id != null && seq != null) {
+            vm.습득물상세조회(id, seq)
+        }
     }
 
     override fun onLoadOnce() {
@@ -32,8 +36,11 @@ class DetailFragment : LFragment() {
     }
 
     companion object {
-        fun newInstance(id: String): DetailFragment {
-            val bundle = Bundle().apply { putString(ID, id) }
+        fun newInstance(id: String, seq: Int): DetailFragment {
+            val bundle = Bundle().apply {
+                putString(ID, id)
+                putInt(SEQ, seq)
+            }
             return DetailFragment().apply {
                 arguments = bundle
                 enterTransition = Slide()
@@ -42,6 +49,7 @@ class DetailFragment : LFragment() {
         }
 
         const val ID = "ID"
+        const val SEQ = "SEQ"
     }
 
 }

@@ -9,12 +9,12 @@ import kotlin.coroutines.CoroutineContext
 
 interface DetailRepository {
 
-    suspend fun 분실물상세조회(id: String): DetailItemFrame
+    suspend fun 습득물상세조회(id: String, seq: Int): DetailItemFrame
 }
 
 class DetailRepositoryImpl(private val detailDataSource: DetailDataSource) : DetailRepository {
     private val coroutineContext: CoroutineContext
         get() = Dispatchers.IO
 
-    override suspend fun 분실물상세조회(id: String): DetailItemFrame = withContext(coroutineContext) { detailDataSource.분실물상세조회(id) }
+    override suspend fun 습득물상세조회(id: String, seq: Int): DetailItemFrame = withContext(coroutineContext) { detailDataSource.습득물상세조회(id, seq) }
 }

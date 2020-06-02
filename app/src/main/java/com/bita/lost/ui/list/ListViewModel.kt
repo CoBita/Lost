@@ -62,7 +62,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     fun getLostList() {
         scope.launch(handler) {
             page++
-            val result: Body<LostList> = repository.분실물조회(product.code, startYmd, endYmd, area.code, page)
+            val result: Body<LostList> = repository.습득물조회(product.code, startYmd, endYmd, area.code, page)
             isLoadFinish.set(true)
             result.items.items?.let { list.addAll(it) }
             if (page == 1) resultCount.set("검색결과 총 ${result.totalCount.format()}개")
