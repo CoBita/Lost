@@ -11,18 +11,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.repo.data.*
 
-object MainBindingAdapter {
+object SearchBindingAdapter {
 
-    @JvmStatic
-    @BindingAdapter("app:acquirePlaceList")
-    fun addAcquirePlaceList(recyclerView: RecyclerView, list: MutableList<AcquirePlaceCode>) {
-        val adapter = recyclerView.adapter
-        adapter?.let {
-            if (adapter is AcquirePlaceAdapter) {
-                adapter.set(list)
-            }
-        }
-    }
 
     @JvmStatic
     @BindingAdapter("app:colorList")
@@ -65,17 +55,6 @@ object MainBindingAdapter {
         val drawable = ContextCompat.getDrawable(context, resId)
         drawable?.let {
             view.setCompoundDrawablesWithIntrinsicBounds(null, it, null, null)
-        }
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:acquisitionList")
-    fun addAcquisitionList(recyclerView: RecyclerView, list: MutableList<AcquisitionCode>) {
-        val adapter = recyclerView.adapter
-        adapter?.let {
-            if (adapter is AcquisitionAdapter) {
-                adapter.set(list)
-            }
         }
     }
 
