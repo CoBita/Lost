@@ -55,12 +55,12 @@ class ListActivity : LActivity() {
         }
     }
 
-    override fun createProgress(): Dialog = Dialog(mContext, R.style.customDialogTheme).apply {
+    override fun createProgress(): Dialog = Dialog(mContext).apply {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setCancelable(false)
         window?.apply {
             setContentView(R.layout.list_loading)
-            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@ListActivity, R.color.dialogBg)))
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
     }
 

@@ -14,6 +14,8 @@ import com.bita.lost.common.progress
 import com.bita.lost.common.format
 import com.bita.lost.repo.ListRepository
 import com.bita.lost.repo.data.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.lang.StringBuilder
@@ -64,6 +66,14 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
 
     fun getFirstLostList() {
         if (list.isEmpty()) getLostList()
+    }
+
+    fun 습득물조회fromDummy(raw: String?) {
+        raw?.let {
+            val dummy : ArrayList<LostItem> = Gson().fromJson(raw, object : TypeToken<ArrayList<LostItem>>() {}.type)
+            list.addAll(dummy)
+            isLoadFinish.set(true)
+        }
     }
 
     fun getLostList() {

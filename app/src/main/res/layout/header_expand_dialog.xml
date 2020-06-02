@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.list.ListActivity">
+
+    <data>
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="areaName"
+            type="String" />
+
+        <variable
+            name="productName"
+            type="String" />
+
+        <variable
+            name="displayPeriod"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/area"
+            style="@style/listInfoText"
+            android:gravity="center"
+            android:inputType="@{InputType.TYPE_NULL}"
+            android:text="@{areaName}"
+            app:layout_constraintBottom_toBottomOf="@id/temp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/temp"
+            tools:text="서울특별시" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp"
+            style="@style/listInfoText"
+            android:layout_marginTop="16dp"
+            android:text="에서"
+            app:layout_constraintStart_toEndOf="@id/area"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/period"
+            style="@style/listInfoText"
+            android:gravity="center"
+            android:inputType="@{InputType.TYPE_NULL}"
+            android:text="@{displayPeriod}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/area"
+            tools:text="2020.3.1 - 2020.6.2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp3"
+            style="@style/listInfoText"
+            android:text=" 동안"
+            app:layout_constraintBottom_toBottomOf="@id/period"
+            app:layout_constraintStart_toEndOf="@id/period"
+            app:layout_constraintTop_toTopOf="@id/period" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp4"
+            style="@style/listInfoText"
+            android:text="발견된"
+            app:layout_constraintBottom_toBottomOf="@id/product"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/product" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/product"
+            style="@style/listInfoText"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:inputType="@{InputType.TYPE_NULL}"
+            android:text="@{productName}"
+            app:layout_constraintStart_toEndOf="@id/temp4"
+            app:layout_constraintTop_toBottomOf="@id/period"
+            tools:text="지갑" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp5"
+            style="@style/listInfoText"
+            android:inputType="none"
+            android:text="의 목록이예요"
+            app:layout_constraintBottom_toBottomOf="@id/product"
+            app:layout_constraintStart_toEndOf="@id/product"
+            app:layout_constraintTop_toTopOf="@id/product" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

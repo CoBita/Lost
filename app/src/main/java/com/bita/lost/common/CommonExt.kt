@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import androidx.annotation.ColorInt
+import androidx.annotation.RawRes
 import androidx.lifecycle.MutableLiveData
 import com.and.base.common.sp2px
 import kotlinx.coroutines.Job
@@ -42,3 +43,15 @@ fun String.textAsBitmap(context: Context, textSize: Float, @ColorInt textColor: 
 }
 
 fun Int.format() : String = DecimalFormat("#,###").format(this)
+
+fun Context.raw2String(@RawRes rawResId: Int) : String? {
+    return try {
+        val inputStream = resources.openRawResource(rawResId)
+        val b = ByteArray(inputStream.available())
+        inputStream.read(b)
+        inputStream.close()
+        String(b)
+    } catch (e: Exception) {
+        ""
+    }
+}
