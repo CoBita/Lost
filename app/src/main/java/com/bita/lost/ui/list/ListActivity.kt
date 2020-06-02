@@ -10,6 +10,8 @@ import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
+import com.bita.lost.repo.data.AreaCode
+import com.bita.lost.repo.data.ProductCode
 import com.bita.lost.ui.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,11 +38,12 @@ class ListActivity : LActivity() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        val place = intent.getSerializableExtra(ACQUIRE_PLACE)
-        val name = intent.getSerializableExtra(ACQUISITION)
-
-        if (place is AcquirePlaceCode && name is AcquisitionCode) {
-            listFr = ListFragment.newInstance(place, name)
+        val area = intent.getSerializableExtra(AREA)
+        val product = intent.getSerializableExtra(PRODUCT)
+        val startDate = intent.getStringExtra(START_DATE) ?: ""
+        val endDate = intent.getStringExtra(END_DATE) ?: ""
+        if(area is AreaCode && product is ProductCode){
+            listFr = ListFragment.newInstance(area, product, startDate, endDate)
         }
     }
 

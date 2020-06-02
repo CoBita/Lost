@@ -26,11 +26,11 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{data.lstPrdtNm}"
+            android:text="@{data.fdSbjt}"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="삼성애니콜폴더핸드폰(검정+회색)" />
+            tools:text="ZEFEF 남성용 가방(그레이(회)색)을 습득하여 보관하고 있습니다." />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/place"
@@ -38,18 +38,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{data.lstPlace}"
+            android:text="@{data.depPlace}"
             app:layout_constraintEnd_toStartOf="@id/date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name"
-            tools:text="경찰서" />
+            tools:text="신구로지구대" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{data.lstYmd}"
+            android:text="@{data.fdYmd}"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/place"

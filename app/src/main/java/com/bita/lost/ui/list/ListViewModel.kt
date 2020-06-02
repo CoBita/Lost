@@ -16,11 +16,16 @@ import com.bita.lost.repo.ListRepository
 import com.bita.lost.repo.data.*
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.lang.StringBuilder
+import java.text.DecimalFormat
 
 class ListViewModel(private val repository: ListRepository) : LViewModel() {
     private var page = 0
-    lateinit var lstPrdtNm: AcquisitionCode
-    lateinit var lstPlace: AcquirePlaceCode
+    lateinit var area: AreaCode
+    lateinit var product: ProductCode
+    lateinit var displayPeriod : String
+    lateinit var startYmd: String
+    lateinit var endYmd: String
 
     val list = ObservableArrayList<LostItem>()
     val hasNext = ObservableBoolean(true)
@@ -35,9 +40,19 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         e.printStackTrace()
     }
 
-    fun init(lstPlace: AcquirePlaceCode, lstPrdtNm: AcquisitionCode) {
-        this.lstPlace = lstPlace
-        this.lstPrdtNm = lstPrdtNm
+    fun init(nFdLctCd: AreaCode, prdtClCd01: ProductCode, startYmd: String, endYmd: String) {
+        this.product = prdtClCd01
+        this.displayPeriod = "$startYmd - $endYmd"
+        this.area = nFdLctCd
+        this.startYmd = parseDate(startYmd)
+        this.endYmd = parseDate(endYmd)
+    }
+
+    private fun parseDate(date : String) : String{
+        val parts= date.split(".")
+        val result = StringBuilder()
+        parts.forEach { part -> result.append(DecimalFormat("00").format(part.toInt())) }
+        return result.toString()
     }
 
     fun getFirstLostList() {
@@ -47,16 +62,15 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     fun getLostList() {
         scope.launch(handler) {
             page++
-            val result: Body<LostList> = repository.분실물조회(lstPlace.description, lstPrdtNm.description, page)
+            val result: Body<LostList> = repository.분실물조회(product.code, startYmd, endYmd, area.code, page)
             isLoadFinish.set(true)
             result.items.items?.let { list.addAll(it) }
-//            if (page == 1) resultCount.set("검색결과 총 ${result.totalCount}개")
             if (page == 1) resultCount.set("검색결과 총 ${result.totalCount.format()}개")
             if (result.totalCount <= page * 20) hasNext.set(false)
         }.progress(_isProgress)
     }
 
-    fun onBackPressed(v : View) {
+    fun onBackPressed(v: View) {
         _backPressed.postValue(true)
     }
 }

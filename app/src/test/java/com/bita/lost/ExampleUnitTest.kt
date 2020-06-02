@@ -3,6 +3,7 @@ package com.bita.lost
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.lang.StringBuilder
 import java.text.DecimalFormat
 
 /**
@@ -23,5 +24,19 @@ class ExampleUnitTest {
             println("$it : ${(DecimalFormat("#").format(it))}")
         }
 
+    }
+
+    @Test
+    fun parseDateMain() {
+        println(parseDate("2020.5.1"))
+        println(parseDate("2020.5.12"))
+    }
+
+
+    fun parseDate(date: String): String {
+        val parts = date.split(".")
+        val result = StringBuilder()
+        parts.forEach { part -> result.append(DecimalFormat("00").format(part.toInt())) }
+        return result.toString()
     }
 }

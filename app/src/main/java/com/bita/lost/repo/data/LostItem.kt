@@ -7,11 +7,13 @@ data class LostList(
 )
 
 data class LostItem(
-        val atcId: String,
-        val lstPlace: String,
-        val lstPrdtNm: String,
-        val lstSbjt: String,
-        val lstYmd: String,
-        val prdtClNm: String,
-        val rnum: Int
+    val atcId: String,
+    val depPlace: String,
+    val fdFilePathImg: String,
+    val fdPrdtNm: String,
+    val fdSbjt: String,
+    val fdSn: Int,
+    val fdYmd: String,
+    val prdtClNm: String,
+    val rnum: Int
 )

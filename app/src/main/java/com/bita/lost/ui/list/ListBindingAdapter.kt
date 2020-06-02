@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.R
-import com.bita.lost.base.LActivity
 import com.bita.lost.common.textAsBitmap
 import com.bita.lost.repo.data.AcquirePlaceCode
 import com.bita.lost.repo.data.AcquisitionCode
