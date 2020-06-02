@@ -35,24 +35,50 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/color"
+            android:id="@+id/startDate"
             style="@style/mainInfoText"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:hint="검정색"
+            android:hint="2020.01.01"
             android:inputType="@{InputType.TYPE_NULL}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/area" />
 
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temp2"
             style="@style/mainInfoText"
-            android:inputType="none"
-            android:text="의"
-            app:layout_constraintBottom_toBottomOf="@id/color"
-            app:layout_constraintStart_toEndOf="@id/color"
-            app:layout_constraintTop_toTopOf="@id/color" />
+            android:text="~"
+            app:layout_constraintBottom_toBottomOf="@id/startDate"
+            app:layout_constraintStart_toEndOf="@id/startDate"
+            app:layout_constraintTop_toTopOf="@id/startDate" />
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/endDate"
+            style="@style/mainInfoText"
+            android:gravity="center"
+            android:hint="2020.02.01"
+            android:inputType="@{InputType.TYPE_NULL}"
+            app:layout_constraintBottom_toBottomOf="@id/startDate"
+            app:layout_constraintStart_toEndOf="@id/temp2"
+            app:layout_constraintTop_toTopOf="@id/startDate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp3"
+            style="@style/mainInfoText"
+            android:text="에"
+            app:layout_constraintBottom_toBottomOf="@id/endDate"
+            app:layout_constraintStart_toEndOf="@id/endDate"
+            app:layout_constraintTop_toTopOf="@id/endDate" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp4"
+            style="@style/mainInfoText"
+            android:layout_marginTop="16dp"
+            android:text="잃어버린"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/startDate" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/product"
@@ -61,32 +87,32 @@
             android:gravity="center"
             android:hint="지갑"
             android:inputType="@{InputType.TYPE_NULL}"
-            app:layout_constraintBottom_toBottomOf="@id/color"
-            app:layout_constraintStart_toEndOf="@id/temp2"
-            app:layout_constraintTop_toTopOf="@id/color" />
+            app:layout_constraintBottom_toBottomOf="@id/temp4"
+            app:layout_constraintStart_toEndOf="@id/temp4"
+            app:layout_constraintTop_toTopOf="@id/temp4" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp3"
+            android:id="@+id/temp5"
             style="@style/mainInfoText"
             android:inputType="none"
             android:text="을(를)"
-            app:layout_constraintBottom_toBottomOf="@id/color"
+            app:layout_constraintBottom_toBottomOf="@id/product"
             app:layout_constraintStart_toEndOf="@id/product"
-            app:layout_constraintTop_toTopOf="@id/color" />
+            app:layout_constraintTop_toTopOf="@id/product" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp4"
+            android:id="@+id/temp6"
             style="@style/mainInfoText"
             android:layout_marginTop="16dp"
             android:text="찾고있습니다."
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/color" />
+            app:layout_constraintTop_toBottomOf="@id/product" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="검색"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
