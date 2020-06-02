@@ -38,4 +38,9 @@
         <item name="android:focusable">false</item>
         <item name="android:textSize">28sp</item>
     </style>
+
+    <style name="customDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
 </resources>

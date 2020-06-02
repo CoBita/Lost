@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
@@ -40,12 +41,12 @@ class ListActivity : LActivity() {
         val product = intent.getSerializableExtra(PRODUCT)
         val startDate = intent.getStringExtra(START_DATE) ?: ""
         val endDate = intent.getStringExtra(END_DATE) ?: ""
-        if(area is AreaCode && product is ProductCode){
+        if (area is AreaCode && product is ProductCode) {
             listFr = ListFragment.newInstance(area, product, startDate, endDate)
         }
     }
 
-    fun showDetail(id: String, seq : Int) {
+    fun showDetail(id: String, seq: Int) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, DetailFragment.newInstance(id, seq))
             addToBackStack(null)
@@ -53,12 +54,12 @@ class ListActivity : LActivity() {
         }
     }
 
-    override fun createProgress(): Dialog = Dialog(mContext).apply {
+    override fun createProgress(): Dialog = Dialog(mContext, R.style.customDialogTheme).apply {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setCancelable(false)
         window?.apply {
             setContentView(R.layout.list_loading)
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this@ListActivity, R.color.dialogBg)))
         }
     }
 
