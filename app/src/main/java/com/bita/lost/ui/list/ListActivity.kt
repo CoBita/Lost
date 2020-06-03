@@ -37,8 +37,8 @@ class ListActivity : LActivity() {
 
     override fun onParseExtra() {
         super.onParseExtra()
-        val area = intent.getSerializableExtra(AREA) ?: AreaCode.전체
-        val product = intent.getSerializableExtra(PRODUCT) ?: ProductCode.전체
+        val area = intent.getSerializableExtra(AREA) ?: AreaCode.전체지역
+        val product = intent.getSerializableExtra(PRODUCT) ?: ProductCode.모든습득물
         val startDate = intent.getStringExtra(START_DATE) ?: ""
         val endDate = intent.getStringExtra(END_DATE) ?: ""
 

@@ -22,5 +22,5 @@ enum class ProductCode(val code: String) {
     컴퓨터("PRI000"),
     현금("PRL000"),
     휴대폰("PRJ000"),
-    전체("");
+    모든습득물("");
 }

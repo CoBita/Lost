@@ -1,11 +1,10 @@
 package com.bita.lost.ui.list
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.transition.Explode
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.and.base.common.raw2String
 import com.bita.lost.R
@@ -16,11 +15,11 @@ import com.bita.lost.repo.data.ProductCode
 import com.google.android.gms.ads.AdRequest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class ListFragment private constructor() : LFragment() {
+class ListFragment() : LFragment() {
     override val vm: ListViewModel by sharedViewModel()
     private lateinit var binding: ListFrBinding
-    private lateinit var nFdLctCd: AreaCode
-    private lateinit var prdtClCd01: ProductCode
+    private lateinit var areaCode: AreaCode
+    private lateinit var productCode: ProductCode
     private lateinit var startYmd: String
     private lateinit var endYmd: String
 
@@ -33,28 +32,13 @@ class ListFragment private constructor() : LFragment() {
         super.onLoadOnce()
         initializeAds()
 
-        vm.init(nFdLctCd, prdtClCd01, startYmd, endYmd)
+        vm.init(areaCode, productCode, startYmd, endYmd)
         binding.vm = vm
         // todo 전문 속도 너무 느려서 dummy 데이터로 처리 중 이후 변경 필요
 //        vm.최초습득물조회()
         vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
         binding.header.setOnClickListener {
-            activity?.let { context ->
-                Dialog(context).apply {
-                    requestWindowFeature(Window.FEATURE_NO_TITLE)
-                    window?.apply {
-                        setContentView(R.layout.header_expand_dialog)
-                        setGravity(Gravity.TOP)
-                        setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        val params = attributes.apply {
-                            width = WindowManager.LayoutParams.MATCH_PARENT
-                            windowAnimations = R.style.AnimationPopupStyle
-                        }
-                        attributes = params
-                    }
-                }.show()
-            }
-
+            HeaderDialog.newInstance(areaCode, productCode, vm.displayPeriod).show(childFragmentManager, "")
         }
     }
 
@@ -64,10 +48,10 @@ class ListFragment private constructor() : LFragment() {
     }
 
     companion object {
-        fun newInstance(nFdLctCd: AreaCode,prdtClCd01: ProductCode, startYmd: String, endYmd: String): ListFragment {
+        fun newInstance(areaCode: AreaCode, productCode: ProductCode, startYmd: String, endYmd: String): ListFragment {
             return ListFragment().apply {
-                this.nFdLctCd = nFdLctCd
-                this.prdtClCd01 = prdtClCd01
+                this.areaCode = areaCode
+                this.productCode = productCode
                 this.startYmd = startYmd
                 this.endYmd = endYmd
                 exitTransition = Explode()
