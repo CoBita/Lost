@@ -3,6 +3,7 @@ package com.bita.lost.ui.main
 import android.graphics.*
 import android.os.Build
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -11,18 +12,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bita.lost.repo.data.*
 
-object MainBindingAdapter {
+object SearchBindingAdapter {
 
-    @JvmStatic
-    @BindingAdapter("app:acquirePlaceList")
-    fun addAcquirePlaceList(recyclerView: RecyclerView, list: MutableList<AcquirePlaceCode>) {
-        val adapter = recyclerView.adapter
-        adapter?.let {
-            if (adapter is AcquirePlaceAdapter) {
-                adapter.set(list)
-            }
-        }
-    }
 
     @JvmStatic
     @BindingAdapter("app:colorList")
@@ -68,17 +59,6 @@ object MainBindingAdapter {
         }
     }
 
-    @JvmStatic
-    @BindingAdapter("app:acquisitionList")
-    fun addAcquisitionList(recyclerView: RecyclerView, list: MutableList<AcquisitionCode>) {
-        val adapter = recyclerView.adapter
-        adapter?.let {
-            if (adapter is AcquisitionAdapter) {
-                adapter.set(list)
-            }
-        }
-    }
-
     @Suppress("DEPRECATION")
     @JvmStatic
     @BindingAdapter("app:colorFilter")
@@ -89,5 +69,11 @@ object MainBindingAdapter {
         } else {
             view.background.setColorFilter(color, PorterDuff.Mode.MULTIPLY)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:hintColor")
+    fun setHintColor(view: EditText, @ColorInt color: Int) {
+        view.setHintTextColor(color)
     }
 }

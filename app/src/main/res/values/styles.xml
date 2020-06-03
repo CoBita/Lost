@@ -38,8 +38,13 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:focusable">false</item>
         <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="mainInfoEditText" parent="mainInfoText">
+        <item name="android:focusable">false</item>
+        <item name="backgroundTint">#aaaaaa</item>
+        <item name="android:textColorHint">#aaaaaa</item>
     </style>
 
     <style name="AnimationPopupStyle">
