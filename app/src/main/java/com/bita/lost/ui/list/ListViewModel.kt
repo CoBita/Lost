@@ -70,7 +70,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
 
     fun 습득물조회fromDummy(raw: String?) {
         raw?.let {
-            val dummy : ArrayList<LostItem> = Gson().fromJson(raw, object : TypeToken<ArrayList<LostItem>>() {}.type)
+            val dummy: ArrayList<LostItem> = Gson().fromJson(raw, object : TypeToken<ArrayList<LostItem>>() {}.type)
             list.addAll(dummy)
             isLoadFinish.set(true)
         }

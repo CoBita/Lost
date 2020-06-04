@@ -10,7 +10,7 @@ import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.SearchActBinding
 import com.bita.lost.repo.data.AreaCode
 import com.bita.lost.repo.data.ProductCode
-import com.bita.lost.ui.list.ListActivity
+import com.bita.lost.ui.list.ListAct
 import kotlinx.android.synthetic.main.search_act.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -80,11 +80,11 @@ class SearchActivity : LActivity() {
         val sd = startDate.editableText.toString()
         val ed = endDate.editableText.toString()
 
-        val intent = Intent(this, ListActivity::class.java).apply {
-            putExtra(ListActivity.AREA, areaCode)
-            putExtra(ListActivity.PRODUCT, productCode)
-            putExtra(ListActivity.START_DATE, sd)
-            putExtra(ListActivity.END_DATE, ed)
+        val intent = Intent(this, ListAct::class.java).apply {
+            putExtra(ListAct.AREA, areaCode)
+            putExtra(ListAct.PRODUCT, productCode)
+            putExtra(ListAct.START_DATE, sd)
+            putExtra(ListAct.END_DATE, ed)
         }
         startActivity(intent)
     }

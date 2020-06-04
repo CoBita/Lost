@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 object ListBindingAdapter {
 
     @JvmStatic
-    @BindingAdapter("app:items", "app:has_next", "app:get_next_data", "app:is_load_finish")
+    @BindingAdapter("app:items", "app:hasNext", "app:getNextData", "app:isLoadFinish")
     fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit, isLoadFinish: Boolean) {
         if (!isLoadFinish) return
 
@@ -25,7 +25,7 @@ object ListBindingAdapter {
 
         v.adapter?.let { it as? ListAdapter }?.set(data)
                 ?: run {
-                    val adapter = ListAdapter({ id, seq -> v.context.let { it as? ListActivity }?.showDetail(id, seq) }, function)
+                    val adapter = ListAdapter({ id, seq -> v.context.let { it as? ListAct }?.showDetail(id, seq) }, function)
                     adapter.set(data)
                     v.adapter = adapter
                 }
@@ -51,7 +51,7 @@ object ListBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:noBreakText")
-    fun noSpace(v : TextView, string : String){
+    fun noSpace(v: TextView, string: String) {
         v.text = string.replace(" ", "\u00A0").replace("-", "\u2011").replace("/", "\u2215")
     }
 }

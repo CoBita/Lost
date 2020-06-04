@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
@@ -14,7 +13,7 @@ import com.bita.lost.repo.data.ProductCode
 import com.bita.lost.ui.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListActivity : LActivity() {
+class ListAct : LActivity() {
     override val vm: ListViewModel by viewModel()
     private lateinit var listFr: ListFragment
 
@@ -31,8 +30,7 @@ class ListActivity : LActivity() {
                 replace(R.id.container, listFr)
                 commit()
             }
-        } else
-            showDialog("", "잃어버리신 장소 및 물건의 이름을 다시 한 번 입력해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> finish() })
+        } else showError()
     }
 
     override fun onParseExtra() {
@@ -62,6 +60,10 @@ class ListActivity : LActivity() {
             setContentView(R.layout.list_loading)
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
+    }
+
+    fun showError() {
+        showDialog("", "잃어버리신 장소 및 물건의 이름을 다시 한 번 입력해주세요~", positiveButtonText = "네!", positiveListener = { _, _ -> finish() })
     }
 
     companion object {

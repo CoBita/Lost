@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.and.base.common.raw2String
+import com.and.base.log.Log
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.ListFrBinding
@@ -15,13 +16,13 @@ import com.bita.lost.repo.data.ProductCode
 import com.google.android.gms.ads.AdRequest
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class ListFragment() : LFragment() {
+class ListFragment : LFragment() {
     override val vm: ListViewModel by sharedViewModel()
     private lateinit var binding: ListFrBinding
-    private lateinit var areaCode: AreaCode
-    private lateinit var productCode: ProductCode
-    private lateinit var startYmd: String
-    private lateinit var endYmd: String
+    private lateinit var area: AreaCode
+    private lateinit var product: ProductCode
+    private lateinit var startDate: String
+    private lateinit var endDate: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fr, container, false)
@@ -30,30 +31,33 @@ class ListFragment() : LFragment() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        initializeAds()
 
-        vm.init(areaCode, productCode, startYmd, endYmd)
-        binding.vm = vm
-        // todo 전문 속도 너무 느려서 dummy 데이터로 처리 중 이후 변경 필요
+        if (::area.isInitialized && ::product.isInitialized && ::startDate.isInitialized && ::endDate.isInitialized) {
+            vm.init(area, product, startDate, endDate)
+            binding.vm = vm
+            // todo 전문 속도 너무 느려서 dummy 데이터로 처리 중 이후 변경 필요
 //        vm.최초습득물조회()
-        vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
-        binding.header.setOnClickListener {
-            HeaderDialog.newInstance(areaCode, productCode, vm.displayPeriod).show(childFragmentManager, "")
-        }
+            vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
+            binding.header.setOnClickListener { ListHeaderDialog.newInstance(area, product, vm.displayPeriod).show(childFragmentManager, "") }
+            initializeAds()
+        } else (activity as? ListAct)?.showError()
     }
 
     private fun initializeAds() {
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+        binding.adView.loadAd(AdRequest.Builder().build())
+    }
+
+    fun changeParameter(test : String){
+        Log.w(test)
     }
 
     companion object {
-        fun newInstance(areaCode: AreaCode, productCode: ProductCode, startYmd: String, endYmd: String): ListFragment {
+        fun newInstance(pArea: AreaCode, pProduct: ProductCode, pStart: String, pEnd: String): ListFragment {
             return ListFragment().apply {
-                this.areaCode = areaCode
-                this.productCode = productCode
-                this.startYmd = startYmd
-                this.endYmd = endYmd
+                area = pArea
+                product = pProduct
+                startDate = pStart
+                endDate = pEnd
                 exitTransition = Explode()
             }
         }

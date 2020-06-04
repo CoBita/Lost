@@ -4,6 +4,7 @@ import com.and.base.net.createNetService
 import com.bita.lost.repo.ListDataSource
 import com.bita.lost.repo.ListRepository
 import com.bita.lost.repo.ListRepositoryImpl
+import com.bita.lost.ui.list.ListHeaderViewModel
 import com.bita.lost.ui.list.ListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -17,4 +18,5 @@ val listModule
         single<ListRepository> { ListRepositoryImpl(get()) }
 
         viewModel { ListViewModel(get()) }
+        viewModel { ListHeaderViewModel() }
     }

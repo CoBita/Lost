@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.list.ListActivity">
+    tools:context=".ui.list.ListAct">
 
     <data>
 
@@ -21,14 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipChildren="false"
-            android:orientation="vertical"
-            android:paddingTop="8dp"
             android:clipToPadding="false"
+            android:orientation="vertical"
             android:overScrollMode="never"
+            android:paddingTop="8dp"
             android:transitionGroup="false"
-            app:get_next_data="@{vm::getLostList}"
-            app:has_next="@{vm.hasNext}"
-            app:is_load_finish="@{vm.isLoadFinish}"
+            app:getNextData="@{vm::getLostList}"
+            app:hasNext="@{vm.hasNext}"
+            app:isLoadFinish="@{vm.isLoadFinish}"
             app:items="@{vm.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/adView"
@@ -95,10 +95,10 @@
                 android:text="@{vm.displayPeriod}"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                tools:text="2020.5.1 - 2020.6.1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/back"
-                app:layout_constraintTop_toBottomOf="@id/area" />
+                app:layout_constraintTop_toBottomOf="@id/area"
+                tools:text="2020.5.1 - 2020.6.1" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier"
