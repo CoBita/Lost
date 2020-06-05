@@ -30,8 +30,8 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     lateinit var area: ObservableField<AreaCode>
     lateinit var product: ObservableField<ProductCode>
     lateinit var displayPeriod: ObservableField<String>
-    lateinit var startYmd: String
-    lateinit var endYmd: String
+    lateinit var start: String
+    lateinit var end: String
 
     val list = ObservableArrayList<Any>()
     val isLoadFinish = ObservableBoolean(false)
@@ -46,12 +46,12 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         e.printStackTrace()
     }
 
-    fun init(nFdLctCd: AreaCode, prdtClCd01: ProductCode, startYmd: String, endYmd: String) {
-        this.product = ObservableField(prdtClCd01)
-        this.displayPeriod = ObservableField("$startYmd - $endYmd")
-        this.area = ObservableField(nFdLctCd)
-        this.startYmd = parseDate(startYmd)
-        this.endYmd = parseDate(endYmd)
+    fun init(pArea: AreaCode, pProduct: ProductCode, pStart: String, pEnd: String) {
+        if(!::product.isInitialized)  this.product = ObservableField(pProduct)
+        if(!::start.isInitialized) this.start = parseDate(pStart)
+        if(!::end.isInitialized) this.end = parseDate(pEnd)
+        if(!::displayPeriod.isInitialized) this.displayPeriod = ObservableField("$pStart - $pEnd")
+        if(!::area.isInitialized) this.area = ObservableField(pArea)
     }
 
     private fun parseDate(date: String): String {
@@ -92,7 +92,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             page++
             val prdtClCd01 = product.get()?.code ?: ProductCode.모든습득물.code
             val nFdLctCd = area.get()?.code ?: AreaCode.전체지역.code
-            val result: Body<LostList> = repository.습득물조회(prdtClCd01, startYmd, endYmd, nFdLctCd, page)
+            val result: Body<LostList> = repository.습득물조회(prdtClCd01, start, end, nFdLctCd, page)
             result.items.items?.let { list.addAll(it) }
                     ?: run { list.add(BaseAdapter.BaseHolderType.결과없음) }
             if (page == 1) resultCount.set("검색결과 총 ${result.totalCount.format()}개")
@@ -111,12 +111,12 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         pArea?.let { area.set(it) }
         pProduct?.let { product.set(it) }
         pStart?.let {
-            startYmd = it
-            displayPeriod.set("$startYmd - $endYmd")
+            start = it
+            displayPeriod.set("$start - $end")
         }
         pEnd?.let {
-            endYmd = it
-            displayPeriod.set("$startYmd - $endYmd")
+            end = it
+            displayPeriod.set("$start - $end")
         }
         page = 0
         list.clear()

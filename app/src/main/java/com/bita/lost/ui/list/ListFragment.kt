@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.and.base.common.raw2String
 import com.and.base.log.Log
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
