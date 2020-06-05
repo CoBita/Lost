@@ -36,9 +36,9 @@ class ListFragment : LFragment() {
             vm.init(area, product, startDate, endDate)
             binding.vm = vm
             // todo 전문 속도 너무 느려서 dummy 데이터로 처리 중 이후 변경 필요
-//        vm.최초습득물조회()
-            vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
-            binding.header.setOnClickListener { ListHeaderDialog.newInstance(area, product, vm.displayPeriod).show(childFragmentManager, "") }
+            vm.getFirstLostList()
+//            vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
+            binding.header.setOnClickListener { ListHeaderDialog.newInstance(area, product, vm.displayPeriod.get()?:"").show(childFragmentManager, "") }
             initializeAds()
         } else (activity as? ListAct)?.showError()
     }
@@ -47,8 +47,12 @@ class ListFragment : LFragment() {
         binding.adView.loadAd(AdRequest.Builder().build())
     }
 
-    fun changeParameter(test : String){
-        Log.w(test)
+    fun changeParameter(param: Any) {
+        when (param) {
+            is AreaCode -> vm.searchAgain(pArea = param)
+            is ProductCode -> vm.searchAgain(pProduct = param)
+            else -> Log.w("param = $param")
+        }
     }
 
     companion object {

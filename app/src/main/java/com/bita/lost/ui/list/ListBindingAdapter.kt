@@ -6,29 +6,30 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.and.base.log.Log
 import com.bita.lost.R
-import com.bita.lost.repo.data.LostItem
 import com.bumptech.glide.Glide
 
 object ListBindingAdapter {
 
     @JvmStatic
-    @BindingAdapter("app:items", "app:hasNext", "app:getNextData", "app:isLoadFinish")
-    fun setAdapter(v: RecyclerView, rawData: ArrayList<LostItem>, hasNext: Boolean, function: () -> Unit, isLoadFinish: Boolean) {
-        if (!isLoadFinish) return
-
-        val data = arrayListOf<LostItem?>().apply {
-            addAll(rawData)
-            if (hasNext && isNotEmpty()) add(null)
-            if (this.isEmpty()) add(null)
-        }
-
+    @BindingAdapter("app:items", "app:getNextData")
+    fun setAdapter(v: RecyclerView, data: ArrayList<Any>, function: () -> Unit) {
         v.adapter?.let { it as? ListAdapter }?.set(data)
                 ?: run {
-                    val adapter = ListAdapter({ id, seq -> v.context.let { it as? ListAct }?.showDetail(id, seq) }, function)
+                    val adapter = ListAdapter { id, seq -> v.context.let { it as? ListAct }?.showDetail(id, seq) }
                     adapter.set(data)
                     v.adapter = adapter
                 }
+        v.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1)) {
+                    Log.w("스크롤 최하단 도달")
+                    function()
+                }
+            }
+        })
         v.scheduleLayoutAnimation()
     }
 

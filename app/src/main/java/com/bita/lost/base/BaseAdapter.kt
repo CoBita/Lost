@@ -1,3 +1,5 @@
+@file:Suppress("EnumEntryName", "NonAsciiCharacters")
+
 package com.bita.lost.base
 
 import android.view.ViewGroup
@@ -25,13 +27,14 @@ abstract class BaseAdapter<T>() : RecyclerView.Adapter<BaseHolder<T>>() {
 
     abstract override fun getItemViewType(position: Int): Int
 
-    override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) =
-            onBind(holder, items[position])
+    override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) = onBind(holder, items[position])
 
     protected fun getItem(position: Int): T = items[position]
 
     override fun getItemCount(): Int = items.size
 
     private fun onBind(holder: BaseHolder<T>, item: T) = holder.bind(data = item)
+
+    enum class BaseHolderType { 더보기, 결과없음; }
 }
 

@@ -2,7 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.list.ListAct">
+    tools:context=".ui.list.ListAct"
+    tools:ignore="HardcodedText">
 
     <data>
 
@@ -45,7 +46,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/area"
-            style="@style/listInfoText"
+            style="@style/listInfoEditText"
             android:gravity="center"
             android:inputType="@{InputType.TYPE_NULL}"
             android:text="@{areaName}"
@@ -68,7 +69,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/period"
-            style="@style/listInfoText"
+            style="@style/listInfoEditText"
             android:autoSizeMaxTextSize="16sp"
             android:autoSizeMinTextSize="9sp"
             android:autoSizeTextType="uniform"
@@ -104,7 +105,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/product"
-            style="@style/listInfoText"
+            style="@style/listInfoEditText"
             android:layout_marginStart="8dp"
             android:gravity="center"
             android:inputType="@{InputType.TYPE_NULL}"

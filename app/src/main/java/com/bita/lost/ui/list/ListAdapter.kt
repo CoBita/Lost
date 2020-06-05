@@ -12,11 +12,10 @@ import com.bita.lost.databinding.ListMoreItemBinding
 import com.bita.lost.databinding.ListNoItemBinding
 import com.bita.lost.repo.data.LostItem
 
-class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit,
-                  private val getNextData: () -> Unit) : BaseAdapter<LostItem?>() {
+class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit) : BaseAdapter<Any>() {
     var lastAnimatedIndex = -1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<LostItem?> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Any> {
         return when (viewType) {
             0 -> ListHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             1 -> NoHolder(ListNoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -24,8 +23,14 @@ class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit,
         }
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.let { 0 }
-            ?: if (position == 0) 1 else 2
+    override fun getItemViewType(position: Int): Int =
+            when (getItem(position)) {
+                is LostItem -> 0
+                BaseHolderType.결과없음 -> 1
+                BaseHolderType.더보기 -> 2
+                else -> 2
+            }
+
 
     private fun animate(v: View, index: Int) {
         if (lastAnimatedIndex < index) {
@@ -34,30 +39,30 @@ class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit,
         }
     }
 
-    inner class ListHolder(private val binding: ListItemBinding) :
-            BaseHolder<LostItem?>(binding.root) {
-        override fun bind(data: LostItem?) {
+    inner class ListHolder(private val binding: ListItemBinding) : BaseHolder<Any>(binding.root) {
+        override fun bind(data: Any) {
             animate(binding.root, items.indexOf(data))
-            binding.data = data
-            binding.root.setOnClickListener { data?.let { showDetail(it.atcId, it.fdSn) } }
+            (data as? LostItem)?.let {
+                binding.data = it
+                binding.root.setOnClickListener { _ -> showDetail(it.atcId, it.fdSn) }
+            }
         }
     }
 
-    inner class NoHolder(private val binding: ListNoItemBinding) : BaseHolder<LostItem?>(binding.root) {
-        override fun bind(data: LostItem?) {
+    inner class NoHolder(private val binding: ListNoItemBinding) : BaseHolder<Any>(binding.root) {
+        override fun bind(data: Any) {
             animate(binding.notice, items.indexOf(data))
         }
     }
 
-    inner class MoreHolder(private val binding: ListMoreItemBinding) : BaseHolder<LostItem?>(binding.root) {
-        override fun bind(data: LostItem?) {
+    inner class MoreHolder(private val binding: ListMoreItemBinding) : BaseHolder<Any>(binding.root) {
+        override fun bind(data: Any) {
             animate(binding.root, items.indexOf(data))
             binding.root.setOnClickListener {
                 lastAnimatedIndex--
                 val lastIndex = items.lastIndex
                 items.removeAt(lastIndex)
                 notifyItemRemoved(lastIndex)
-                getNextData()
             }
         }
     }

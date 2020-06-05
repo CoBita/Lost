@@ -38,14 +38,19 @@ class ListHeaderDialog : BottomSheetDialogFragment() {
             binding.areaName = area.name
             binding.productName = product.name
             binding.displayPeriod = period
-            // todo 조건 변경해서 재검색하는 기능 추가 필요
+            // todo 조건 변경해서 재검색하는 기능 추가 필요 - 기간
             binding.area.setOnClickListener {
                 AreaPickFr.newInstance {
-                    (parentFragment as? ListFragment)?.changeParameter(it.name)
+                    (parentFragment as? ListFragment)?.changeParameter(it)
                     dismiss()
                 }.show(childFragmentManager, "area")
             }
-            binding.product.setOnClickListener { ProductPickFr.newInstance { }.show(childFragmentManager, "product") }
+            binding.product.setOnClickListener {
+                ProductPickFr.newInstance {
+                    (parentFragment as? ListFragment)?.changeParameter(it)
+                    dismiss()
+                }.show(childFragmentManager, "product")
+            }
         }
 
         vm.dismiss.observe(this, EventObserver { dismiss() })
