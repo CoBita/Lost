@@ -35,10 +35,12 @@ class ListFragment : LFragment() {
         if (::area.isInitialized && ::product.isInitialized && ::startDate.isInitialized && ::endDate.isInitialized) {
             vm.init(area, product, startDate, endDate)
             binding.vm = vm
-            // todo 전문 속도 너무 느려서 dummy 데이터로 처리 중 이후 변경 필요
             vm.getFirstLostList()
+            // todo 테스트용 이후 삭제 필요
 //            vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
-            binding.header.setOnClickListener { ListHeaderDialog.newInstance(area, product, vm.displayPeriod.get()?:"").show(childFragmentManager, "") }
+            binding.header.setOnClickListener {
+                ListHeaderDialog.newInstance(vm.area.get(), vm.product.get(), vm.displayPeriod.get()).show(childFragmentManager, null)
+            }
             initializeAds()
         } else (activity as? ListAct)?.showError()
     }

@@ -63,6 +63,7 @@
         <item name="layout_constraintHorizontal_chainStyle">packed</item>
         <item name="layout_constraintWidth_default">wrap</item>
         <item name="android:inputType">none</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 

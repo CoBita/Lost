@@ -57,10 +57,10 @@ class ListHeaderDialog : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(pArea: AreaCode, pProduct: ProductCode, pPeriod: String): ListHeaderDialog = ListHeaderDialog().apply {
-            area = pArea
-            product = pProduct
-            period = pPeriod
+        fun newInstance(pArea: AreaCode?, pProduct: ProductCode?, pPeriod: String?): ListHeaderDialog = ListHeaderDialog().apply {
+            area = pArea ?: AreaCode.전체지역
+            product = pProduct ?: ProductCode.모든습득물
+            period = pPeriod ?: ""
         }
     }
 }
