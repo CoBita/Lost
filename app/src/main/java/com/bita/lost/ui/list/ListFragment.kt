@@ -33,15 +33,16 @@ class ListFragment : LFragment() {
 
         if (::area.isInitialized && ::product.isInitialized && ::startDate.isInitialized && ::endDate.isInitialized) {
             vm.init(area, product, startDate, endDate)
-            binding.vm = vm
-            vm.getFirstLostList()
-            // todo 테스트용 이후 삭제 필요
-//            vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
-            binding.header.setOnClickListener {
-                ListHeaderDialog.newInstance(vm.area.get(), vm.product.get(), vm.displayPeriod.get()).show(childFragmentManager, null)
-            }
-            initializeAds()
-        } else (activity as? ListAct)?.showError()
+        }
+        binding.vm = vm
+
+        vm.searchInitialLosts()
+        // todo 테스트용 이후 삭제 필요
+        // vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
+
+        binding.header.setOnClickListener { ListHeaderDialog.newInstance(vm.area.get(), vm.product.get(), vm.displayPeriod.get()).show(childFragmentManager, null) }
+
+        initializeAds()
     }
 
     private fun initializeAds() {

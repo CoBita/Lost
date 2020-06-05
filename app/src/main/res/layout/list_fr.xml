@@ -26,7 +26,7 @@
             android:overScrollMode="never"
             android:paddingTop="8dp"
             android:transitionGroup="false"
-            app:getNextData="@{vm::getLostList}"
+            app:getNextData="@{vm::searchLosts}"
             app:items="@{vm.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/adView"

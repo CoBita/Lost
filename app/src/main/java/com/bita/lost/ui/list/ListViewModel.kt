@@ -8,6 +8,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.and.base.common.Event
 import com.and.base.log.Log
 import com.bita.lost.base.BaseAdapter
 import com.bita.lost.base.LViewModel
@@ -27,6 +28,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     private var page = 0
     private var hasNext: Boolean = true
     private var isSearching = false
+
     lateinit var area: ObservableField<AreaCode>
     lateinit var product: ObservableField<ProductCode>
     lateinit var displayPeriod: ObservableField<String>
@@ -37,9 +39,8 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     val isLoadFinish = ObservableBoolean(false)
     val resultCount = ObservableField("")
 
-
-    private val _backPressed = MutableLiveData<Boolean>()
-    val backPressed: LiveData<Boolean> get() = _backPressed
+    private val _backPressed = MutableLiveData<Event<Unit>>()
+    val backPressed: LiveData<Event<Unit>> get() = _backPressed
 
     private val handler = CoroutineExceptionHandler { _, e ->
         Log.w("exception occured")
@@ -54,6 +55,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         if(!::area.isInitialized) this.area = ObservableField(pArea)
     }
 
+    // "####.#.#" -> "########" 으로 포맷 변경
     private fun parseDate(date: String): String {
         if (date.isEmpty()) return date
         val parts = date.split(".")
@@ -68,10 +70,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         return result.toString()
     }
 
-    fun getFirstLostList() {
-        if (list.isEmpty()) getLostList()
-    }
-
+    // todo 이후 삭제
     fun 습득물조회fromDummy(raw: String?) {
         raw?.let {
             val dummy: ArrayList<LostItem> = Gson().fromJson(raw, object : TypeToken<ArrayList<LostItem>>() {}.type)
@@ -85,17 +84,24 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         }
     }
 
-    fun getLostList() {
+    // 습득물 목록 조회
+    fun searchLosts() {
         if (!hasNext || isSearching) return
         else isSearching = true
         scope.launch(handler) {
             page++
+
             val prdtClCd01 = product.get()?.code ?: ProductCode.모든습득물.code
             val nFdLctCd = area.get()?.code ?: AreaCode.전체지역.code
+
             val result: Body<LostList> = repository.습득물조회(prdtClCd01, start, end, nFdLctCd, page)
+
+            // after success
             result.items.items?.let { list.addAll(it) }
                     ?: run { list.add(BaseAdapter.BaseHolderType.결과없음) }
             if (page == 1) resultCount.set("검색결과 총 ${result.totalCount.format()}개")
+
+            // 더보기 여부
             if (result.totalCount <= page * 20) hasNext = false
         }.progress(_isProgress).invokeOnCompletion {
             isLoadFinish.set(true)
@@ -103,10 +109,16 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         }
     }
 
-    fun onBackPressed(v: View) {
-        _backPressed.postValue(true)
+    // 조회 조건 초기화
+    fun searchInitialLosts(){
+        page = 0
+        list.clear()
+        hasNext = true
+        isLoadFinish.set(false)
+        searchLosts()
     }
 
+    // 재조회
     fun searchAgain(pArea: AreaCode? = null, pProduct: ProductCode? = null, pStart: String? = null, pEnd: String? = null) {
         pArea?.let { area.set(it) }
         pProduct?.let { product.set(it) }
@@ -118,9 +130,11 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             end = it
             displayPeriod.set("$start - $end")
         }
-        page = 0
-        list.clear()
-        isLoadFinish.set(false)
-        getLostList()
+        searchInitialLosts()
     }
+
+    fun onBackPressed(v: View) {
+        _backPressed.value = Event(Unit)
+    }
+
 }

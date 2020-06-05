@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import androidx.lifecycle.Observer
+import com.and.base.common.EventObserver
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.repo.data.AreaCode
@@ -24,7 +24,7 @@ class ListAct : LActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        vm.backPressed.observe(this, Observer { onBackPressed() })
+        vm.backPressed.observe(this, EventObserver { onBackPressed() })
         if (::listFr.isInitialized) {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, listFr)
