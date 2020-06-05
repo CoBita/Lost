@@ -25,7 +25,6 @@ object ListBindingAdapter {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (!recyclerView.canScrollVertically(1)) {
-                    Log.w("스크롤 최하단 도달")
                     function()
                 }
             }

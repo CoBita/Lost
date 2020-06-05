@@ -14,6 +14,11 @@ import com.bita.lost.repo.data.LostItem
 class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit) : BaseAdapter<Any>() {
     var lastAnimatedIndex = -1
 
+    init {
+        // 깜빡임 현상 막기
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Any> {
         return when (viewType) {
             0 -> ListHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -26,6 +31,9 @@ class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit) : Base
         BaseHolderType.결과없음 -> 1
         else -> 1
     }
+
+
+    override fun getItemId(position: Int): Long = getItem(position).hashCode().toLong()
 
     // item 애니메이션
     private fun animate(v: View, index: Int) {
