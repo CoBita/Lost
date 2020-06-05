@@ -87,13 +87,12 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
 
     fun getLostList() {
         if (!hasNext || isSearching) return
+        else isSearching = true
         scope.launch(handler) {
             page++
-            isSearching = true
-            Log.w("isSearching = $isSearching")
-            val result: Body<LostList> = repository.습득물조회(product.get()?.code
-                    ?: ProductCode.모든습득물.code, startYmd, endYmd, area.get()?.code
-                    ?: AreaCode.전체지역.code, page)
+            val prdtClCd01 = product.get()?.code ?: ProductCode.모든습득물.code
+            val nFdLctCd = area.get()?.code ?: AreaCode.전체지역.code
+            val result: Body<LostList> = repository.습득물조회(prdtClCd01, startYmd, endYmd, nFdLctCd, page)
             result.items.items?.let { list.addAll(it) }
                     ?: run { list.add(BaseAdapter.BaseHolderType.결과없음) }
             if (page == 1) resultCount.set("검색결과 총 ${result.totalCount.format()}개")
@@ -101,7 +100,6 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         }.progress(_isProgress).invokeOnCompletion {
             isLoadFinish.set(true)
             isSearching = false
-            Log.w("isSearching = $isSearching")
         }
     }
 
