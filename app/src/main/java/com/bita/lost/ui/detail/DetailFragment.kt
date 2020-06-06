@@ -32,7 +32,6 @@ class DetailFragment : LFragment() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        vm.result.observe(this, Observer { binding.result.text = it.toString() })
     }
 
     companion object {

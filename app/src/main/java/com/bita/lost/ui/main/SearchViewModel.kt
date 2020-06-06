@@ -16,7 +16,6 @@ class SearchViewModel : LViewModel() {
     val startDate = ObservableField<String>()           // 시작날짜
     val endDate = ObservableField<String>()             // 끝날짜
 
-
     val areaPickFr = AreaPickFr.newInstance { areaCode.set(it) }
     val productPickFr = ProductPickFr.newInstance { productCode.set(it) }
 
