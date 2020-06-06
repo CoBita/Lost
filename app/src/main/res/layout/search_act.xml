@@ -6,6 +6,10 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.bita.lost.ui.main.SearchViewModel" />
+
         <import type="android.text.InputType" />
     </data>
 
@@ -21,6 +25,8 @@
             android:gravity="center"
             android:hint="서울특별시"
             android:inputType="@{InputType.TYPE_NULL}"
+            android:onClick="@{() -> vm.showFragment(vm.areaPickFr)}"
+            android:text="@{vm.areaCode.name()}"
             app:layout_constraintBottom_toBottomOf="@id/temp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/temp" />
@@ -41,6 +47,8 @@
             android:gravity="center"
             android:hint="2020.01.01"
             android:inputType="@{InputType.TYPE_NULL}"
+            android:onClick="@{()->vm.showDatePicker(vm.startDateResult)}"
+            android:text="@={vm.startDate}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/area" />
 
@@ -59,6 +67,8 @@
             android:gravity="center"
             android:hint="2020.02.01"
             android:inputType="@{InputType.TYPE_NULL}"
+            android:onClick="@{()->vm.showDatePicker(vm.endDateResult)}"
+            android:text="@={vm.endDate}"
             app:layout_constraintBottom_toBottomOf="@id/startDate"
             app:layout_constraintStart_toEndOf="@id/temp2"
             app:layout_constraintTop_toTopOf="@id/startDate" />
@@ -87,6 +97,8 @@
             android:gravity="center"
             android:hint="물건 선택"
             android:inputType="@{InputType.TYPE_NULL}"
+            android:onClick="@{() -> vm.showFragment(vm.productPickFr)}"
+            android:text="@{vm.productCode.name}"
             app:layout_constraintBottom_toBottomOf="@id/temp4"
             app:layout_constraintStart_toEndOf="@id/temp4"
             app:layout_constraintTop_toTopOf="@id/temp4" />
@@ -118,6 +130,7 @@
             android:background="@drawable/rounded_color_rect"
             android:drawableEnd="@drawable/ic_search"
             android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{()->vm.search()}"
             android:padding="8dp"
             android:text="검색"
             android:textColor="@color/white"
