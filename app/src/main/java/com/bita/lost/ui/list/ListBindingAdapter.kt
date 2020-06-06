@@ -32,11 +32,7 @@ object ListBindingAdapter {
         v.scheduleLayoutAnimation()
     }
 
-    @JvmStatic
-    @BindingAdapter("app:src")
-    fun setSrc(v: ImageView, drawable: Any) {
-        Glide.with(v.context).load(drawable).into(v)
-    }
+
 
     @JvmStatic
     @BindingAdapter("app:translationY")

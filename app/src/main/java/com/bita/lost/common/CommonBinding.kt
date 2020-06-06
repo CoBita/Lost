@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bita.lost.R
+import com.bumptech.glide.Glide
 
 object CommonBinding {
     @JvmStatic
@@ -29,5 +30,11 @@ object CommonBinding {
                 else -> throw IllegalArgumentException("정상적인 Image가 아닙니다.")
             }
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:src")
+    fun setSrc(v: ImageView, drawable: Any) {
+        Glide.with(v.context).load(drawable).into(v)
     }
 }
