@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.DetailFrBinding
@@ -32,7 +31,7 @@ class DetailFragment : LFragment() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        vm.result.observe(this, Observer { binding.result.text = it.toString() })
+        binding.vm = vm
     }
 
     companion object {

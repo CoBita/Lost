@@ -1,16 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.bita.lost.ui.detail.DetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/result"
+        <FrameLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:text="id가 들어갈 곳" />
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:src="@{vm.imageUrl}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fdPlace"
+            style="@style/detailInfoText"
+            android:text="@{vm.fdPlace}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            tools:text="노상" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tel"
+            style="@style/detailInfoText"
+            android:text="@{vm.tel}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fdPlace"
+            tools:text="02-1234-5678" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/uniq"
+            style="@style/detailInfoText"
+            android:layout_marginEnd="16dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@{vm.uniq}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tel"
+            tools:text="하고있습니다.\n간격테스트" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
