@@ -1,11 +1,14 @@
 package com.bita.lost.ui.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.DetailFrBinding
@@ -32,7 +35,15 @@ class DetailFragment : LFragment() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         binding.vm = vm
+        vm.goTel.observe(this, Observer { it?.let { num -> goTel(num) } })
+
     }
+
+    private fun goTel(num: String) {
+        val telIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$num"))
+        startActivity(telIntent)
+    }
+
 
     companion object {
         fun newInstance(id: String, seq: Int): DetailFragment {
