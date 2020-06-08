@@ -48,11 +48,11 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     }
 
     fun init(pArea: AreaCode, pProduct: ProductCode, pStart: String, pEnd: String) {
-        if(!::product.isInitialized)  this.product = ObservableField(pProduct)
-        if(!::start.isInitialized) this.start = parseDate(pStart)
-        if(!::end.isInitialized) this.end = parseDate(pEnd)
-        if(!::displayPeriod.isInitialized) this.displayPeriod = ObservableField("$pStart - $pEnd")
-        if(!::area.isInitialized) this.area = ObservableField(pArea)
+        if (!::product.isInitialized) this.product = ObservableField(pProduct)
+        if (!::start.isInitialized) this.start = parseDate(pStart)
+        if (!::end.isInitialized) this.end = parseDate(pEnd)
+        if (!::displayPeriod.isInitialized) this.displayPeriod = ObservableField("$pStart - $pEnd")
+        if (!::area.isInitialized) this.area = ObservableField(pArea)
     }
 
     // "####.#.#" -> "########" 으로 포맷 변경
@@ -110,9 +110,11 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     }
 
     // 조회 조건 초기화
-    fun searchInitialLosts(){
+    fun searchInitialLosts() {
+        if (list.isNotEmpty())
+            return
+
         page = 0
-        list.clear()
         hasNext = true
         isLoadFinish.set(false)
         searchLosts()
@@ -130,6 +132,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             end = it
             displayPeriod.set("$start - $end")
         }
+        list.clear()
         searchInitialLosts()
     }
 

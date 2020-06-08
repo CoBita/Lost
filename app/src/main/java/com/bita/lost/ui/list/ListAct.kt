@@ -45,9 +45,9 @@ class ListAct : LActivity() {
         }
     }
 
-    fun showDetail(id: String, seq: Int) {
+    fun showDetail(id: String, seq: Int, title : String) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.container, DetailFragment.newInstance(id, seq))
+            replace(R.id.container, DetailFragment.newInstance(id, seq, title))
             addToBackStack(null)
             commit()
         }

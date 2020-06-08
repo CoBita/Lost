@@ -7,6 +7,7 @@ import android.transition.Slide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.bita.lost.R
@@ -27,6 +28,8 @@ class DetailFragment : LFragment() {
         super.onParseExtra()
         val id = arguments?.getString(ID)
         val seq = arguments?.getInt(SEQ)
+        val title = arguments?.getString(TITLE)
+        Toast.makeText(activity, title, Toast.LENGTH_LONG).show()
         if (id != null && seq != null) {
             vm.습득물상세조회(id, seq)
         }
@@ -46,10 +49,11 @@ class DetailFragment : LFragment() {
 
 
     companion object {
-        fun newInstance(id: String, seq: Int): DetailFragment {
+        fun newInstance(id: String, seq: Int, title : String): DetailFragment {
             val bundle = Bundle().apply {
                 putString(ID, id)
                 putInt(SEQ, seq)
+                putString(TITLE, title)
             }
             return DetailFragment().apply {
                 arguments = bundle
@@ -60,6 +64,7 @@ class DetailFragment : LFragment() {
 
         const val ID = "ID"
         const val SEQ = "SEQ"
+        const val TITLE = "TITLE"
     }
 
 }
