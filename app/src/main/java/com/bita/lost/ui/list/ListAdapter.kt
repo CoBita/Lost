@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import com.and.base.log.Log
 import com.bita.lost.R
 import com.bita.lost.base.BaseAdapter
 import com.bita.lost.base.BaseHolder
@@ -11,7 +12,7 @@ import com.bita.lost.databinding.ListItemBinding
 import com.bita.lost.databinding.ListNoItemBinding
 import com.bita.lost.repo.data.LostItem
 
-class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit) : BaseAdapter<Any>() {
+class ListAdapter(private val showDetail: (id: String, seq: Int, title : String) -> Unit) : BaseAdapter<Any>() {
     var lastAnimatedIndex = -1
 
     init {
@@ -40,7 +41,7 @@ class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit) : Base
         if (lastAnimatedIndex < index) {
             v.animation = AnimationUtils.loadAnimation(v.context, R.anim.up_anim)
             lastAnimatedIndex = index
-        }
+        } else v.clearAnimation()
     }
 
     inner class ListHolder(private val binding: ListItemBinding) : BaseHolder<Any>(binding.root) {
@@ -48,7 +49,7 @@ class ListAdapter(private val showDetail: (id: String, seq: Int) -> Unit) : Base
             animate(binding.root, items.indexOf(data))
             (data as? LostItem)?.let {
                 binding.data = it
-                binding.root.setOnClickListener { _ -> showDetail(it.atcId, it.fdSn) }
+                binding.root.setOnClickListener { _ -> showDetail(it.atcId, it.fdSn, it.fdPrdtNm) }
             }
         }
     }

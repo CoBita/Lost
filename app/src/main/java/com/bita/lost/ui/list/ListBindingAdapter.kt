@@ -17,7 +17,7 @@ object ListBindingAdapter {
     fun setAdapter(v: RecyclerView, data: ArrayList<Any>, function: () -> Unit) {
         v.adapter?.let { it as? ListAdapter }?.set(data)
                 ?: run {
-                    val adapter = ListAdapter { id, seq -> v.context.let { it as? ListAct }?.showDetail(id, seq) }
+                    val adapter = ListAdapter { id, seq, title -> v.context.let { it as? ListAct }?.showDetail(id, seq, title) }
                     adapter.set(data)
                     v.adapter = adapter
                 }
