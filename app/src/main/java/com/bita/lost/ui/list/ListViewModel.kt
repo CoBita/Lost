@@ -115,7 +115,6 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             return
 
         page = 0
-        list.clear()
         hasNext = true
         isLoadFinish.set(false)
         searchLosts()
@@ -133,6 +132,7 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
             end = it
             displayPeriod.set("$start - $end")
         }
+        list.clear()
         searchInitialLosts()
     }
 
