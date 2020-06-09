@@ -14,4 +14,6 @@ data class LostList(@SerializedName("item") val items: List<LostItem>?)
             val fdYmd: String,
             val prdtClNm: String,
             val rnum: Int
-    )
+    ){
+            val displayFdYmd get() = "습득일자 $fdYmd"
+    }
