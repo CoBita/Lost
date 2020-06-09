@@ -35,8 +35,6 @@ object CommonBinding {
     @JvmStatic
     @BindingAdapter("app:src")
     fun setSrc(v: ImageView, drawable: Any?) {
-        drawable?.let {
-            Glide.with(v.context).load(it).into(v)
-        }
+        drawable?.let { Glide.with(v.context).load(it).into(v) }
     }
 }
