@@ -19,6 +19,7 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            style="@style/shadow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -86,5 +87,15 @@
             app:layout_constraintTop_toBottomOf="@id/tel"
             tools:text="하고있습니다.\n간격테스트" />
 
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            app:adSize="BANNER"
+            app:adUnitId="@string/ad_unit_test_id"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
