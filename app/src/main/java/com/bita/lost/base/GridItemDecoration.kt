@@ -1,4 +1,4 @@
-package com.bita.lost.ui.main
+package com.bita.lost.base
 
 import android.graphics.Rect
 import android.view.View

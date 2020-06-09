@@ -8,15 +8,11 @@ import org.koin.dsl.module
 val mainModule
     get() = module {
 
-        single<ColorRepository> { ColorRepositoryImpl() }
         single<AreaRepository> { AreaRepositoryImpl() }
         single<ProductRepository> { ProductRepositoryImpl() }
 
-        viewModel { ColorPickViewModel(get()) }
         viewModel { AreaViewModel(get()) }
         viewModel { ProductViewModel(get()) }
-
         viewModel { SearchViewModel() }
-
 
     }

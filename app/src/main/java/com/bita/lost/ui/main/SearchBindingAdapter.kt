@@ -14,18 +14,6 @@ import com.bita.lost.repo.data.*
 
 object SearchBindingAdapter {
 
-
-    @JvmStatic
-    @BindingAdapter("app:colorList")
-    fun addColorList(recyclerView: RecyclerView, list: MutableList<ColorCode>) {
-        val adapter = recyclerView.adapter
-        adapter?.let {
-            if (adapter is ColorAdapter) {
-                adapter.set(list)
-            }
-        }
-    }
-
     @JvmStatic
     @BindingAdapter("app:areaList")
     fun addAreaList(recyclerView: RecyclerView, list: MutableList<AreaCode>) {

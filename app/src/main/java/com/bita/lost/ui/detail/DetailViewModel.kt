@@ -41,7 +41,7 @@ class DetailViewModel(private val detailRepository: DetailRepository) : LViewMod
 
     private fun 습득물결과(data: DetailItem) {
         imageUrl.set(data.fdFilePathImg)
-        fdPlace.set(data.fdPlace)
+        fdPlace.set("습득장소 : ${data.fdPlace}")
         tel.set(data.tel)
         uniq.set(data.uniq)
         depPlace.set(data.depPlace)
