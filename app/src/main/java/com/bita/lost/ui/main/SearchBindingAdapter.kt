@@ -47,6 +47,16 @@ object SearchBindingAdapter {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("app:drawableStart")
+    fun startDrawable(view: TextView, @DrawableRes resId: Int) {
+        val context = view.context
+        val drawable = ContextCompat.getDrawable(context, resId)
+        drawable?.let {
+            view.setCompoundDrawablesWithIntrinsicBounds(it, null, null, null)
+        }
+    }
+
     @Suppress("DEPRECATION")
     @JvmStatic
     @BindingAdapter("app:colorFilter")

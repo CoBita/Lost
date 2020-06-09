@@ -23,16 +23,17 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_book"
             android:drawablePadding="8dp"
             android:gravity="start"
             android:padding="16dp"
             android:text="@{item.name()}"
             android:textColor="@color/black"
             android:textSize="16sp"
+            app:drawableStart="@{item.icon}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:drawableStart="@drawable/ic_book"
             tools:text="책" />
 
 
