@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
 import com.bita.lost.databinding.DetailFrBinding
+import com.google.android.gms.ads.AdRequest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : LFragment() {
@@ -28,11 +29,7 @@ class DetailFragment : LFragment() {
         super.onParseExtra()
         val id = arguments?.getString(ID)
         val seq = arguments?.getInt(SEQ)
-        val title = arguments?.getString(TITLE)
 
-        if (title != null) {
-            vm.title.set(title)
-        }
         if (id != null && seq != null) {
             vm.습득물상세조회(id, seq)
         }
@@ -41,8 +38,20 @@ class DetailFragment : LFragment() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         binding.vm = vm
+        val title = arguments?.getString(TITLE)
+        if (title != null) {
+            vm.title.set(title)
+        }
+        binding.adView.loadAd(AdRequest.Builder().build())
         vm.goTel.observe(this, Observer { it?.let { num -> goTel(num) } })
 
+        vm.finishAlert.observe(this, Observer {
+            it?.let { message ->
+                showDialog(message = message, positiveButtonText = "확인") { _, _ ->
+                    activity?.onBackPressed()
+                }
+            }
+        })
     }
 
     private fun goTel(num: String) {

@@ -47,7 +47,10 @@ object ListBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:noBreakText")
-    fun noSpace(v: TextView, string: String) {
-        v.text = string.replace(" ", "\u00A0").replace("-", "\u2011").replace("/", "\u2215")
+    fun noSpace(v: TextView, string: String?) {
+        string?.let {
+            v.text = it.replace(" ", "\u00A0").replace("-", "\u2011").replace("/", "\u2215")
+        }
+
     }
 }
