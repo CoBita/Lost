@@ -10,6 +10,7 @@
             type="com.bita.lost.ui.detail.DetailViewModel" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,8 +18,10 @@
 
         <FrameLayout
             android:id="@+id/header"
+            style="@style/shadow"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,54 +40,95 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="@{vm.title}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="타이틀" />
         </FrameLayout>
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header"
-            app:src="@{vm.imageUrl}" />
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/adView"
+            app:layout_constraintTop_toBottomOf="@id/header">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fdPlace"
-            style="@style/detailInfoText"
-            android:text="@{vm.fdPlace}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
-            tools:text="노상" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="16dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tel"
-            style="@style/detailInfoText"
-            android:onClick="@{() -> vm.clickTel()}"
-            android:text="@{vm.tel}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fdPlace"
-            tools:text="02-1234-5678" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    style="@style/shadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:src="@{vm.imageUrl}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fdPlace"
+                    style="@style/detailInfoText"
+                    android:text="@{vm.fdPlace}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image"
+                    tools:text="노상" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/depPlace"
+                    style="@style/detailInfoText"
+                    android:drawableEnd="@drawable/ic_right"
+                    android:text="@{vm.depPlace}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fdPlace"
+                    tools:text="서울강북경찰서" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tel"
+                    style="@style/detailInfoText"
+                    android:drawableEnd="@drawable/ic_right"
+                    android:onClick="@{() -> vm.clickTel()}"
+                    android:text="@{vm.tel}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/depPlace"
+                    tools:text="02-1234-5678" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/uniq"
-            style="@style/detailInfoText"
-            android:layout_marginEnd="16dp"
-            android:lineSpacingExtra="4dp"
-            android:text="@{vm.uniq}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tel"
-            tools:text="하고있습니다.\n간격테스트" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/uniq"
+                    style="@style/detailInfoText"
+                    android:layout_marginEnd="16dp"
+                    android:lineSpacingExtra="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tel"
+                    app:noBreakText="@{vm.uniq}"
+                    tools:text="하고있습니다.\n간격테스트" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            app:adSize="BANNER"
+            app:adUnitId="@string/ad_unit_test_id"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

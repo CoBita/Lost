@@ -13,13 +13,19 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : LViewModel() {
 
+    val title = ObservableField<String>()
+
     val imageUrl = ObservableField<String>()    // 이미지 URL
     val fdPlace = ObservableField<String>()     // 습득 장소
     val tel = ObservableField<String>()         // 전화번호
     val uniq = ObservableField<String>()        // 특이사항
+    val depPlace = ObservableField<String>()    // 보관장소
 
     private val _goTel = MutableLiveData<String>()
     val goTel: LiveData<String> get() = _goTel
+
+    private val _finishAlert = MutableLiveData<String>()
+    val finishAlert: LiveData<String> get() = _finishAlert
 
 
     fun 습득물상세조회(id: String, seq: Int) {
@@ -32,9 +38,16 @@ class DetailViewModel(private val detailRepository: DetailRepository) : LViewMod
 
     private fun 습득물결과(data: DetailItem) {
         imageUrl.set(data.fdFilePathImg)
-        fdPlace.set("습득장소 : ${data.fdPlace}")
-        tel.set("전화번호 : ${data.tel}")
+        fdPlace.set(data.fdPlace)
+        tel.set(data.tel)
         uniq.set(data.uniq)
+        depPlace.set(data.depPlace)
+
+
+        val state = data.csteSteNm
+        if (state == "종결") {
+            _finishAlert.postValue("이미 종결 된 물건입니다.\n다른 물건을 찾아보세요")
+        }
     }
 
     fun clickTel() {
