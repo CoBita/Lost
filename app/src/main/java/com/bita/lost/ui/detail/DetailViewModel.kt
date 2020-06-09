@@ -24,6 +24,9 @@ class DetailViewModel(private val detailRepository: DetailRepository) : LViewMod
     private val _goTel = MutableLiveData<String>()
     val goTel: LiveData<String> get() = _goTel
 
+    private val _findPlace = MutableLiveData<String>()
+    val findPlace: LiveData<String> get() = _findPlace
+
     private val _finishAlert = MutableLiveData<String>()
     val finishAlert: LiveData<String> get() = _finishAlert
 
@@ -53,5 +56,11 @@ class DetailViewModel(private val detailRepository: DetailRepository) : LViewMod
     fun clickTel() {
         val telNum = tel.get()
         _goTel.postValue(telNum)
+    }
+
+    fun clickDepPlace(){
+        val place = depPlace.get()
+        _findPlace.postValue(place)
+
     }
 }

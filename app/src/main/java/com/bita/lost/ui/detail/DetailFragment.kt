@@ -44,12 +44,20 @@ class DetailFragment : LFragment() {
         }
         binding.adView.loadAd(AdRequest.Builder().build())
         vm.goTel.observe(this, Observer { it?.let { num -> goTel(num) } })
-
         vm.finishAlert.observe(this, Observer {
             it?.let { message ->
-                showDialog(message = message, positiveButtonText = "확인") { _, _ ->
+                showDialog(message = message, positiveButtonText = "확인", positiveListener = { _, _ ->
                     activity?.onBackPressed()
+                })
+            }
+        })
+
+        vm.findPlace.observe(this, Observer {
+            it?.let { place ->
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://map.kakao.com/link/search/$place")).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
+                startActivity(intent)
             }
         })
     }

@@ -87,6 +87,7 @@
                     android:id="@+id/depPlace"
                     style="@style/detailInfoText"
                     android:drawableEnd="@drawable/ic_right"
+                    android:onClick="@{()-> vm.clickDepPlace()}"
                     android:text="@{vm.depPlace}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
