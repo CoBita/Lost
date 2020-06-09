@@ -29,7 +29,10 @@ class DetailFragment : LFragment() {
         val id = arguments?.getString(ID)
         val seq = arguments?.getInt(SEQ)
         val title = arguments?.getString(TITLE)
-        Toast.makeText(activity, title, Toast.LENGTH_LONG).show()
+
+        if (title != null) {
+            vm.title.set(title)
+        }
         if (id != null && seq != null) {
             vm.습득물상세조회(id, seq)
         }
@@ -49,7 +52,7 @@ class DetailFragment : LFragment() {
 
 
     companion object {
-        fun newInstance(id: String, seq: Int, title : String): DetailFragment {
+        fun newInstance(id: String, seq: Int, title: String): DetailFragment {
             val bundle = Bundle().apply {
                 putString(ID, id)
                 putInt(SEQ, seq)

@@ -1,6 +1,8 @@
 package com.bita.lost.common
 
+import android.graphics.Paint
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -39,4 +41,14 @@ object CommonBinding {
             Glide.with(v.context).load(it).into(v)
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("app:underline")
+    fun addUnderline(view: TextView, isUnderLine: Boolean?) {
+        isUnderLine?.let {
+            if (it)
+                view.paintFlags = view.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        }
+    }
+
 }

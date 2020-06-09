@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepository: DetailRepository) : LViewModel() {
 
+    val title = ObservableField<String>()
+
     val imageUrl = ObservableField<String>()    // 이미지 URL
     val fdPlace = ObservableField<String>()     // 습득 장소
     val tel = ObservableField<String>()         // 전화번호
@@ -20,6 +22,7 @@ class DetailViewModel(private val detailRepository: DetailRepository) : LViewMod
 
     private val _goTel = MutableLiveData<String>()
     val goTel: LiveData<String> get() = _goTel
+
 
 
     fun 습득물상세조회(id: String, seq: Int) {
