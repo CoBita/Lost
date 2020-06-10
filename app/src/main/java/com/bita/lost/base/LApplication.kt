@@ -30,11 +30,12 @@ class LApplication : BaseApplication() {
 
     private fun initAds() {
         MobileAds.initialize(this)
-        if (!AdRequest.Builder().build().isTestDevice(this)) {
-            val testDeviceIds = listOf(resources.getString(R.string.test_device_id_1), resources.getString(R.string.test_device_id_2), resources.getString(R.string.test_device_id_3))
-            val configuration =
-                RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
-            MobileAds.setRequestConfiguration(configuration)
-        }
+        // for develop
+//        if (!AdRequest.Builder().build().isTestDevice(this)) {
+//            val testDeviceIds = listOf(resources.getString(R.string.test_device_id_1), resources.getString(R.string.test_device_id_2), resources.getString(R.string.test_device_id_3))
+//            val configuration =
+//                RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
+//            MobileAds.setRequestConfiguration(configuration)
+//        }
     }
 }
