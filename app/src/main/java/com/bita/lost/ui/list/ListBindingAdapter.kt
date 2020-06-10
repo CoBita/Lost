@@ -2,13 +2,12 @@ package com.bita.lost.ui.list
 
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.and.base.log.Log
 import com.bita.lost.R
-import com.bumptech.glide.Glide
 
 object ListBindingAdapter {
 
@@ -22,8 +21,17 @@ object ListBindingAdapter {
                     v.adapter = adapter
                 }
         v.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            val lm = v.layoutManager as? LinearLayoutManager
+            var lastVisibleIndex = -1
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+                lm?.let {
+                    val currentLast = it.findLastVisibleItemPosition()
+                    if (currentLast > lastVisibleIndex) {
+                        lastVisibleIndex = currentLast
+                        (v.adapter as? ListAdapter)?.setLastVisibleIndex(currentLast)
+                    }
+                }
                 if (!recyclerView.canScrollVertically(1)) {
                     function()
                 }
@@ -31,7 +39,6 @@ object ListBindingAdapter {
         })
         v.scheduleLayoutAnimation()
     }
-
 
 
     @JvmStatic
