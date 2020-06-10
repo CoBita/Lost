@@ -24,6 +24,8 @@ class SearchViewModel : LViewModel() {
     val startDate = ObservableField<String>()           // 시작날짜
     val endDate = ObservableField<String>()             // 끝날짜
 
+    val dateText = ObservableField<String>()            // 날짜
+
     val areaPickFr = AreaPickFr.newInstance { areaCode.set(it) }
     val productPickFr = ProductPickFr.newInstance { productCode.set(it) }
 
@@ -59,6 +61,8 @@ class SearchViewModel : LViewModel() {
 
                 startDate.set(formatFirstDate)
                 endDate.set(formatSecondDate)
+
+                dateText.set("$formatFirstDate - $formatSecondDate")
             }
         }
     }
