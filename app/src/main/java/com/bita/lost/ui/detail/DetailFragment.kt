@@ -67,7 +67,20 @@ class DetailFragment : LFragment() {
         startActivity(telIntent)
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.adView.pause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        binding.adView.resume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.adView.destroy()
+    }
     companion object {
         fun newInstance(id: String, seq: Int, title: String): DetailFragment {
             val bundle = Bundle().apply {
