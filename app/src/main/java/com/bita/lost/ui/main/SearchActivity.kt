@@ -1,17 +1,18 @@
 package com.bita.lost.ui.main
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.and.base.common.EventObserver
 import com.bita.lost.R
 import com.bita.lost.base.LActivity
 import com.bita.lost.databinding.SearchActBinding
 import com.bita.lost.repo.data.SearchResultData
 import com.bita.lost.ui.list.ListAct
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class SearchActivity : LActivity() {
 
@@ -28,19 +29,23 @@ class SearchActivity : LActivity() {
         super.onLoadOnce()
         bb.vm = vm
         vm.showBottomSheet.observe(this, Observer { it?.show(supportFragmentManager, "") })
-        vm.showDatePicker.observe(this, Observer { it?.let { result -> showDatePicker(result) } })
+        vm.showRangeDatePicker.observe(this, EventObserver { showRangeDatePicker() })
         vm.resultSearchData.observe(this, Observer { it?.let { data -> search(data) } })
     }
 
+    private fun showRangeDatePicker() {
+        val datePicker = MaterialDatePicker.Builder.dateRangePicker().apply {
+            setCalendarConstraints(getCalendarConstraints())
+            setTitleText("기간 선택")
+        }.build()
+        datePicker.addOnPositiveButtonClickListener(vm.datePickerListener())
+        datePicker.show(supportFragmentManager, datePicker.tag)
+    }
 
-    private fun showDatePicker(dateResult: (result: String) -> Unit) {
-        val cal = Calendar.getInstance()
-        val dateDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            val result = "$year.${month + 1}.$dayOfMonth"
-            dateResult.invoke(result)
-        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE))
-        dateDialog.datePicker.maxDate = System.currentTimeMillis()
-        dateDialog.show()
+    private fun getCalendarConstraints(): CalendarConstraints {
+        return CalendarConstraints.Builder().apply {
+            setEnd(System.currentTimeMillis())
+        }.build()
     }
 
     private fun search(data: SearchResultData) {
