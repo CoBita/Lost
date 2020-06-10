@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.and.base.common.EventObserver
+import com.and.base.component.SDF
+import com.and.base.component.format
+import com.and.base.log.Log
 import com.bita.lost.R
 import com.bita.lost.databinding.ListHeaderDlgBinding
 import com.bita.lost.repo.data.AreaCode
@@ -13,6 +16,10 @@ import com.bita.lost.repo.data.ProductCode
 import com.bita.lost.ui.main.AreaPickFr
 import com.bita.lost.ui.main.ProductPickFr
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
+import kotlinx.android.synthetic.main.search_act.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListHeaderDialog : BottomSheetDialogFragment() {
@@ -45,6 +52,7 @@ class ListHeaderDialog : BottomSheetDialogFragment() {
                     dismiss()
                 }.show(childFragmentManager, "area")
             }
+            binding.period.setOnClickListener { showRangeDatePicker() }
             binding.product.setOnClickListener {
                 ProductPickFr.newInstance {
                     (parentFragment as? ListFragment)?.changeParameter(it)
@@ -54,6 +62,34 @@ class ListHeaderDialog : BottomSheetDialogFragment() {
         }
 
         vm.dismiss.observe(this, EventObserver { dismiss() })
+    }
+
+
+    private fun showRangeDatePicker() {
+        val datePicker = MaterialDatePicker.Builder.dateRangePicker().apply {
+            setCalendarConstraints(getCalendarConstraints())
+            setTitleText("기간 선택")
+        }.build()
+        datePicker.addOnPositiveButtonClickListener(MaterialPickerOnPositiveButtonClickListener {
+            it?.let { pair ->
+                val first = pair.first ?: 0
+                val second = pair.second ?: 0
+
+                val formatFirstDate = first.format(SDF.yyyymmdd_2)
+                val formatSecondDate = second.format(SDF.yyyymmdd_2)
+                Log.i("startDate : $formatFirstDate , endDate : $formatSecondDate")
+
+                (parentFragment as? ListFragment)?.changeParameter(Pair(formatFirstDate, formatSecondDate))
+                dismiss()
+            }
+        })
+        datePicker.show(childFragmentManager, datePicker.tag)
+    }
+
+    private fun getCalendarConstraints(): CalendarConstraints {
+        return CalendarConstraints.Builder().apply {
+            setEnd(System.currentTimeMillis())
+        }.build()
     }
 
     companion object {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.and.base.component.parseDate
 import com.and.base.log.Log
 import com.bita.lost.R
 import com.bita.lost.base.LFragment
@@ -37,8 +38,6 @@ class ListFragment : LFragment() {
         binding.vm = vm
 
         vm.searchInitialLosts()
-        // todo 테스트용 이후 삭제 필요
-        // vm.습득물조회fromDummy(activity?.raw2String(R.raw.dummy_lost_list))
 
         binding.header.setOnClickListener { ListHeaderDialog.newInstance(vm.area.get(), vm.product.get(), vm.displayPeriod.get()).show(childFragmentManager, null) }
 
@@ -53,6 +52,7 @@ class ListFragment : LFragment() {
         when (param) {
             is AreaCode -> vm.searchAgain(pArea = param)
             is ProductCode -> vm.searchAgain(pProduct = param)
+            is Pair<*, *> -> vm.searchAgain(pPeriod = param)
             else -> Log.w("param = $param")
         }
     }

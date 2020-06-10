@@ -70,20 +70,6 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
         return result.toString()
     }
 
-    // todo 이후 삭제
-    fun 습득물조회fromDummy(raw: String?) {
-        raw?.let {
-            val dummy: ArrayList<LostItem> = Gson().fromJson(raw, object : TypeToken<ArrayList<LostItem>>() {}.type)
-            scope.launch {
-                delay(3000)
-                isLoadFinish.set(true)
-                list.addAll(dummy)
-                if (page == 1) resultCount.set("검색결과 총 20개")
-                hasNext = true
-            }.progress(_isProgress)
-        }
-    }
-
     // 습득물 목록 조회
     fun searchLosts() {
         if (!hasNext || isSearching) return
@@ -121,16 +107,13 @@ class ListViewModel(private val repository: ListRepository) : LViewModel() {
     }
 
     // 재조회
-    fun searchAgain(pArea: AreaCode? = null, pProduct: ProductCode? = null, pStart: String? = null, pEnd: String? = null) {
+    fun searchAgain(pArea: AreaCode? = null, pProduct: ProductCode? = null, pPeriod: Pair<*,*>? = null) {
         pArea?.let { area.set(it) }
         pProduct?.let { product.set(it) }
-        pStart?.let {
-            start = it
-            displayPeriod.set("$start - $end")
-        }
-        pEnd?.let {
-            end = it
-            displayPeriod.set("$start - $end")
+        pPeriod?.let {
+            start = parseDate(it.first as String)
+            end = parseDate(it.second as String)
+            displayPeriod.set("${it.first} - ${it.second}")
         }
         list.clear()
         searchInitialLosts()
