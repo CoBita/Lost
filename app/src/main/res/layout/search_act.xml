@@ -41,45 +41,30 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/startDate"
+            android:id="@+id/date"
             style="@style/mainInfoEditText"
+            android:layout_width="0dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:hint="2020.01.01"
+            android:hint="기간 선택"
             android:inputType="@{InputType.TYPE_NULL}"
             android:onClick="@{()->vm.showDatePicker()}"
-            android:text="@={vm.startDate}"
+            android:text="@{vm.dateText}"
+            app:layout_constraintEnd_toStartOf="@id/temp3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/area" />
+            app:layout_constraintTop_toBottomOf="@id/area"
+            tools:text="2020.01.01 - 2020.02.02" />
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/temp2"
-            style="@style/mainInfoText"
-            android:text="~"
-            app:layout_constraintBottom_toBottomOf="@id/startDate"
-            app:layout_constraintStart_toEndOf="@id/startDate"
-            app:layout_constraintTop_toTopOf="@id/startDate" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/endDate"
-            style="@style/mainInfoEditText"
-            android:gravity="center"
-            android:hint="2020.02.01"
-            android:inputType="@{InputType.TYPE_NULL}"
-            android:onClick="@{()->vm.showDatePicker()}"
-            android:text="@={vm.endDate}"
-            app:layout_constraintBottom_toBottomOf="@id/startDate"
-            app:layout_constraintStart_toEndOf="@id/temp2"
-            app:layout_constraintTop_toTopOf="@id/startDate" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/temp3"
             style="@style/mainInfoText"
             android:text="에"
-            app:layout_constraintBottom_toBottomOf="@id/endDate"
-            app:layout_constraintStart_toEndOf="@id/endDate"
-            app:layout_constraintTop_toTopOf="@id/endDate" />
+            app:layout_constraintBottom_toBottomOf="@id/date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/date"
+            app:layout_constraintTop_toTopOf="@id/date" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -88,7 +73,7 @@
             android:layout_marginTop="16dp"
             android:text="잃어버린"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/startDate" />
+            app:layout_constraintTop_toBottomOf="@id/date" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/product"
